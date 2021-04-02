@@ -208,7 +208,7 @@
         <div class="position-relative">
             <div class="hero-shape"></div>
             <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container py-2"> <a class="navbar-brand font-weight-bold" href="#">BestTutors</a>
+                <div class="container py-2"> <a class="navbar-brand font-weight-bold" href="#">Languages</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
@@ -399,7 +399,7 @@
             <div class="container py-5">
                 <div class="row pt-5">
                     <div class="col-md-6 col-lg-3 mb-5">
-                        <h3 class="font-weight-bold mb-4">BestTutors</h3>
+                        <h3 class="font-weight-bold mb-4">Languages</h3>
                         <p class="semi-bold"> The best way to learn from a Tutor. </p>
                         <div class="social-icons mt-4"> <a href="#"><i class="lni lni-facebook-filled"></i></a> <a href="#"><i class="lni lni-twitter-filled"></i></a> <a href="#"><i class="lni lni-instagram-filled"></i></a> <a href="#"><i class="lni lni-github-original"></i></a> </div>
                     </div>
