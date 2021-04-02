@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-    <title>Free tutors landing page</title>
+    <title>Languages</title>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
