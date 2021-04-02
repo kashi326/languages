@@ -12,6 +12,41 @@
     }
 </style>
 
+<div uk-sticky class="card mt-0">
+    <div class="d-flex justify-content-start py-3 mb-2 w-75 mx-auto">
+        <button class="uk-button bg-light uk-button-default mx-2" type="button">I Want To Learn</button>
+        <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+                <li><a href="#">English</a></li>
+                <li><a href="#">French</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">Arabic</a></li>
+            </ul>
+        </div>
+        <button class="uk-button bg-light uk-button-default mx-2" type="button">From Country</button>
+        <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+                <li><a href="#">English</a></li>
+                <li><a href="#">French</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">Arabic</a></li>
+            </ul>
+        </div>
+        <button class="uk-button bg-light uk-button-default mx-2" type="button">Speciality</button>
+        <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+                <li><a href="#">English</a></li>
+                <li><a href="#">French</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">Arabic</a></li>
+            </ul>
+        </div>
+        <form class="uk-search uk-search-default ml-auto" style="min-width: 230px;">
+            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+            <input class="uk-search-input bg-light" type="search" placeholder="Search">
+        </form>
+    </div>
+</div>
 <div class="container-fluid">
     @if(count($teachers)>0)
     @foreach($teachers as $teacher)

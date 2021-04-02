@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="{{asset('css/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/uikit.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/layouts/main.css')}}">
     <link rel="stylesheet" href="{{asset('css/welcome.css')}}">
 
@@ -207,6 +208,7 @@
     @endauth
     @yield('scripts')
     <script src="{{asset('js/ajax-obstructive.js')}}"></script>
+    <script src="{{asset('js/uikit.min.js')}}"></script>
     @if (Auth::check())
     <script>
         $(function() {

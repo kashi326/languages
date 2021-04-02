@@ -208,17 +208,17 @@
         <div class="position-relative">
             <div class="hero-shape"></div>
             <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container py-2"> <a class="navbar-brand font-weight-bold" href="#">Languages</a>
+                <div class="container-fluid py-2"> <a class="navbar-brand font-weight-bold" href="#">Languages</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active"> <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">About Us</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">Find Teacher</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">E-Learning</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">Contact Us</a> </li>
+                            <li class="nav-item active"> <a class="nav-link" href="{{route('main')}}">Home <span class="sr-only">(current)</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('findteacher.index')}}">Find Teacher</a> </li>
                         </ul>
-                        <div class="ml-lg-5"><a class="btn btn-success" href="#">My Tutors</a> </div>
+                        @guest
+                        <div class="ml-lg-1"><a class="btn btn-success" href="{{route('login')}}">Login</a> </div>
+                        <div class="ml-lg-1"><a class="btn btn-success" href="{{route('register')}}">Register</a> </div>
+                        @endguest
                     </div>
                 </div>
             </nav>
@@ -228,7 +228,7 @@
                         <div class="col-lg-6 col-md-7 py-5">
                             <h1 class="font-weight-bold display-4 mb-4">Our tutors offers face-to-face and online tuition. </h1>
                             <p class="lead mb-5">Our focus - modular training programs from leading practice lectors.</p>
-                            <a href="" class="btn btn-success">Find Teacher &rarr; </a>
+                            <a href="{{route('findteacher.index')}}" class="btn btn-success">Find Teacher &rarr; </a>
                         </div>
                     </div>
                 </div>
@@ -403,15 +403,16 @@
                         <p class="semi-bold"> The best way to learn from a Tutor. </p>
                         <div class="social-icons mt-4"> <a href="#"><i class="lni lni-facebook-filled"></i></a> <a href="#"><i class="lni lni-twitter-filled"></i></a> <a href="#"><i class="lni lni-instagram-filled"></i></a> <a href="#"><i class="lni lni-github-original"></i></a> </div>
                     </div>
+                    @guest
                     <div class="col-md-6 col-lg-3 mb-5">
-                        <h6 class="mb-4 font-weight-bold">Products</h6>
+                        <h6 class="mb-4 font-weight-bold">User</h6>
                         <ul class="list-unstyled bb m-0">
-                            <li><a href="">For Individuals</a></li>
-                            <li><a href="">For Schools</a></li>
-                            <li><a href="">For Universities</a></li>
-                            <li><a href="">For Businesses</a></li>
+                            <li><a href="{{route('login')}}">Login</a></li>
+                            <li><a href="{{route('register')}}">Register</a></li>
+                            <li><a href="{{route('teach.join')}}">Apply to teach</a></li>
                         </ul>
                     </div>
+                    @endguest
                     <div class="col-md-6 col-lg-3 mb-5">
                         <h6 class="mb-4 font-weight-bold">Company</h6>
                         <ul class="list-unstyled bb m-0">
