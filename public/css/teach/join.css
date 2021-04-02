@@ -1,0 +1,77 @@
+#main-container {
+    padding: 0;
+}
+.background-image {
+    background-image: url(../../images/teach/join_background.jpg);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.image-Overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#main-container .content {
+    position: relative;
+    z-index: 3;
+    width: 88%;
+    margin: 0 auto;
+    margin-top: 10%;
+    text-align: center;
+    padding-bottom: 10vh;
+}
+#main-container .content h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ecf9fe;
+}
+.content .each-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+.content .each-card .form-group label {
+    float: left;
+    font-weight: 600;
+}
+.content .each-card .avatar h5 {
+    font-weight: bold;
+}
+.content .each-card .avatar img {
+    width: 15%;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.submit-button {
+    width: 50%;
+}
+
+@media (max-width: 480px) {
+    .content .each-card {
+        width: 90%;
+    }
+}
+@media (max-width: 786px) {
+    .content .each-card {
+        width: 90%;
+    }
+    .submit-button {
+        width: 70%;
+    }
+}
+@media (max-width: 960px) {
+    .content .each-card {
+        width: 90%;
+    }
+    .submit-button {
+        width: 60%;
+    }
+}

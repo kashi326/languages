@@ -1,0 +1,30 @@
+
+header .content{
+    max-width: 45%;
+    color:white;
+    z-index: 2;
+    position: relative;
+    height: 500px;
+}
+header {
+    background: linear-gradient(rgba(0,0,0, 0.5), rgba(0,0,0,0.5)), url('/images/christmas-gifts.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    text-align: justify;
+    vertical-align: middle;
+}
+header .content h1{
+    padding-top: 25%;
+}
+.btn-main{
+    background-color: #0699cd;
+    border: 2px solid #ffffff;
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.4);
+}
+.btn-main:hover{
+    background-color: #05749b;
+    color: white;
+}
