@@ -435,7 +435,7 @@
         </div>
         <div class="py-3 bg-white">
             <div class="container">
-                <p class="m-0 text-center small medium-500">Copyright &copy; Your Website Name 2020. Made by <a href="http://bootstraplily.com">BootstrapLily</a></p>
+                <p class="m-0 text-center small medium-500">Copyright &copy; </p>
             </div>
         </div>
     </div>
