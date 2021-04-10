@@ -120,7 +120,7 @@
     }
 </style>
 <div>
-    <div class="flex flex-align-center" style="background:url(&quot;https://cdn.verbling.com/static/img/enterprise/cd055b3f78a337faf1cb94bab3a1b0e1.landing-cover.jpg&quot;) no-repeat center center;background-position:center;background-repeat:no-repeat;height:100vh;background-size:cover">
+    <div class="flex flex-align-center" style="background:url(&quot;https://cdn.Languages.com/static/img/enterprise/cd055b3f78a337faf1cb94bab3a1b0e1.landing-cover.jpg&quot;) no-repeat center center;background-position:center;background-repeat:no-repeat;height:100vh;background-size:cover">
         <div class="container">
             <form action="{{ route('enterprise.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group--focuser form-group"><label class="control-label">Organization
-                                        name</label><input placeholder="Verbling" name="organization_name" @error('organization_name') is-invalid @enderror" class="form-control--focuser form-control" value="">
+                                        name</label><input placeholder="Languages" name="organization_name" @error('organization_name') is-invalid @enderror" class="form-control--focuser form-control" value="">
                                     @error('organization_name')
                                     <span class="invalid-feedback d-inline-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -192,48 +192,50 @@
     <div class="container padding-top-xl">
         <div class="react-reveal">
             <h2 class="text-center flex flex-align-center flex-justify-content-center margin-top-xxl">Why Choose
-                Verbling?</h2>
+                Languages?</h2>
             <div class="row">
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
-                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="classroom" src="https://cdn.verbling.com/static/svg/icons8/6aa4609df05914e479b0dd25e4a135f8.icons8-classroom.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
+                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="classroom" src="https://cdn.Languages.com/static/svg/icons8/6aa4609df05914e479b0dd25e4a135f8.icons8-classroom.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
                         <!-- -->Professional teachers</h2>
                     <div>Choose from thousands of native-speaking professional teachers, available 24/7.</div>
                 </div>
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
-                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="video_conference" src="https://cdn.verbling.com/static/svg/icons8/8c823fb95a34df65d6c182c2a1cf7d50.icons8-video_conference.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
+                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="video_conference" src="https://cdn.Languages.com/static/svg/icons8/8c823fb95a34df65d6c182c2a1cf7d50.icons8-video_conference.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
                         <!-- -->Integrated platform</h2>
                     <div>Schedule your lessons and meet with your teacher, all within your browser window.</div>
                 </div>
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
-                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="toolbox" src="https://cdn.verbling.com/static/svg/icons8/564abb3512e1d7ae3ebb4694d57c3d98.icons8-toolbox.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
+                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="toolbox" src="https://cdn.Languages.com/static/svg/icons8/564abb3512e1d7ae3ebb4694d57c3d98.icons8-toolbox.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
                         <!-- -->Language tools</h2>
                     <div>Learn with great features such as collaborative textpads, vocabulary review, and more.
                     </div>
                 </div>
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
-                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="smartphone_tablet" src="https://cdn.verbling.com/static/svg/icons8/4c68d9752e2185c37a6558d7689682ec.icons8-smartphone_tablet.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
+                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="smartphone_tablet" src="https://cdn.Languages.com/static/svg/icons8/4c68d9752e2185c37a6558d7689682ec.icons8-smartphone_tablet.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
                         <!-- -->Multi-device support</h2>
-                    <div>Access Verbling on desktop browsers, iOS, and Android— we support it all.</div>
+                    <div>Access Languages on desktop browsers, iOS, and Android— we support it all.</div>
                 </div>
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
-                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="goal" src="https://cdn.verbling.com/static/svg/icons8/a55dee167e15cc15d10d37553745b355.icons8-goal.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
+                    <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center"><img width="50px" height="50px" alt="goal" src="https://cdn.Languages.com/static/svg/icons8/a55dee167e15cc15d10d37553745b355.icons8-goal.svg" class="margin-right-sm" style="max-width:inherit;width:50px;height:50px">
                         <!-- -->Personalized education</h2>
                     <div>Progress through existing courses or ask your teacher to create curriculum for your
                         needs.</div>
                 </div>
                 <div class="col-md-4 col-12 margin-bottom-md text-center">
                     <h2 class="flex flex-direction-column flex-align-center flex-justify-content-center">
-                        <img width="50px" height="50px" alt="rebalance_portfolio" src="https://cdn.verbling.com/static/svg/icons8/be312649bd40f76363d6b628cb31a647.icons8-rebalance_portfolio.svg" style="max-width:inherit;width:50px;height:50px;">
-                        <!-- -->Easy Administration</h2>
+                        <img width="50px" height="50px" alt="rebalance_portfolio" src="https://cdn.Languages.com/static/svg/icons8/be312649bd40f76363d6b628cb31a647.icons8-rebalance_portfolio.svg" style="max-width:inherit;width:50px;height:50px;">
+                        <!-- -->Easy Administration
+                    </h2>
                     <div>No more spreadsheets or coordinating schedules. Easily view statistics and generate
                         reports from your dashboard.
-                        <!-- --> Login using SSO. Provisioning via SCIM API.</div>
+                        <!-- --> Login using SSO. Provisioning via SCIM API.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<div style="background:url(&quot;https://cdn.verbling.com/static/img/landing/89ce9e786b6de4cf160e6154cb490445.street.jpg&quot;)
+<div style="background:url(&quot;https://cdn.Languages.com/static/img/landing/89ce9e786b6de4cf160e6154cb490445.street.jpg&quot;)
                                     no-repeat center center;background-size:cover !important;background-position:center;background-repeat:no-repeat;height:50vh;">
 
     <div>
@@ -245,24 +247,24 @@
 <div class="container1">
     <h2>Frequently Asked Questions</h2>
     <div class="accordion">
-        <a>What is Verbling for Enterprise?</a>
+        <a>What is Languages for Enterprise?</a>
         <div class="content">
-            <p>Verbling for Enterprise is a language-learning
+            <p>Languages for Enterprise is a language-learning
                 service for businesses or organizations looking to improve their team’s communication in
                 a new language. It offers quality language instruction via online video-chat based
                 lessons, accessible on multiple devices platforms anywhere with a sufficient internet
                 connection. Lessons are 1-on-1, hour-long video-chat sessions between a student and
                 teacher. Curriculum is customizable to a student’s needs to ensure efficient, effective
-                learning. Verbling for Enterprise offers the education of a brick-and-mortar school or
+                learning. Languages for Enterprise offers the education of a brick-and-mortar school or
                 in-house tutor for a fraction of the price, with unparalleled convenience.</p>
         </div>
 
         <div class="accordion-item">
-            <a>What is the difference between Verbling and Verbling for Enterprise?</a>
+            <a>What is the difference between Languages and Languages for Enterprise?</a>
             <div class="content">
-                <p>Students learn on the same Verbling platform and
-                    have access to the same great Verbling teachers. Verbling for Enterprise is an
-                    administrative layer added on top of the standard Verbling platform that allows for easy
+                <p>Students learn on the same Languages platform and
+                    have access to the same great Languages teachers. Languages for Enterprise is an
+                    administrative layer added on top of the standard Languages platform that allows for easy
                     and powerful administration and analysis of an organization and its members. It allows
                     an organization administrator to maintain an organization’s plan, make payments, invite
                     and manage membership, generate reports, analyze progress, set access controls, and
@@ -284,17 +286,17 @@
         <div class="accordion-item">
             <a>How does one choose a teacher?</a>
             <div class="content">
-                <p>One of Verbling’s advantages is the ability for a
+                <p>One of Languages’s advantages is the ability for a
                     student to choose a teacher that uniquely suits their needs and personality. To find a
-                    teacher, simply log on to Verbling, navigate to the “Find a Teacher” page, and browse
-                    the thousands of teachers who teach on Verbling. It’s possible to filter by language,
+                    teacher, simply log on to Languages, navigate to the “Find a Teacher” page, and browse
+                    the thousands of teachers who teach on Languages. It’s possible to filter by language,
                     accent, skills, and more so the student can find the right teacher for them.</p>
             </div>
         </div>
         <div class="accordion-item">
-            <a>How good are the teachers on Verbling?</a>
+            <a>How good are the teachers on Languages?</a>
             <div class="content">
-                <p>All of Verbling’s teachers are accredited with
+                <p>All of Languages’s teachers are accredited with
                     prior professional teaching experience who have passed our extensive application
                     process. Many teachers specialize in certain subjects and can customize the curriculum
                     to a student’s needs.</p>
@@ -304,20 +306,20 @@
             <a>What is the learning experience like?</a>
             <div class="content">
                 <p>Over a million students from around the world love
-                    Verbling’s integrated platform. Verbling’s digital classroom was built from the ground
+                    Languages’s integrated platform. Languages’s digital classroom was built from the ground
                     up to focus on delivering the best learning experience possible, entirely in-browser. It
                     includes video- and audio-chat, messaging, flashcards, collaborative textpads, image and
                     PDF markup, file management, cloud storage, learning tools and widgets, and more! No
                     external downloads or third-party applications are required, with the exception of a
-                    couple extensions developed by Verbling to allow for screen-sharing and recording of
+                    couple extensions developed by Languages to allow for screen-sharing and recording of
                     lessons.</p>
             </div>
         </div>
         <div class="accordion-item">
-            <a>What technical requirements are there to use Verbling?</a>
+            <a>What technical requirements are there to use Languages?</a>
             <div class="content">
                 <p>A student can access the digital classroom by using
-                    the latest version of Chrome or Firefox on a computer, or by downloading the Verbling
+                    the latest version of Chrome or Firefox on a computer, or by downloading the Languages
                     app, available on the App Store and Google Play Store. A minimum internet speed of
                     approximately 1 MB/s upload and download is required for a stable, quality video and
                     audio connection. Personal or corporate firewalls may need to be configured to allow for

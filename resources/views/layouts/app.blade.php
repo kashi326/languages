@@ -156,7 +156,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <h3>Verbling</h3>
+                        <h3>Languages</h3>
                         @if(Auth::check() && Auth::user()->role=='user')
                         <p><a href="{{route('teach.join')}}">Apply To Teach</a></p>
                         @endif

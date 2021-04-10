@@ -14,7 +14,7 @@ return [
   'languagetools'         => 'Language tools',
   'sublanguagetools'      => 'Learn with great features such as collaborative textpads, vocabulary review, and more.',
   'globalcommunity'       => 'Global community',
-  'subglobalcommunity'    => 'Join a friendly community of language learners around the world who love using Verbling.',
+  'subglobalcommunity'    => 'Join a friendly community of language learners around the world who love using Languages.',
   'started'               => 'Let s get started!',
 
   'failed'                => 'These credentials do not match our records.',
@@ -30,6 +30,6 @@ return [
   'lessons'               => 'Lessons',
   'homeworks'               => 'Homeworks',
   'decks' =>                'Decks',
-  'settings'                =>'Settings',
-  'features'                =>'Features'
+  'settings'                => 'Settings',
+  'features'                => 'Features'
 ];

@@ -175,7 +175,6 @@ class DashboardController extends Controller
             return response()->view('user.dashboard.partials.list', $data);
         }
         $data['list'] = view('user.dashboard.partials.list', $data);
-
         return view('user.dashboard.lessons', $data);
     }
     public function homework()

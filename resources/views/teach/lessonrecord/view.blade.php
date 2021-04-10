@@ -41,6 +41,7 @@
                 </div>
                 <hr>
                 <span class="font-5 text-muted">Platform</span>
+                <a href="{{route('teacher.meeting',$lesson->id,$lesson->teacher_id)}}" class="btn btn-primary">Start Meeting</a>
                 <div class="row">
                     <div class="col-12 col-md-8 m-auto">
                         <form class="w-75 m-auto" id="platformForm">
@@ -79,17 +80,15 @@
                 @if ($lesson->homework && $lesson->homework->response_path != null)
                 <div class="mb-3 w-75 m-auto">
                     <span class="font-3">Response Submitted</span>
-                    <form
-                        action="{{ route('homework.download',$lesson->homework->id) }}"
-                        method="get">
+                    <form action="{{ route('homework.download',$lesson->homework->id) }}" method="get">
                         @csrf
                         <input type="submit" value="Download" class="btn btn-primary btn-block btn-sm" />
                     </form>
                 </div>
                 @else
-                    <div class="alert alert-info">
-                        Response Not Submitted yet
-                    </div>
+                <div class="alert alert-info">
+                    Response Not Submitted yet
+                </div>
                 @endif
                 <hr>
                 <span class="font-5 text-muted">FeedBack</span>
@@ -137,35 +136,35 @@
                 })
             })
             $('#fileUpload').change(function() {
-            var form = $(this).closest('form')[0];
-            var formData = new FormData(form);
-            $.ajax({
-                type: 'POST',
-                url: '{{route("teach.homework.upload")}}',
-                data: formData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
+                var form = $(this).closest('form')[0];
+                var formData = new FormData(form);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("teach.homework.upload")}}',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
 
-                    console.log(`sucess: ${response}`)
-                    $('#toastMessage').html(response);
-                    $('#success').toast('show')
-
-                },
-                error: function(error) {
-                    console.log(`error:${error}`)
-                    if (error.toast) {
-                        $('#toastMessage').html(error.toast);
+                        console.log(`sucess: ${response}`)
+                        $('#toastMessage').html(response);
                         $('#success').toast('show')
-                    } else
-                        alert('Something went wrong');
-                }
-            });
-        })
+
+                    },
+                    error: function(error) {
+                        console.log(`error:${error}`)
+                        if (error.toast) {
+                            $('#toastMessage').html(error.toast);
+                            $('#success').toast('show')
+                        } else
+                            alert('Something went wrong');
+                    }
+                });
+            })
         })
     </script>
     @endsection

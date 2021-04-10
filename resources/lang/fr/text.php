@@ -13,7 +13,7 @@ return [
     'languagetools'         => 'Outils de langage',
     'sublanguagetools'      => 'Apprenez avec des fonctionnalités exceptionnelles telles que les blocs de texte collaboratifs, la révision du vocabulaire, etc.',
     'globalcommunity'       => 'Communauté globale',
-    'subglobalcommunity'    => 'Rejoignez une communauté amicale d apprenants en langues du monde entier qui aiment utiliser Verbling. ',
+    'subglobalcommunity'    => 'Rejoignez une communauté amicale d apprenants en langues du monde entier qui aiment utiliser Languages. ',
     'started'               => 'Commençons!',
 
     'failed'                => 'Ces informations d identification ne correspondent pas à nos enregistrements.',
