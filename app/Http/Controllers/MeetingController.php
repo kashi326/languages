@@ -15,12 +15,15 @@ class MeetingController extends Controller
     {
         $lesson = UserRegisterWithTeacher::where('id', $id)->first();
         if ($lesson && $lesson->platform && $lesson->link) {
-            return redirect()->route('meeting.start', [$lesson->link, $userid]);
+            return redirect()->to($lesson->link);
         } else if ($lesson) {
+            $session_id = (string)Str::uuid();
             $lesson->platform = env('APP_NAME', "Languages");
-            $lesson->link = (string)Str::uuid();
+            $lesson->session_id = $session_id;
+            $lesson->link = route('meeting.start', [$session_id, $userid]);
+            $lesson->isAttended = 1;
             $lesson->save();
-            return redirect()->route('meeting.start', [$lesson->link, $userid]);
+            return redirect()->to($lesson->link);
         } else
             return redirect()->back();
     }

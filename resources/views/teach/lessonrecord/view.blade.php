@@ -41,24 +41,27 @@
                 </div>
                 <hr>
                 <span class="font-5 text-muted">Platform</span>
-                <a href="{{route('teacher.meeting',$lesson->id,$lesson->teacher_id)}}" class="btn btn-primary">Start Meeting</a>
                 <div class="row">
                     <div class="col-12 col-md-8 m-auto">
-                        <form class="w-75 m-auto" id="platformForm">
-                            <div id="summaryError"></div>
-                            <input type="text" name="id" value="{{$lesson->id}}" hidden>
-                            <div class="form-group">
-                                <label for="">Platform Name</label>
-                                <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" required>
-                                <div id="platformNameError" class="mt-1"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Lesson Link</label>
-                                <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" required>
-                                <div id="lessonLinkError" class="mt-1"></div>
-                            </div>
-                            <div class="form-group"><a type="submit" class="btn btn-primary btn-sm float-right text-decoration-none text-light" id="updatePlatform">Update</a></div>
-                        </form>
+                        <div class="w-75 m-auto">
+                            <a href="{{route('teacher.meeting',[$lesson->id,$lesson->teacher->user_id])}}" target="_blank" class="btn btn-primary">Start Meeting</a>
+                            <p class="text-center"><b>OR</b></p>
+                            <form id="platformForm">
+                                <div id="summaryError"></div>
+                                <input type="text" name="id" value="{{$lesson->id}}" hidden>
+                                <div class="form-group">
+                                    <label for="">Platform Name</label>
+                                    <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" required>
+                                    <div id="platformNameError" class="mt-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Lesson Link</label>
+                                    <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" required>
+                                    <div id="lessonLinkError" class="mt-1"></div>
+                                </div>
+                                <div class="form-group"><a type="submit" class="btn btn-primary btn-sm float-right text-decoration-none text-light" id="updatePlatform">Update</a></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <hr>

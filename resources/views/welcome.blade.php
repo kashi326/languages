@@ -214,7 +214,42 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active"> <a class="nav-link" href="{{route('main')}}">Home <span class="sr-only">(current)</span></a> </li>
                             <li class="nav-item"> <a class="nav-link" href="{{route('findteacher.index')}}">Find Teacher</a> </li>
+                            @if(Auth::user())
+                            <li class="nav-item dropdown">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle  dropdown-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Community
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item pl-2" href="{{Auth::user()->role!='teacher'?route('decks'):route('decks.index')}}"><img src="{{asset('icons/sheets.svg')}}" width="35"><span class="ml-2">Explore Decks</span></a>
+                                        <a class="dropdown-item pl-2" href="{{route('discussion.index')}}"><img src="{{asset('icons/collaborationfemalemale.svg')}}" width="35"><span class="ml-2"> Discussion</span></a>
+                                        <a class="dropdown-item pl-2" href="{{route('feature.index')}}"><img src="{{asset('icons/idea.svg')}}" width="35"><span class="ml-2"> Feature Suggestion</span></a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            @if(Auth::user()->role == 'user')
+                            <li class="nav-item dropdown">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle dropdown-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        More
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <!-- <a class="dropdown-item" href="">Buy a gift</a> -->
+                                        <a class="dropdown-item" href="{{ route('teach.join') }}">Apply To Teach</a>
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
+                            @if(Auth::user()->role == 'teacher')
+                            <li class="nav-item" style="font-weight: 400;">
+                                <a class="nav-link side-link" href="{{route('teach.lesson.record')}}" style="color: #1997fd !important;"> Teacher Dashboard</a>
+                            </li>
+                            @endif
+                            @endif
+
                         </ul>
+
                         @guest
                         <div class="ml-lg-1"><a class="btn btn-success" href="{{route('login')}}">Login</a> </div>
                         <div class="ml-lg-1"><a class="btn btn-success" href="{{route('register')}}">Register</a> </div>

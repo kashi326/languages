@@ -659,3 +659,6 @@ pre {
 .fc-icon {
     height: auto !important;
 }
+.navbar-nav .dropdown-menu {
+    min-width: max-content !important;
+}

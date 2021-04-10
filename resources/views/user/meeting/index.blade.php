@@ -7,14 +7,10 @@
     </div>
     <div class="col-12 col-md-4 px-4">
         <div class="uk-section pt-0">
-            <div class="uk-container-fluid uk-width-large">
-
+            <div class="uk-container-fluid uk-width-expand">
                 <div class="uk-card uk-card-default uk-border-rounded ">
-
                     <div class="uk-card-body uk-padding-small" uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper" id="chatBox" style="height: 420px;">
                         <!-- messages comes here -->
-
-
                     </div>
 
                     <div class="uk-card-footer uk-padding-remove">
@@ -34,9 +30,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
