@@ -248,12 +248,44 @@
                             @endif
                             @endif
 
+
+                            @guest
+                            <li class="nav-item">
+                                <div class="ml-lg-1"><a class="btn btn-success" href="{{route('login')}}">Login</a> </div>
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <div class="ml-lg-1"><a class="btn btn-success" href="{{route('register')}}">Register</a> </div>
+                            </li>
+                            @endif
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle primary-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->role == 'admin')
+                                    <a href="{{route('admin.index')}}" class="dropdown-item">
+                                        Admin Panel
+                                    </a>
+                                    @endif
+
+                                    <a class="dropdown-item" href="{{route('dashboard')}}"> Dashboard</a>
+                                    <a class="dropdown-item" href="{{route('setting.profile.get')}}"> Setting</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endguest
                         </ul>
 
-                        @guest
-                        <div class="ml-lg-1"><a class="btn btn-success" href="{{route('login')}}">Login</a> </div>
-                        <div class="ml-lg-1"><a class="btn btn-success" href="{{route('register')}}">Register</a> </div>
-                        @endguest
                     </div>
                 </div>
             </nav>
