@@ -307,48 +307,17 @@
                 <div class="row pt-5 justify-content-between text-center">
                     <div class="col-12">
                         <h6 class="text-warning mb-3">01. Tutors</h6>
-                        <h2 class="font-weight-bold mb-5 pb-3">Choose our tutors by subjects.</h2>
+                        <h2 class="font-weight-bold mb-5 pb-3">Choose our tutors by languages.</h2>
                     </div>
+                    @foreach($langs as $l)
                     <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-calculator"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Mathematics</h6>
-                        </div>
+                        <a href="/findteacher?lang={{$l->name}}" class="text-decoration-none">
+                            <div class="p-4 bg-tutor rounded"> <img src="{{$l->avatar}}" alt="" width="35" height="35" /></i>
+                                <h6 class="font-weight-bold mb-0 pt-3">{{$l->name}}</h6>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-library"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">History</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-code"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Programming</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-layers"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Art</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-music"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Music</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-package"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Chemistry</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-users"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Languages</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 pb-4">
-                        <div class="p-4 bg-tutor rounded"> <i class="lni lni-bulb"></i>
-                            <h6 class="font-weight-bold mb-0 pt-3">Physics</h6>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

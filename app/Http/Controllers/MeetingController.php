@@ -7,8 +7,9 @@ use Illuminate\Support\Str;
 
 class MeetingController extends Controller
 {
-    public function index($id, $userid)
+    public function index($id)
     {
+        $userid = Auth::id();
         return view('user.meeting.index', compact('id', 'userid'));
     }
     public function start($id, $userid)

@@ -2,12 +2,24 @@
 
 @section('content')
 <script src="https://www.paypal.com/sdk/js?client-id={{$paypal_settings->client_id}}&currency={{$paypal_settings->currency}}"></script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-8 m-auto mt-3">
             <div class="card">
                 <div class="card-header">
                     <h3>Payment Page</h3>
+                </div>
+                <div class="loader-container  d-none" style="z-index:9999;width:100%;height:100%;max-width:100%;background-color:#f4f7f9ab">
+                    <div class="loader">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body payments">
                     <div class="d-flex-between-center">
@@ -97,6 +109,9 @@
                                 _token: $('meta[name="csrf-token"]').attr('content'),
                                 teacher_id: '{{$teacher->id}}',
                                 details: details
+                            },
+                            beforeSend: function() {
+                                $('.loader-container').removeClass('d-none').addClass('d-block');
                             },
                             dataType: 'json',
                             success: function(response) {

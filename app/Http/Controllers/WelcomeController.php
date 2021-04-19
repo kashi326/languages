@@ -8,9 +8,10 @@ use App;
 
 class WelcomeController extends Controller
 {
-    public function index(){
-        $langs = DB::table("languages")->limit(7)->get();
-        return view('welcome',compact('langs'));
+    public function index()
+    {
+        $langs = DB::table("languages")->limit(8)->get();
+        return view('welcome', compact('langs'));
     }
     public function lang($locale)
     {

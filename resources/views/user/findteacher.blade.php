@@ -17,22 +17,20 @@
         <button class="uk-button bg-light uk-button-default mx-2" type="button">I Want To Learn</button>
         <div uk-dropdown>
             <ul class="uk-nav uk-dropdown-nav">
-                <li><a href="#">English</a></li>
-                <li><a href="#">French</a></li>
-                <li><a href="#">Spanish</a></li>
-                <li><a href="#">Arabic</a></li>
+                @foreach($langs as $l)
+                <li><a href="/findteacher?lang={{$l->name}}">{{$l->name}}</a></li>
+                @endforeach
             </ul>
         </div>
         <button class="uk-button bg-light uk-button-default mx-2" type="button">From Country</button>
         <div uk-dropdown>
             <ul class="uk-nav uk-dropdown-nav">
-                <li><a href="#">English</a></li>
-                <li><a href="#">French</a></li>
-                <li><a href="#">Spanish</a></li>
-                <li><a href="#">Arabic</a></li>
+                @foreach($countries as $country)
+                <li><a href="/findteacher?from={{$country->country}}">{{$country->country}}</a></li>
+                @endforeach
             </ul>
         </div>
-        <button class="uk-button bg-light uk-button-default mx-2" type="button">Speciality</button>
+        <!-- <button class="uk-button bg-light uk-button-default mx-2" type="button">Speciality</button>
         <div uk-dropdown>
             <ul class="uk-nav uk-dropdown-nav">
                 <li><a href="#">English</a></li>
@@ -40,10 +38,10 @@
                 <li><a href="#">Spanish</a></li>
                 <li><a href="#">Arabic</a></li>
             </ul>
-        </div>
-        <form class="uk-search uk-search-default ml-auto" style="min-width: 230px;">
-            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-            <input class="uk-search-input bg-light" type="search" placeholder="Search">
+        </div> -->
+        <form method="get" action="/findteacher" class="uk-search uk-search-default ml-auto" style="min-width: 230px;">
+            <button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+            <input class="uk-search-input bg-light" name="search" type="search" placeholder="Search">
         </form>
     </div>
 </div>
@@ -68,7 +66,7 @@
                         <div class="d-flex justify-content-between mt-2">
                             <div class="ml-sm-2">
                                 Teaches:
-                                <h5>English</h5>
+                                <h5>{{$teacher->languagename}}</h5>
                             </div>
                             <div class="ml-sm-2">
                                 From: <h5>{{$teacher->country}}</h5>

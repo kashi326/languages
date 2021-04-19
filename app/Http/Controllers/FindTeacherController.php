@@ -20,11 +20,12 @@ class FindTeacherController extends Controller
     use GetDates;
     public function index()
     {
-
+        DB::enableQueryLog();
         $teachers = DB::table('teachers')
             ->LeftJoin('users', 'users.id', '=', 'teachers.user_id')
             ->LeftJoin('languages', 'languages.id', '=', 'teachers.language_id')
             ->leftJoin('lessons', 'lessons.teacher_id', '=', 'teachers.id')
+            ->distinct()
             ->select(
                 'teachers.name as teachername',
                 'users.*',
@@ -33,13 +34,13 @@ class FindTeacherController extends Controller
                 'teachers.country',
                 'teachers.verified as isVerified',
                 'teachers.about',
-                'teachers.updated_at as lastupdated',
+                'teachers.updated_at as lastupdated'
                 // DB::raw("count(lessons.id) as lessons_count")
             );
         // ->groupBy('teachers.id');
         if (isset($_GET['lang'])) {
             $lang = $_GET['lang'];
-            $teachers = $teachers->where('languages.id', 'like', "%" . $lang . "%");
+            $teachers = $teachers->where('languages.name', $lang);
         }
         if (isset($_GET['teacherSpeaks'])) {
             $speaks = $_GET['teacherSpeaks'];
@@ -54,11 +55,17 @@ class FindTeacherController extends Controller
             $userSelected = $_GET['userSelected'];
             $teachers = $teachers->where('teachers.language_id', $userSelected);
         }
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $teachers = $teachers->where('teachers.name', 'like', "%$search%")->orWhere('teachers.lastname', 'like', "%$search%");
+        }
         $teachers = $teachers->paginate(10);
+        // dd(DB::getQueryLog());
+
         $langs = DB::table('languages')->select('name')->get();
         $data['teachers'] = $teachers;
         $data['langs'] = $langs;
-        $data['languageOption'] = Language::select('name')->get();
+        $data['countries'] = Teacher::select('country')->distinct()->get();
         return view('user.findteacher', $data);
     }
 
