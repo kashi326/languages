@@ -3,24 +3,26 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UserRegisterWithTeacher extends Model
 {
     protected $table = 'lessons';
-    public function teacher()
+    public function teacher():BelongsTo
     {
         return $this->belongsTo('App\Teacher');
     }
 
-    public function user()
+    public function user():BelongsTo
     {
         return $this->belongsTo('App\User');
     }
-    public function timing()
+    public function timing():BelongsTo
     {
         return $this->belongsTo('App\TeacherTiming');
     }
-    public function homework(){
+    public function homework():HasOne{
         return $this->hasOne('App\Homework','lesson_id');
     }
 }
