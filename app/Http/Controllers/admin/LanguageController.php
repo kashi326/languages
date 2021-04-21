@@ -56,7 +56,6 @@ class LanguageController extends Controller
             'name' => "required|min: 2|max: 255",
             'description' => "required|min: 10",
             "avatar" => "mimes: jpeg,jpg,png,gif,svg",
-            'code'=>'required|min:2|max:3'
         ]);
         $validator->sometimes('image', "mimes:jpg,jpeg,png,svg,gif", function ($input) {
             return $input->image != null ? true : false;

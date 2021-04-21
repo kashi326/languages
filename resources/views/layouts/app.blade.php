@@ -63,7 +63,7 @@
                         @if(Auth::user()->role == 'user')
                         <li class="nav-item dropdown">
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle dropdown-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                                <button class="btn dropdown-toggle dropdown-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     More
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

@@ -14,6 +14,8 @@ Route::group(['prefix' => "teacher", "namespace" => "teach", 'middleware' => "Pr
     Route::get("/homework", "HomeworkController@index")->name('teach.homework.index');
     Route::get("/update/profile", "IndexController@teachingProfile")->name('teach.profile.update');
     Route::post("/update/profile/{update}", "IndexController@updateTeachingProfile")->name('teach.profile.test');
+    Route::post("/update/profile/timing/add", "IndexController@addTiming")->name('teach.profile.timing.add');
+    Route::post("/update/profile/timing/delete", "IndexController@deleteTiming")->name('teach.profile.timing.delete');
     Route::resource('decks', 'DecksController');
     Route::resource('decksLesson', 'DeckLessonsController');
     Route::get('/meeting/{id}/{teacher}', "MeetingController@index")->name('teacher.meeting');

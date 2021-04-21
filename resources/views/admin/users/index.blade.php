@@ -89,7 +89,6 @@
                 </table>
             </div>
             {{$users->links()}}
-
             @else
             <p>No user found.</p>
             @endif

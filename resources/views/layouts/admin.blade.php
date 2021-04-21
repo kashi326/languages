@@ -149,9 +149,9 @@
                                 </li>
                             </a>
                             <ul class="drop-down collapse w-75 m-auto mb-5" id="collapse1" aria-expanded="false" style="list-style: none">
-                                <li class="nav-item active">
-                                    <a href="{{route("admin.setting.subject")}}" class="nav-link">Subjects</a>
-                                </li>
+{{--                                <li class="nav-item active">--}}
+{{--                                    <a href="{{route("admin.setting.subject")}}" class="nav-link">Subjects</a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a href="{{route("admin.setting.testpreparation")}}" class="nav-link">Test Preparation</a>
                                 </li>

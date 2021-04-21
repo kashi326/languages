@@ -24,7 +24,7 @@
                 {{$decks->links()}}
             </div>
             @else
-                @include("includes.notfound")
+                <h4 class="text-center">No Decks Added yet.</h4>
             @endif
         </div>
     </div>

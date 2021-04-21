@@ -60,7 +60,7 @@
                     @endforeach
                     @else
                     <div class="d-flex justify-content-center">
-                        @include("includes.notfound")
+                        <h4 class="text-center">No Lesson added to Decks yet.</h4>
                     </div>
                     @endif
                 </div>

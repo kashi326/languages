@@ -23,13 +23,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 col-lg-3">
-                            <img class="card-img-top teacher-avatar" src="{{asset(Auth::user()->avatar)??asset('/images/avatar.png')}}" alt="Teacher Avator" style="border-radius: 100%;" height="80" width="80">
+                            <img class="card-img-top teacher-avatar" src="{{asset(Auth::user()->avatar)}}" alt="" style="border-radius: 100%;" height="80" width="80">
                         </div>
                         <div class="col-md-12 col-lg-9">
                             <div class="row">
                                 <div class="col-9 d-flex">
                                     <div class="p-2 bd-highlight">
-                                        {{$teacher->name}}{{ $teacher->lastname}}
+                                        {{$teacher->name}} {{ $teacher->lastname}}
                                     </div>
                                     <div class="p-2 bd-highlight"><?php echo $teacher->verified ?
                                                                         '<img src="/icons/welcome/verified-badge.png" alt="teacher icon">' : '' ?></div>
@@ -79,7 +79,6 @@
                         @endif
                         <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','teachesAdd')}}" method="post" data-remote="true">
                             <div class="form-group">
-                                <label for="">Teaches</label>
                                 <select class="form-control browser-select custom-select" name="level">
                                     @foreach ($setting_level as $level)
                                     <option value="{{$level->level}}">{{$level->level}}</option>
@@ -123,7 +122,6 @@
                         @endif
                         <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','includeAdd')}}" method="post" data-remote="true">
                             <div class="form-group">
-                                <label for="">Includes</label>
                                 <select class="form-control browser-select custom-select" name="includes">
                                     @foreach ($setting_lessson_include as $include)
                                     <option value="{{$include->include}}">{{$include->include}}</option>
@@ -156,7 +154,6 @@
                         @endif
                         <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','teachesToAdd')}}" method="post" data-remote="true">
                             <div class="form-group">
-                                <label for="">Teaches To</label>
                                 <select class="form-control browser-select custom-select" name="teachesTo">
                                     @foreach ($setting_teach_to as $to)
                                     <option value="{{$to->id}}">{{$to->age}} ({{$to->from}} - {{$to->to}})</option>
@@ -170,37 +167,36 @@
                     </section>
 
                     <!-- Subjects -->
-                    <section id="subjects" class="mt-3 ml-1 p-2">
-                        <h5 class="mb-1">Subjects</h5>
-                        @if(!$teacher->teach_subjects->isEmpty())
-                        <div class="row mr-2 ml-2">
-                            @foreach($teacher->teach_subjects as $subject)
-                            <div class="col-12 col-sm-6">
-                                <div class="teacher-expertise-row">
-                                    <p class="mb-1">
-                                        {{$subject->subject}}
-                                    </p>
-                                    <a href="{{route('teach.profile.test','subjectDelete')}}" data-remote="true" data-method="post" data-confirm="Are You Sure You Want To Delete This Record" data-params="subject={{$subject->id}}"><img src="{{asset('icons/delete-x.svg')}}" alt=""> </a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        @endif
-                        <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','subjectAdd')}}" method="post" data-remote="true">
-                            <div class="form-group">
-                                <label for="">Teaching Subjects</label>
-                                <select class="form-control browser-select custom-select" name="subject">
-                                    @foreach ($setting_subjects as $subject)
-                                    <option value="{{$subject->subject}}">{{$subject->subject}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-success btn-sm float-right" type="submit" value="Add +" />
-                            </div>
-                        </form>
-                    </section>
-                    <!-- Test Preparation -->
+{{--                    <section id="subjects" class="mt-3 ml-1 p-2">--}}
+{{--                        <h5 class="mb-1">Subjects</h5>--}}
+{{--                        @if(!$teacher->teach_subjects->isEmpty())--}}
+{{--                        <div class="row mr-2 ml-2">--}}
+{{--                            @foreach($teacher->teach_subjects as $subject)--}}
+{{--                            <div class="col-12 col-sm-6">--}}
+{{--                                <div class="teacher-expertise-row">--}}
+{{--                                    <p class="mb-1">--}}
+{{--                                        {{$subject->subject}}--}}
+{{--                                    </p>--}}
+{{--                                    <a href="{{route('teach.profile.test','subjectDelete')}}" data-remote="true" data-method="post" data-confirm="Are You Sure You Want To Delete This Record" data-params="subject={{$subject->id}}"><img src="{{asset('icons/delete-x.svg')}}" alt=""> </a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
+{{--                        <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','subjectAdd')}}" method="post" data-remote="true">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <select class="form-control browser-select custom-select" name="subject">--}}
+{{--                                    @foreach ($setting_subjects as $subject)--}}
+{{--                                    <option value="{{$subject->subject}}">{{$subject->subject}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <input class="btn btn-success btn-sm float-right" type="submit" value="Add +" />--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
+{{--                    </section>--}}
+{{--                    <!-- Test Preparation -->--}}
                     <section id="testPreparation" class="mt-3 ml-1 p-2">
                         <h5 class="mb-1">Test Preparation</h5>
                         @if(!$teacher->teach_test_preparation->isEmpty())
@@ -219,7 +215,6 @@
                         @endif
                         <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','testPreparationAdd')}}" method="post" data-remote="true">
                             <div class="form-group">
-                                <label for="">Teaches Test Preparation</label>
                                 <select class="form-control browser-select custom-select" name="test">
                                     @foreach ($setting_test_preparation as $test)
                                     <option value="{{$test->test}}">{{$test->test}}</option>
@@ -380,11 +375,11 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="from_year">From</label>
                                 <input type="month" name="from_year" id="" class="form-control">
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="to_year">To</label>
                                 <input type="month" name="to_year" id="" class="form-control">
                             </div>
@@ -426,11 +421,11 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="from_year">From</label>
                                 <input type="month" name="from_year" id="" class="form-control">
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="to_year">To</label>
                                 <input type="month" name="to_year" id="" class="form-control">
                             </div>
@@ -472,11 +467,11 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="from_year">From</label>
                                 <input type="month" name="from_year" id="" class="form-control">
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="to_year">To</label>
                                 <input type="month" name="to_year" id="" class="form-control">
                             </div>
@@ -508,6 +503,7 @@
         });
 
     });
+
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEvents = <?php echo json_encode($classes) ?>;
         var calendarEl = document.getElementById('calendar');
@@ -519,7 +515,71 @@
             },
             initialView: 'timeGridWeek',
             themeSystem: 'bootstrap',
-            events: calendarEvents
+            events: calendarEvents,
+            selectable: true,
+            editable: true,
+            eventClick: function(info) {
+                var event = info.event;
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("teach.profile.timing.delete")}}',
+                    data: {
+                        start: event.startStr,
+                        end: event.endStr,
+                        teacher_id: <?php echo $teacher->id; ?>
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        return confirm("Are you want to delete this timing to your timetable?")
+                    },
+                    success: function(response) {
+                        console.log(`sucess: ${response}`)
+                        $('#toastMessage').html(response);
+                        $('#success').toast('show')
+
+                    },
+                    error: function(error) {
+                        console.log(`error:${error}`)
+                        if (error.toast) {
+                            $('#toastMessage').html(error.toast);
+                            $('#success').toast('show')
+                        } else
+                            alert('Something went wrong');
+                    }
+                });
+
+            },
+            select: function(info) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("teach.profile.timing.add")}}',
+                    data: {
+                        start: info.startStr,
+                        end: info.endStr,
+                        teacher_id: <?php echo $teacher->id; ?>
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        return confirm("Are you want to add this timing to your timetable?")
+                    },
+                    success: function(response) {
+                        $('#toastMessage').html(response);
+                        $('#success').toast('show')
+                    },
+                    error: function(error) {
+                        if (error.toast) {
+                            $('#toastMessage').html(error.toast);
+                            $('#success').toast('show')
+                        } else
+                            alert('Something went wrong');
+                    }
+                });
+
+            }
         });
         calendar.render();
     });

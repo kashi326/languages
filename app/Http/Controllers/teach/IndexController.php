@@ -27,7 +27,8 @@ use App\SettingTeachTo;
 use App\SettingTestPreparation;
 use App\Traits\GetDates;
 use \Validator;
-
+use DateTime;
+use DateTimeZone;
 class IndexController extends Controller
 {
     use GetDates;
@@ -361,5 +362,35 @@ class IndexController extends Controller
                 return response()->json(['message' => 'Price & Discount updated Successfully'], 208);
                 break;
         }
+    }
+    public function addTiming(Request $request)
+    {
+        $start_class = new DateTime($request->start, new DateTimeZone('UTC'));
+        $end_class = new DateTime($request->end, new DateTimeZone('UTC'));
+        $timing = new TeacherTiming;
+        $timing->name = strtolower($start_class->format('l'));
+        $timing->open = $start_class->format('H:i:s');
+        $timing->close = $end_class->format('H:i:s');
+        $timing->isOpen = 1;
+        $timing->teacher_id = $request->teacher_id;
+        try {
+            $timing->save();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th], 400);
+        }
+        return response()->json('Timing added successfully');
+    }
+    public function deleteTiming(Request $request)
+    {
+        $start_class = new DateTime($request->start, new DateTimeZone('UTC'));
+        $end_class = new DateTime($request->end, new DateTimeZone('UTC'));
+        $timing = null;
+        try {
+            $timing = TeacherTiming::where('name', strtolower($start_class->format('l')))->where('open', $start_class->format('H:i:s'))->where('close', $end_class->format('H:i:s'))->where('teacher_id', $request->teacher_id)->first();
+            $timing->delete();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th], 400);
+        }
+        return response()->json($timing);
     }
 }

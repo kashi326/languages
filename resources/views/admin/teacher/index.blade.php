@@ -54,6 +54,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$teachers->links()}}
             </div>
             @else
             <p>No teacher found.</p>

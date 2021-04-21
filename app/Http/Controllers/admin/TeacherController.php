@@ -56,14 +56,17 @@ class TeacherController extends Controller
             'phone'     => "required",
             'status'    => "required"
         ]);
-        foreach ($request->id as $key => $id) {
-            $data = array(
-                'isOpen'    => $request->isOpen[$key],
-                'open'      => $request->open[$key],
-                'close'     => $request->close[$key],
-            );
-            TeacherTiming::where('id', $request->id[$key])->update($data);
+        if($request->has('isOpen')){
+            foreach ($request->isOpen as $key => $id) {
+                $data = array(
+                    'isOpen'    => $request->isOpen[$key],
+                    'open'      => $request->open[$key],
+                    'close'     => $request->close[$key],
+                );
+                TeacherTiming::where('id', $request->id)->update($data);
+            }
         }
+
         if ($request->other_language) {
 
             foreach ($request->other_language as $key => $id) {
