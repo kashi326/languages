@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->softDeletes();
             $table->string("role")->default("user");
-            $table->string('avatar')->default('/images/default.png');
+            $table->string('avatar')->default('/images/default.jpeg');
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('country')->nullable();
