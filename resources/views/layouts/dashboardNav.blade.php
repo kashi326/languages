@@ -28,9 +28,9 @@
                 <li class="nav-item dashboardNav" id="myTeachers">
                     <a href="/dashboard/myteachers" class="nav-link side-link dashboard-links"> <img src="{{asset('icons/talk_female.svg')}}" alt="" width="24" height="24"> Teachers</a>
                 </li>
-                <li class="nav-item dashboardNav" id="vocabulary">
+                <!-- <li class="nav-item dashboardNav" id="vocabulary">
                     <a href="/dashboard/vocabulary" class="nav-link side-link dashboard-links"> <img src="{{asset('icons/sheets.svg')}}" alt="" width="24" height="24"> Vocabulary</a>
-                </li>
+                </li> -->
                 @endif
             </ul>
         </div>
@@ -38,15 +38,9 @@
 </nav>
 
 <script>
-    $(function() {
-        $('.nav-item.dashboardNav').click(function() {
-            var id = $(this).attr('id');
-            console.log(id)
-            sessionStorage.setItem('dashboardNavActive', id);
-        })
+   $(function(){
+        const url  =window.location.pathname;
+        $('.side-link').removeClass("active");
+        $(`a[href='${url}']`).addClass('active')
     });
-    window.onload = function() {
-        var id = sessionStorage.getItem('dashboardNavActive');
-        $('#' + id).find('a').addClass('active');
-    }
 </script>

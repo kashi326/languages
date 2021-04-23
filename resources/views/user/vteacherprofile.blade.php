@@ -63,12 +63,12 @@
                         <div class="col-4">
                             <img src="/icons/welcome/classroom.png" alt="Total Lessons">
                             <p class="text-muted">Total Lessons</p>
-                            <p>150</p>
+                            <p>{{$total_registered_lessons}}</p>
                         </div>
                         <div class="col-4">
                             <img src="/icons/welcome/classroom2.png" alt="Lessons per Student">
                             <p class="text-muted">Lessons per Student</p>
-                            <p>15</p>
+                            <p>{{$lesson_per_Student}}</p>
                         </div>
                         <div class="col-4">
                             <img src="/icons/welcome/star.png" alt="Attendance">
@@ -325,6 +325,7 @@
             @endif
         </div>
         <div class="d-none d-lg-block col-lg-4 ">
+        @if($teacher->trail)
             <div class="card mb-4">
                 <div class="card-head p-2">
                     <p class="card-title mb-0">Trail Lesson</p>
@@ -335,7 +336,7 @@
                         <h6 class="text-muted">Trail Lesson</h6>
                     </div>
                     <div class="col-4">
-                        <p style="color:green"> Curreny {{$teacher->price/2}}</p>
+                        <p style="color:green"> $ {{$teacher->price/2}}</p>
                         <p class="text-muted">30 min</p>
                     </div>
                 </div>
@@ -343,6 +344,7 @@
                     <a href="/payments?teacher_id={{$teacher->id}}&start={{$classes&&$classes[0]?$classes[0]['start']:''}}&end={{$classes&&$classes[0]?$classes[0]['end']:''}}" class="btn btn-primary btn-block">Book Free Trail</a>
                 </div>
             </div>
+            @endif
             <div class="card mb-4">
                 <div class="card-head p-2">
                     <p class="card-title mb-0">Private Lesson</p>
@@ -354,7 +356,7 @@
                             <h6 class="text-muted">1 Lesson</h6>
                         </div>
                         <div class="col-4">
-                            <p style="color:green"> Curreny {{$teacher->price}}</p>
+                            <p style="color:green"> $ {{$teacher->price}}</p>
                             <p class="text-muted">60 min</p>
                         </div>
                     </div>
@@ -363,7 +365,7 @@
                             <h6 class="text-muted">5 Lessons</h6>
                         </div>
                         <div class="col-4">
-                            <p style="color:green"> Curreny {{5*$teacher->price - (($teacher->price*5)*$teacher->discount)/100}}</p>
+                            <p style="color:green"> $ {{5*$teacher->price - (($teacher->price*5)*$teacher->discount)/100}}</p>
                             <p class="text-muted">5 x 60 min</p>
                         </div>
                     </div>
@@ -372,7 +374,7 @@
                             <h6 class="text-muted">10 Lessons</h6>
                         </div>
                         <div class="col-4">
-                            <p style="color:green"> Curreny {{10*$teacher->price - (($teacher->price*10)*$teacher->discount)/100}}</p>
+                            <p style="color:green"> $ {{10*$teacher->price - (($teacher->price*10)*$teacher->discount)/100}}</p>
                             <p class="text-muted" style="justify-content: end;">10 x 60 min</p>
                         </div>
                     </div>

@@ -57,7 +57,7 @@
                 {{$teachers->links()}}
             </div>
             @else
-            <p>No teacher found.</p>
+            <p>No teacher found. </p>
             @endif
         </div>
     </div>

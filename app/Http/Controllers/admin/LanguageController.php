@@ -71,7 +71,6 @@ class LanguageController extends Controller
             $image_path = '/lang_images/' . $name;
 
 
-
             if (file_exists(public_path($lang->avatar)) && $lang->avatar != null) {
                 unlink(public_path($lang->avatar));
             }

@@ -60,7 +60,7 @@
     @else
     <div class="row">
         <img src="{{ asset('/icons/collaborationfemalemale.svg') }}" width="100" height="100" alt="img" style="margin-left:45%">
-        <h4 class="text-center w-100">No Teachers Found.</h4>
+        <h4 class="text-center w-100">No Teachers Found. <a href="/findteacher">Find Teacher</a></h4>
     </div>
     @endif
 </div>

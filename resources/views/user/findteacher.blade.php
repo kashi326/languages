@@ -65,17 +65,17 @@
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <div class="ml-sm-2">
-                                Teaches:
-                                <h5>{{$teacher->languagename}}</h5>
+                               <strong> Teaches:</strong>
+                                <h5 class="mt-1">{{$teacher->languagename}}</h5>
                             </div>
                             <div class="ml-sm-2">
-                                From: <h5>{{$teacher->country}}</h5>
+                               <strong> From:</strong> <h5 class="mt-1">{{$teacher->country}}</h5>
                             </div>
                             <div class="ml-sm-2">
-                                Lessons: <h5>0</h5>
+                               <strong>Total Lessons:</strong> <h5 class="mt-1">{{$teacher->lessons_count}}</h5>
                             </div>
                         </div>
-                        <p class="font-size-14 mb-1 mt-1">Speaks: </p>
+                        <p class="font-size-14 mb-1 mt-1 font-weight-bold">Speaks: </p>
                         <p class="card-text pr-2" style="word-break: break-word;">{!! substr($teacher->about,0,300) !!}</p>
                     </div>
                 </div>

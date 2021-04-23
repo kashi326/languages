@@ -17,7 +17,7 @@ class TeacherController extends Controller
 
     public function index()
     {
-        $teachers =  Teacher::paginate(10);
+        $teachers = Teacher::paginate(10);
         return view('admin.teacher.index', compact('teachers'));
     }
 
@@ -51,17 +51,17 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $request->validate([
-            'name'      => "required",
-            'gender'    => "required",
-            'phone'     => "required",
-            'status'    => "required"
+            'name' => "required",
+            'gender' => "required",
+            'phone' => "required",
+            'status' => "required"
         ]);
-        if($request->has('isOpen')){
+        if ($request->has('isOpen')) {
             foreach ($request->isOpen as $key => $id) {
                 $data = array(
-                    'isOpen'    => $request->isOpen[$key],
-                    'open'      => $request->open[$key],
-                    'close'     => $request->close[$key],
+                    'isOpen' => $request->isOpen[$key],
+                    'open' => $request->open[$key],
+                    'close' => $request->close[$key],
                 );
                 TeacherTiming::where('id', $request->id)->update($data);
             }
@@ -109,11 +109,13 @@ class TeacherController extends Controller
         $lessons = UserRegisterWithTeacher::with('teacher', 'user', 'timing')->paginate(10);
         return view('admin.lessons.index')->with(['lessons' => $lessons]);
     }
+
     public function lessonView(UserRegisterWithTeacher $lesson)
     {
         $lessonData = UserRegisterWithTeacher::where('id', $lesson->id)->with('teacher', 'user', 'timing')->first();
         return view('admin.lessons.view')->with('lesson', $lessonData);
     }
+
     public function homework()
     {
         $homework = Homework::with(['lesson' => function ($q) {
@@ -121,9 +123,10 @@ class TeacherController extends Controller
         }])->paginate(10);
         return view('admin.homework.index')->with('homeworks', $homework);
     }
+
     public function download($type, $id, Request $request)
     {
-       $homework = Homework::where("id",$id)->first();
+        $homework = Homework::where("id", $id)->first();
         $url = '';
         if ($type == 'homework') {
             $url = public_path($homework->homework_path);

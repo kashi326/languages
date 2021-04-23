@@ -38,7 +38,7 @@
             @csrf
             @method("PUT")
             <div class="tab-content">
-                <div class="card-body tab-pane" id="personal_details" role="tabpanel">
+                <div class="card-body tab-pane active" id="personal_details" role="tabpanel">
                     <div class="avatar-img mb-3">
                         @if($teacher->user->avatar)
                         <img src="{{$teacher->user->avatar}}" alt="avatar" class="">
@@ -113,7 +113,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary ml-3">Save</button>
                 </div>
-                <div class="card-body tab-pane active" id="lang_details">
+                <div class="card-body tab-pane" id="lang_details">
                 <input type="text" hidden name="teacher_id" value="{{$teacher->id}}">
                     @foreach($languages as $language)
                     <div>

@@ -87,7 +87,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'country' => $data['country'],
             'gender' => $data['gender'],
-            'avatar'=>$image_path?:''
+            'avatar'=>$image_path?:'images/default.jpeg'
         ]);
     }
 }

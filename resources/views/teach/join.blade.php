@@ -46,28 +46,28 @@
                                     <strong>@{{errors['details.phone'][0]}}</strong>
                                 </div>
                             </div>
-                            <div class="col-md-3 form-group">
-                                <label for="gender">Gender</label><br>
-                                <select name="gender" id="gender" class="form-control" v-model="form.gender">
-                                    <option value="">...</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="others">Others</option>
-                                </select>
-                                <div class="invalid-feedback d-block" v-if="errors['details.gender']">
-                                    <strong>@{{errors['details.gender'][0]}}</strong>
-                                </div>
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="country">Country</label>
-                                <select name="country" id="country" class="form-control" v-model="form.country">
-                                    <option value="">...</option>
-                                    @include('includes.countries_list')
-                                </select>
-                                <div class="invalid-feedback d-block" v-if="errors['details.country']">
-                                    <strong>@{{errors['details.country'][0]}}</strong>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-3 form-group">--}}
+{{--                                <label for="gender">Gender</label><br>--}}
+{{--                                <select name="gender" id="gender" class="form-control" v-model="form.gender" >--}}
+{{--                                    <option value="">...</option>--}}
+{{--                                    <option value="male">Male</option>--}}
+{{--                                    <option value="female">Female</option>--}}
+{{--                                    <option value="others">Others</option>--}}
+{{--                                </select>--}}
+{{--                                <div class="invalid-feedback d-block" v-if="errors['details.gender']">--}}
+{{--                                    <strong>@{{errors['details.gender'][0]}}</strong>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-3 form-group">--}}
+{{--                                <label for="country">Country</label>--}}
+{{--                                <select name="country" id="country" class="form-control" v-model="form.country">--}}
+{{--                                    <option value="">...</option>--}}
+{{--                                    @include('includes.countries_list')--}}
+{{--                                </select>--}}
+{{--                                <div class="invalid-feedback d-block" v-if="errors['details.country']">--}}
+{{--                                    <strong>@{{errors['details.country'][0]}}</strong>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
 
                         {{-- <div class="avatar">

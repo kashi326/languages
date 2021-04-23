@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traits\GetDates;
+use App\User;
 use Illuminate\Http\Request;
 use App\Teacher;
 use App\Language;
@@ -18,14 +19,15 @@ class FindTeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     use GetDates;
+
     public function index()
     {
         DB::enableQueryLog();
-        $teachers = DB::table('teachers')
-            ->LeftJoin('users', 'users.id', '=', 'teachers.user_id')
+        $teachers = Teacher::
+            LeftJoin('users', 'users.id', '=', 'teachers.user_id')
             ->LeftJoin('languages', 'languages.id', '=', 'teachers.language_id')
             ->leftJoin('lessons', 'lessons.teacher_id', '=', 'teachers.id')
-            ->distinct()
+//            ->distinct()
             ->select(
                 'teachers.name as teachername',
                 'users.*',
@@ -35,9 +37,7 @@ class FindTeacherController extends Controller
                 'teachers.verified as isVerified',
                 'teachers.about',
                 'teachers.updated_at as lastupdated'
-                // DB::raw("count(lessons.id) as lessons_count")
-            );
-        // ->groupBy('teachers.id');
+            )->withCount('lessons');
         if (isset($_GET['lang'])) {
             $lang = $_GET['lang'];
             $teachers = $teachers->where('languages.name', $lang);
@@ -60,8 +60,6 @@ class FindTeacherController extends Controller
             $teachers = $teachers->where('teachers.name', 'like', "%$search%")->orWhere('teachers.lastname', 'like', "%$search%");
         }
         $teachers = $teachers->paginate(10);
-        // dd(DB::getQueryLog());
-
         $langs = DB::table('languages')->select('name')->get();
         $data['teachers'] = $teachers;
         $data['langs'] = $langs;
@@ -112,6 +110,8 @@ class FindTeacherController extends Controller
         foreach ($allClasses as $c) {
             $classes = array_merge($classes, $this->getMondaysInRange($dateFromString, $dateToString, $c->name, $c->open, $c->close, $id));
         }
+        $total_registered_lessons = UserRegisterWithTeacher::where('teacher_id', $id)->get();
+        $lesson_per_Student = UserRegisterWithTeacher::where('teacher_id', $id)->groupBy('user_id')->select('user_id')->get();
         $data = [];
         $data['teacher'] = $teacher;
         $data['resume'] = $teacher_resume;
@@ -120,8 +120,11 @@ class FindTeacherController extends Controller
         $data['comments'] = $comments;
         $data['classes'] = $classes;
         $data['expertise'] = $expertise;
+        $data['total_registered_lessons'] = count($total_registered_lessons);
+        $data['lesson_per_Student'] = count($lesson_per_Student);
         return view('user.vteacherprofile', $data);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -136,7 +139,7 @@ class FindTeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -147,7 +150,7 @@ class FindTeacherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -158,7 +161,7 @@ class FindTeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -169,8 +172,8 @@ class FindTeacherController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -181,7 +184,7 @@ class FindTeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

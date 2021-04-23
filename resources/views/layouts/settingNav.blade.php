@@ -44,13 +44,9 @@
 
 <script>
     $(function(){
-        var getid = (sessionStorage.getItem('settingNavItem'))
-        $('#'+getid).find('a').addClass('active')
-        $('.nav-item.settingNav').click(function(){
-            var id = $(this).attr('id');
-            console.log(id)
-            sessionStorage.setItem('settingNavItem',id);
-        })
+        const url  =window.location.pathname;
+        $('.side-link').removeClass("active");
+        $(`a[href=${url}]`).addClass('active')
 
     });
 </script>

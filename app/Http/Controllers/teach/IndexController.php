@@ -43,11 +43,11 @@ class IndexController extends Controller
     {
         $request->validate([
             'details.phone' => "required",
-            'details.gender' => "required",
+//            'details.gender' => "required",
             'details.primary_lang.name' => "required",
             'details.about' => "required",
             'details.agree' => "accepted",
-            'details.country' => 'required',
+//            'details.country' => 'required',
             'days' => [new DaysRule],
             'other_langs' => [new OtherLangsRule]
         ]);
@@ -62,11 +62,11 @@ class IndexController extends Controller
         $teacher->lastname = $user->lastname;
         $teacher->user_id = $user->id;
         $teacher->phone = $details['phone'];
-        $teacher->gender = $details['gender'];
+        $teacher->gender = $user->gender;
         $teacher->language_id = $details['primary_lang']['id'];
         $teacher->about = $details['about'];
         $teacher->intro_link = $request->details['intro_link'];
-        $teacher->country = $details['country'];
+        $teacher->country = $user->country;
         $teacher->save();
 
         foreach ($request->days as $key => $item) {
@@ -190,7 +190,7 @@ class IndexController extends Controller
                 }
                 $teacher_level = TeachingLevel::firstOrNew(
                     ['level' => $request->level, 'teacher_id' => $teacher->id],
-                    ['teacher_id' => $teacher->id, 'level' => $request->level],
+                    ['teacher_id' => $teacher->id, 'level' => $request->level]
                 );
                 $teacher_level->save();
                 return response()->json(['message' => 'Teaching Level Added Successfully'], 201);
@@ -351,13 +351,14 @@ class IndexController extends Controller
             case 'price':
                 $validator = Validator::make($request->all(), [
                     'lessonPrice' => 'required|numeric|min:0',
-                    'discount' => 'required|numeric|min:0|max:100'
+                    'discount' => 'required|numeric|min:0|max:100',
                 ]);
                 if ($validator->fails()) {
                     return response()->json(['message' => $validator->errors()], 401);
                 }
                 $teacher->price = $request->lessonPrice;
                 $teacher->discount = $request->discount;
+                $teacher->trail = $request->has('trail') && $request->trail == 'on';
                 $teacher->update();
                 return response()->json(['message' => 'Price & Discount updated Successfully'], 208);
                 break;

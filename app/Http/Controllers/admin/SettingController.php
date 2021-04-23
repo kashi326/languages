@@ -19,6 +19,7 @@ class SettingController extends Controller
         $subjects = SettingTeachSubjects::get();
         return view('admin.setting.subject.index')->with('subjects', $subjects);
     }
+
     public function createSubject(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -32,6 +33,7 @@ class SettingController extends Controller
         $subject->save();
         return response()->json(['message' => 'Subject Added Successfully']);
     }
+
     public function destroySubject(Request $request)
     {
         $subject = SettingTeachSubjects::destroy($request->ID);
@@ -44,6 +46,7 @@ class SettingController extends Controller
         $test = SettingTestPreparation::get();
         return view('admin.setting.test.index')->with('tests', $test);
     }
+
     public function createTestPreparation(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -57,16 +60,19 @@ class SettingController extends Controller
         $test->save();
         return response()->json(['message' => 'Test Added Successfully']);
     }
+
     public function destroyTestPreparation(Request $request)
     {
         $test = SettingTestPreparation::destroy($request->ID);
         return response()->json(['message' => 'Test Deleted Successfully']);
     }
+
     public function getTeachesTo()
     {
         $to = SettingTeachTo::get();
         return view('admin.setting.teachesto.index')->with('tos', $to);
     }
+
     public function createTeachesTo(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -89,17 +95,20 @@ class SettingController extends Controller
             return response()->json(['message' => 'Age already exists'], 200);
         }
     }
+
     public function destroyTeachesTo(Request $request)
     {
         SettingTeachTo::destroy($request->ID);
         return response()->json(['message' => 'Age Deleted Successfully']);
     }
+
     public function getTeachingLevel()
     {
         $level = SettingTeachingLevel::get();
         return view('admin.setting.level.index')->with('levels', $level);
 
-     }
+    }
+
     public function createTeachingLevel(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -118,16 +127,19 @@ class SettingController extends Controller
             return response()->json(['message' => 'Teaching Level already exists'], 200);
         }
     }
+
     public function destroyTeachingLevel(Request $request)
     {
         SettingTeachingLevel::destroy($request->ID);
         return response()->json(['message' => 'Teaching Level Deleted Successfully']);
     }
+
     public function getLessonInclude()
     {
         $include = SettingLessonInclude::get();
         return view('admin.setting.lessoninclude.index')->with('includes', $include);
     }
+
     public function createLessonInclude(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -146,41 +158,50 @@ class SettingController extends Controller
             return response()->json(['message' => 'Record already exists'], 200);
         }
     }
+
     public function editLessonInclude($id, Request $request)
     {
         SettingLessonInclude::destroy($request->ID);
         return response()->json(['message' => 'Record Deleted Successfully']);
     }
-    public function privacy(){
+
+    public function privacy()
+    {
         $pp = PrivacyPolicy::get();
-        return view('admin.privacy.edit',compact('pp'));
+        return view('admin.privacy.edit', compact('pp'));
     }
-    public function updateprivacy(Request $request){
+
+    public function updateprivacy(Request $request)
+    {
         $id = $request->ID;
         $privacy = PrivacyPolicy::find($id);
         $privacy->heading = $request->heading;
-        if($request->content){
-            $privacy->content = strip_tags($request->content,'<p><a><ul><ol><li><hr><div>');
+        if ($request->content) {
+            $privacy->content = strip_tags($request->content, '<p><a><ul><ol><li><hr><div>');
         }
         $privacy->update();
-        return response()->json(['message'=>'Section Updated successfully']);
+        return response()->json(['message' => 'Section Updated successfully']);
     }
-    public function addprivacy(Request $request){
+
+    public function addprivacy(Request $request)
+    {
         $request->validate([
-            'heading'=>'required'
+            'heading' => 'required'
         ]);
         $privacy = new PrivacyPolicy;
         $privacy->heading = $request->heading;
-        if($request->content){
-            $privacy->content = strip_tags($request->content,'<p><a><ul><ol><li><hr><div>');
+        if ($request->content) {
+            $privacy->content = strip_tags($request->content, '<p><a><ul><ol><li><hr><div>');
         }
         $privacy->save();
-        return response()->json(['message'=>'Section Added successfully']);
+        return response()->json(['message' => 'Section Added successfully']);
     }
-    public function deleteprivacy(Request $request){
+
+    public function deleteprivacy(Request $request)
+    {
         $id = $request->ID;
         PrivacyPolicy::destroy($id);
-        return response()->json(['message'=>'Section Deleted successfully']);
+        return response()->json(['message' => 'Section Deleted successfully']);
 
     }
 }

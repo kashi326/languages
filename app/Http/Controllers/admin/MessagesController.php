@@ -12,6 +12,7 @@ class MessagesController extends Controller
     {
         $messages = Messages::select('session_id')->distinct()->get();
     }
+
     public function show($session_id)
     {
         $users = Messages::select('user_id')->where('session_id', $session_id)->distinct()->limit(2)->get();

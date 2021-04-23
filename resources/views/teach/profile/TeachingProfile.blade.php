@@ -340,6 +340,10 @@
                             <input type="number" name="discount" class="form-control" value="{{$teacher->discount}}">
                         </div>
                         <div class="form-group">
+                            <input type="checkbox" name="trail" <?php echo $teacher->trail?"checked":""; ?> >
+                            <label for="">Free Trail for students</label>
+                        </div>
+                        <div class="form-group">
                             <input type="submit" class="btn btn-success btn-sm float-right" value="Update">
                         </div>
                     </form>
@@ -538,7 +542,7 @@
                         console.log(`sucess: ${response}`)
                         $('#toastMessage').html(response);
                         $('#success').toast('show')
-
+                        location.reload();
                     },
                     error: function(error) {
                         console.log(`error:${error}`)
@@ -569,6 +573,7 @@
                     success: function(response) {
                         $('#toastMessage').html(response);
                         $('#success').toast('show')
+                        location.reload();
                     },
                     error: function(error) {
                         if (error.toast) {

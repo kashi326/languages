@@ -16,7 +16,7 @@
     Vue.component('v-select', VueSelect.VueSelect);
     new Vue({
         el: "#main-container",
-        data: function(){
+        data: function () {
             return {
                 loading: false,
                 languages: languages,
@@ -27,96 +27,96 @@
                 errors: {},
                 form: {
                     phone: "",
-                    gender: "",
                     intro_link: "",
                     primary_lang: {},
                     about: "",
-                    country:"",
                     agree: false,
                 },
                 days: {
                     sunday: [
-                {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5c7',
-                    isOpen: false
-                    }
-                ],
-                monday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5d1',
-                    isOpen: false
-                    }
-                ],
-                tuesday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5d8',
-                    isOpen: false
-                    }
-                ],
-                wednesday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5df',
-                    isOpen: false
-                    }
-                ],
-                thursday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5e6',
-                    isOpen: false
-                    }
-                ],
-                friday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5ec',
-                    isOpen: false
-                    },
-                ],
-                saturday: [
-                    {
-                    open: '',
-                    close: '',
-                    id: '5ca5578b0c5f8',
-                    isOpen: false
-                    }
-                ]
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5c7',
+                            isOpen: false
+                        }
+                    ],
+                    monday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5d1',
+                            isOpen: false
+                        }
+                    ],
+                    tuesday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5d8',
+                            isOpen: false
+                        }
+                    ],
+                    wednesday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5df',
+                            isOpen: false
+                        }
+                    ],
+                    thursday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5e6',
+                            isOpen: false
+                        }
+                    ],
+                    friday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5ec',
+                            isOpen: false
+                        },
+                    ],
+                    saturday: [
+                        {
+                            open: '',
+                            close: '',
+                            id: '5ca5578b0c5f8',
+                            isOpen: false
+                        }
+                    ]
                 }
             };
         },
         methods: {
             convert(input) {
-    return moment(input, 'HH:mm:ss').format('h:mm:ss A');
-},
-            addLang(){
-                this.other_langs.push({id: this.other_langs.length + 1,language: {
-                    name: "",
-                    code: ""
-                },level: {
-                    name: ""
-                }});
+                return moment(input, 'HH:mm:ss').format('h:mm:ss A');
             },
-            removeLang(id){
-                this.other_langs = this.other_langs.filter((item)=>{
+            addLang() {
+                this.other_langs.push({
+                    id: this.other_langs.length + 1, language: {
+                        name: "",
+                        code: ""
+                    }, level: {
+                        name: ""
+                    }
+                });
+            },
+            removeLang(id) {
+                this.other_langs = this.other_langs.filter((item) => {
                     return item.id != id;
                 })
             },
-            handleAvatar(ev){
+            handleAvatar(ev) {
                 const url = ev.target.files[0];
                 this.avatarUrl = URL.createObjectURL(url);
                 this.form.avatar = url;
             },
-            handleSubmit(){
+            handleSubmit() {
 
                 const data = {
                     details: this.form,
@@ -125,14 +125,14 @@
                 }
 
                 this.loading = true;
-                axios.post("/teacher/register",data).then((val)=>{
+                axios.post("/teacher/register", data).then((val) => {
                     this.loading = false;
-                    if(val.status == 200){
+                    if (val.status == 200) {
                         location.href = '/'
                     }
-                }).catch((error)=>{
+                }).catch((error) => {
                     this.loading = false;
-                    if(error.response.status == 422){
+                    if (error.response.status == 422) {
                         this.errors = error.response.data.errors;
                         console.log(this.errors)
                     }

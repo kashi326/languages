@@ -36,6 +36,8 @@ div.card:first-of-type {
 .teacher-avatar {
     width: auto;
     flex-shrink: initial;
+    max-width:150px;
+    border-radius:15px !important;
 }
 
 .rounded-button {
@@ -675,9 +677,7 @@ pre {
     z-index: 1000;
     position: absolute;
 }
-.d-none {
-    display: none !important;
-}
+
 .spinner {
     margin: 100px auto;
     width: 50px;

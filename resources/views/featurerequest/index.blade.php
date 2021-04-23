@@ -30,7 +30,7 @@
     <div class="modal-dialog modal-full-height modal-right" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title w-100" id="myModalLabel">Add to Deck</h4>
+                <h4 class="modal-title w-100" id="myModalLabel">Suggest Feature</h4>
             </div>
             <div class="modal-body">
                 <form class="w-75 m-auto" id="FeatureForm" data-type="json" action="{{route('feature.store')}}" method="post" data-remote="true">
