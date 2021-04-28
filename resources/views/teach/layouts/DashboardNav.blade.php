@@ -2,7 +2,8 @@
     #DashboardNav .active {
         border-bottom: 2px solid #0699cd !important;
     }
-    .dash-nav{
+
+    .dash-nav {
         border-top: 1px solid #d8d8d8;
         border-bottom: 1px solid #d8d8d8;
     }
@@ -26,24 +27,24 @@
                 <li class="nav-item dashboardNav" id="teachingProfile">
                     <a href="{{route('teach.profile.update')}}" class="nav-link side-link dashboard-links"> <img src="{{asset('icons/teacher.png')}}" alt="" width="24" height="24"> Teaching Profile</a>
                 </li>
-                <li class="nav-item dashboardNav" id="decks">
+                <!-- <li class="nav-item dashboardNav" id="decks">
                     <a href="{{route('decks.index')}}" class="nav-link side-link dashboard-links"> <img src="{{asset('icons/sheets.svg')}}" alt="" width="24" height="24"> Decks</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
 </nav>
 
 <script>
-    $(function(){
-        $('.nav-item.dashboardNav').click(function(){
+    $(function() {
+        $('.nav-item.dashboardNav').click(function() {
             var id = $(this).attr('id');
             console.log(id)
-            sessionStorage.setItem('dashboardNavActive',id);
+            sessionStorage.setItem('dashboardNavActive', id);
         })
     });
-    window.onload = function(){
+    window.onload = function() {
         var id = sessionStorage.getItem('dashboardNavActive');
-        $('#'+id).find('a').addClass('active');
+        $('#' + id).find('a').addClass('active');
     }
 </script>

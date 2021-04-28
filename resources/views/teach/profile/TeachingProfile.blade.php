@@ -167,36 +167,36 @@
                     </section>
 
                     <!-- Subjects -->
-{{--                    <section id="subjects" class="mt-3 ml-1 p-2">--}}
-{{--                        <h5 class="mb-1">Subjects</h5>--}}
-{{--                        @if(!$teacher->teach_subjects->isEmpty())--}}
-{{--                        <div class="row mr-2 ml-2">--}}
-{{--                            @foreach($teacher->teach_subjects as $subject)--}}
-{{--                            <div class="col-12 col-sm-6">--}}
-{{--                                <div class="teacher-expertise-row">--}}
-{{--                                    <p class="mb-1">--}}
-{{--                                        {{$subject->subject}}--}}
-{{--                                    </p>--}}
-{{--                                    <a href="{{route('teach.profile.test','subjectDelete')}}" data-remote="true" data-method="post" data-confirm="Are You Sure You Want To Delete This Record" data-params="subject={{$subject->id}}"><img src="{{asset('icons/delete-x.svg')}}" alt=""> </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                        @endif--}}
-{{--                        <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','subjectAdd')}}" method="post" data-remote="true">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <select class="form-control browser-select custom-select" name="subject">--}}
-{{--                                    @foreach ($setting_subjects as $subject)--}}
-{{--                                    <option value="{{$subject->subject}}">{{$subject->subject}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <input class="btn btn-success btn-sm float-right" type="submit" value="Add +" />--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-{{--                    </section>--}}
-{{--                    <!-- Test Preparation -->--}}
+                    {{-- <section id="subjects" class="mt-3 ml-1 p-2">--}}
+                    {{-- <h5 class="mb-1">Subjects</h5>--}}
+                    {{-- @if(!$teacher->teach_subjects->isEmpty())--}}
+                    {{-- <div class="row mr-2 ml-2">--}}
+                    {{-- @foreach($teacher->teach_subjects as $subject)--}}
+                    {{-- <div class="col-12 col-sm-6">--}}
+                    {{-- <div class="teacher-expertise-row">--}}
+                    {{-- <p class="mb-1">--}}
+                    {{-- {{$subject->subject}}--}}
+                    {{-- </p>--}}
+                    {{-- <a href="{{route('teach.profile.test','subjectDelete')}}" data-remote="true" data-method="post" data-confirm="Are You Sure You Want To Delete This Record" data-params="subject={{$subject->id}}"><img src="{{asset('icons/delete-x.svg')}}" alt=""> </a>--}}
+                    {{-- </div>--}}
+                    {{-- </div>--}}
+                    {{-- @endforeach--}}
+                    {{-- </div>--}}
+                    {{-- @endif--}}
+                    {{-- <form class="w-75 m-auto" data-type="json" action="{{route('teach.profile.test','subjectAdd')}}" method="post" data-remote="true">--}}
+                    {{-- <div class="form-group">--}}
+                    {{-- <select class="form-control browser-select custom-select" name="subject">--}}
+                    {{-- @foreach ($setting_subjects as $subject)--}}
+                    {{-- <option value="{{$subject->subject}}">{{$subject->subject}}</option>--}}
+                    {{-- @endforeach--}}
+                    {{-- </select>--}}
+                    {{-- </div>--}}
+                    {{-- <div class="form-group">--}}
+                    {{-- <input class="btn btn-success btn-sm float-right" type="submit" value="Add +" />--}}
+                    {{-- </div>--}}
+                    {{-- </form>--}}
+                    {{-- </section>--}}
+                    {{-- <!-- Test Preparation -->--}}
                     <section id="testPreparation" class="mt-3 ml-1 p-2">
                         <h5 class="mb-1">Test Preparation</h5>
                         @if(!$teacher->teach_test_preparation->isEmpty())
@@ -340,8 +340,12 @@
                             <input type="number" name="discount" class="form-control" value="{{$teacher->discount}}">
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="trail" <?php echo $teacher->trail?"checked":""; ?> >
+                            <input type="checkbox" name="trail" <?php echo $teacher->trail ? "checked" : ""; ?>>
                             <label for="">Free Trail for students</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Trail class price</label>
+                            <input type="number" name="trail_price" class="form-control" value="{{$teacher->trail_price}}">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-success btn-sm float-right" value="Update">

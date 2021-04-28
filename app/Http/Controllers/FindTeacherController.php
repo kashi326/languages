@@ -69,7 +69,7 @@ class FindTeacherController extends Controller
 
     public function profile($id, $name)
     {
-        //get teacher with paricular id
+        //get teacher with particular id
         $teacher = DB::table('teachers')
             ->where('teachers.id', $id)
             ->LeftJoin('users', 'users.id', '=', 'teachers.user_id')

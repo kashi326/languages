@@ -325,7 +325,7 @@
             @endif
         </div>
         <div class="d-none d-lg-block col-lg-4 ">
-        @if($teacher->trail)
+            @if($teacher->trail)
             <div class="card mb-4">
                 <div class="card-head p-2">
                     <p class="card-title mb-0">Trail Lesson</p>
@@ -341,7 +341,7 @@
                     </div>
                 </div>
                 <div class="card-footer border-0">
-                    <a href="/payments?teacher_id={{$teacher->id}}&start={{$classes&&$classes[0]?$classes[0]['start']:''}}&end={{$classes&&$classes[0]?$classes[0]['end']:''}}" class="btn btn-primary btn-block">Book Free Trail</a>
+                    <a href="/payments?is_trial=1&teacher_id={{$teacher->id}}&start={{$classes&&$classes[0]?$classes[0]['start']:''}}&end={{$classes&&$classes[0]?$classes[0]['end']:''}}" class="btn btn-primary btn-block">Book Free Trail</a>
                 </div>
             </div>
             @endif

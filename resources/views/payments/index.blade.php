@@ -22,14 +22,27 @@
                     </div>
                 </div>
                 <div class="card-body payments">
+                    @if($trail)
                     <div class="d-flex-between-center">
                         <label class="custom-control custom-radio">
-                            <input type="radio" name="lesson" value="1" class="custom-control-input" checked>
+                            <input type="radio" name="lesson" value="0" class="custom-control-input" <?php echo $trail ? "checked" : "" ?>>
+                            Trail Lesson
+                        </label>
+                        <div>
+                            <p class="text-green text-right">{{$teacher->trail_price>0?"$ $teacher->trail_price":'Free'}}</p>
+                            @if($teacher->trail_price <= 0) <small>A small amount of 0.01 will be charged for trail lesson</small>
+                                @endif
+                        </div>
+                    </div>
+                    @endif
+                    <div class="d-flex-between-center">
+                        <label class="custom-control custom-radio">
+                            <input type="radio" name="lesson" value="1" class="custom-control-input" <?php echo !$trail ? "checked" : "" ?>>
                             1 Lesson
                         </label>
                         <p class="text-green">$ {{$teacher->price - ($teacher->price*$teacher->discount)/100}}</p>
                     </div>
-                    <div class="d-flex-between-center">
+                    <!-- <div class="d-flex-between-center">
                         <label class="custom-control custom-radio">
                             <input type="radio" name="lesson" value="5" class="custom-control-input">
                             5 Lesson
@@ -49,10 +62,10 @@
                             15 Lesson
                         </label>
                         <p class="text-green">$ {{15*$teacher->price - (($teacher->price*15)*$teacher->discount)/100}}</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <div id="paypal-button-container" style="width:250px;"><button id="next" class="btn btn-primary">Continue to Payment</button></div>
+                    <div id="paypal-button-container" class=" d-flex justify-content-end" style="width:250px;"><button id="next" class="btn btn-primary">Continue to Payment</button></div>
                 </div>
             </div>
             <!-- <form class="form form-horizontal" method="POST" action="/payments/completed">
@@ -74,7 +87,11 @@
         $('#next').click(function() {
             $(this).remove()
             var lesson = $('input[name=lesson]:checked').val();
-            value = parseFloat((value * lesson) - ((value * lesson) * discount) / 100);
+            if (lesson != 0)
+                value = parseFloat((value * lesson) - ((value * lesson) * discount) / 100);
+            else {
+                value = parseFloat('<?php echo $teacher->trail_price > 0 ? $teacher->trail_price : 0.01; ?>');
+            }
             $('input[name=lesson]').attr('disabled', 'disabled');
 
             paypal.Buttons({ // initialize payment button
@@ -83,7 +100,6 @@
                 },
                 // Set up the transaction
                 createOrder: function(data, actions) { // this will be executed when user initiate payment process
-                    console.log(value)
                     return actions.order.create({
                         purchase_units: [{
                             reference_id: '<?php echo 'order-' . Auth::user()->id . '-' . $teacher->id; ?>',
@@ -101,9 +117,8 @@
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
                         // When the payment is captured by Paypal, it will return captured info, we can use this to create ref in our db
-                        console.log(details)
                         $.ajax({
-                            url: "/payments/completed?start={{$start}}&end={{$end}}",
+                            url: "/payments/completed?start={{$start}}&end={{$end}}" + "<?php echo $trail ? "&is_trial=1" : ""; ?>",
                             type: 'POST',
                             data: {
                                 _token: $('meta[name="csrf-token"]').attr('content'),
@@ -115,12 +130,15 @@
                             },
                             dataType: 'json',
                             success: function(response) {
-                                console.log(response);
                                 if (response.status == 'success') {
                                     location.href = '/payments/success?id=' + response.pid;
                                 } else {
                                     alert('Something went wrong');
                                 }
+                            },
+                            error: function(error) {
+                                $('.loader-container').removeClass('d-block').addClass('d-none');
+                                alert('Something went wrong');
                             }
                         });
                     });

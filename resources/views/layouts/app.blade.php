@@ -53,8 +53,8 @@
                                     Community
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item pl-2" href="{{Auth::user()->role!='teacher'?route('decks'):route('decks.index')}}"><img src="{{asset('icons/sheets.svg')}}" width="35"><span class="ml-2">Explore Decks</span></a>
-                                    <a class="dropdown-item pl-2" href="{{route('discussion.index')}}"><img src="{{asset('icons/collaborationfemalemale.svg')}}" width="35"><span class="ml-2"> Discussion</span></a>
+                                    <!-- <a class="dropdown-item pl-2" href="{{Auth::user()->role!='teacher'?route('decks'):route('decks.index')}}"><img src="{{asset('icons/sheets.svg')}}" width="35"><span class="ml-2">Explore Decks</span></a> -->
+                                    <!-- <a class="dropdown-item pl-2" href="{{route('discussion.index')}}"><img src="{{asset('icons/collaborationfemalemale.svg')}}" width="35"><span class="ml-2"> Discussion</span></a> -->
                                     <a class="dropdown-item pl-2" href="{{route('feature.index')}}"><img src="{{asset('icons/idea.svg')}}" width="35"><span class="ml-2"> Feature Suggestion</span></a>
                                 </div>
                             </div>
@@ -129,9 +129,9 @@
                                     Admin Panel
                                 </a>
                                 @endif
-                                    @if(Auth::user()->role != 'admin')
-                                    <a class="dropdown-item" href="{{route('dashboard')}}"> Dashboard</a>
-                                    @endif
+                                @if(Auth::user()->role != 'admin')
+                                <a class="dropdown-item" href="{{route('dashboard')}}"> Dashboard</a>
+                                @endif
                                 <a class="dropdown-item" href="{{route('setting.profile.get')}}"> Setting</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -161,8 +161,8 @@
                         @if(Auth::check() && Auth::user()->role=='user')
                         <p><a href="{{route('teach.join')}}">Apply To Teach</a></p>
                         @endif
-                        <p><a href="#">Articles</a></p>
-                        <p><a href="#">Discussion</a></p>
+                        <!-- <p><a href="#">Articles</a></p> -->
+                        <!-- <p><a href="#">Discussion</a></p> -->
                         <p><a href="{{route('privacy')}}">Privacy Policy</a></p>
                         <p><a href="#">Support</a></p>
                     </div>

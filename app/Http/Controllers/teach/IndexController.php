@@ -29,6 +29,7 @@ use App\Traits\GetDates;
 use \Validator;
 use DateTime;
 use DateTimeZone;
+
 class IndexController extends Controller
 {
     use GetDates;
@@ -43,11 +44,11 @@ class IndexController extends Controller
     {
         $request->validate([
             'details.phone' => "required",
-//            'details.gender' => "required",
+            //            'details.gender' => "required",
             'details.primary_lang.name' => "required",
             'details.about' => "required",
             'details.agree' => "accepted",
-//            'details.country' => 'required',
+            //            'details.country' => 'required',
             'days' => [new DaysRule],
             'other_langs' => [new OtherLangsRule]
         ]);
@@ -352,6 +353,7 @@ class IndexController extends Controller
                 $validator = Validator::make($request->all(), [
                     'lessonPrice' => 'required|numeric|min:0',
                     'discount' => 'required|numeric|min:0|max:100',
+                    'trail_price' => 'required|numeric|min:0'
                 ]);
                 if ($validator->fails()) {
                     return response()->json(['message' => $validator->errors()], 401);
@@ -359,6 +361,7 @@ class IndexController extends Controller
                 $teacher->price = $request->lessonPrice;
                 $teacher->discount = $request->discount;
                 $teacher->trail = $request->has('trail') && $request->trail == 'on';
+                $teacher->trail_price = $request->has('trail_price') ? $request->trail_price : 0.01;
                 $teacher->update();
                 return response()->json(['message' => 'Price & Discount updated Successfully'], 208);
                 break;

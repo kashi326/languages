@@ -136,12 +136,12 @@
                                     <span>{{ __("text.homeworks") }}</span>
                                 </li>
                             </a>
-                            <a href="{{ route('admin.decks') }}">
+                            <!-- <a href="{{ route('admin.decks') }}">
                                 <li class="list-item">
                                     <img src="{{ asset('icons/sheets.svg') }}" alt="home image" width="35" />
                                     <span>{{ __("text.decks") }}</span>
                                 </li>
-                            </a>
+                            </a> -->
                             <a href="#" data-toggle="collapse" data-target="#collapse1">
                                 <li class="list-item">
                                     <img src="{{ asset('icons/settings.svg') }}" alt="home image" width="35" />
@@ -149,9 +149,9 @@
                                 </li>
                             </a>
                             <ul class="drop-down collapse w-75 m-auto mb-5" id="collapse1" aria-expanded="false" style="list-style: none">
-{{--                                <li class="nav-item active">--}}
-{{--                                    <a href="{{route("admin.setting.subject")}}" class="nav-link">Subjects</a>--}}
-{{--                                </li>--}}
+                                {{-- <li class="nav-item active">--}}
+                                {{-- <a href="{{route("admin.setting.subject")}}" class="nav-link">Subjects</a>--}}
+                                {{-- </li>--}}
                                 <li class="nav-item">
                                     <a href="{{route("admin.setting.testpreparation")}}" class="nav-link">Test Preparation</a>
                                 </li>
