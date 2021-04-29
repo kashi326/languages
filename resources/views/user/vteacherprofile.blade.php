@@ -336,7 +336,7 @@
                         <h6 class="text-muted">Trail Lesson</h6>
                     </div>
                     <div class="col-4">
-                        <p style="color:green"> $ {{$teacher->price/2}}</p>
+                        <p style="color:green">  {{$teacher->trail_price>0?"$ $teacher->trail_price":"Free"}}</p>
                         <p class="text-muted">30 min</p>
                     </div>
                 </div>
