@@ -345,7 +345,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Trail class price</label>
-                            <input type="number" name="trail_price" class="form-control" value="{{$teacher->trail_price}}">
+                            <input type="text" name="trail_price" class="form-control" value="{{$teacher->trail_price}}">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-success btn-sm float-right" value="Update">
