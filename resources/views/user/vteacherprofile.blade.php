@@ -360,24 +360,24 @@
                             <p class="text-muted">60 min</p>
                         </div>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-8">
-                            <h6 class="text-muted">5 Lessons</h6>
-                        </div>
-                        <div class="col-4">
-                            <p style="color:green"> $ {{5*$teacher->price - (($teacher->price*5)*$teacher->discount)/100}}</p>
-                            <p class="text-muted">5 x 60 min</p>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-8">
-                            <h6 class="text-muted">10 Lessons</h6>
-                        </div>
-                        <div class="col-4">
-                            <p style="color:green"> $ {{10*$teacher->price - (($teacher->price*10)*$teacher->discount)/100}}</p>
-                            <p class="text-muted" style="justify-content: end;">10 x 60 min</p>
-                        </div>
-                    </div>
+{{--                    <div class="row mt-2">--}}
+{{--                        <div class="col-8">--}}
+{{--                            <h6 class="text-muted">5 Lessons</h6>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-4">--}}
+{{--                            <p style="color:green"> $ {{5*$teacher->price - (($teacher->price*5)*$teacher->discount)/100}}</p>--}}
+{{--                            <p class="text-muted">5 x 60 min</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="row mt-2">--}}
+{{--                        <div class="col-8">--}}
+{{--                            <h6 class="text-muted">10 Lessons</h6>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-4">--}}
+{{--                            <p style="color:green"> $ {{10*$teacher->price - (($teacher->price*10)*$teacher->discount)/100}}</p>--}}
+{{--                            <p class="text-muted" style="justify-content: end;">10 x 60 min</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="card-footer border-0">
                     <a href="/payments?teacher_id={{$teacher->id}}&start={{$classes&&$classes[0]?$classes[0]['start']:''}}&end={{$classes&&$classes[0]?$classes[0]['end']:''}}" class="btn btn-primary btn-block">Book Lesson</a>

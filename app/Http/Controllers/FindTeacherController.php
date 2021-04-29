@@ -36,7 +36,8 @@ class FindTeacherController extends Controller
                 'teachers.country',
                 'teachers.verified as isVerified',
                 'teachers.about',
-                'teachers.updated_at as lastupdated'
+                'teachers.updated_at as lastupdated',
+                'teachers.intro_link as intro'
             )->withCount('lessons');
         if (isset($_GET['lang'])) {
             $lang = $_GET['lang'];
