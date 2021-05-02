@@ -65,7 +65,7 @@
                     </div> -->
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <div id="paypal-button-container" class=" d-flex justify-content-end" style="width:250px;"><button id="next" class="btn btn-primary">Continue to Payment</button></div>
+                    <div id="paypal-button-container" class=" d-flex justify-content-end" style="width:250px;"><button id="next" class="btn btn-primary">{{$trail?"Book Lesson":"Continue to Payment"}}</button></div>
                 </div>
             </div>
             <!-- <form class="form form-horizontal" method="POST" action="/payments/completed">
@@ -93,57 +93,85 @@
                 value = parseFloat('<?php echo $teacher->trail_price > 0 ? $teacher->trail_price : 0.01; ?>');
             }
             $('input[name=lesson]').attr('disabled', 'disabled');
+            if(lesson != 0) {
 
-            paypal.Buttons({ // initialize payment button
-                style: {
-                    layout: 'horizontal'
-                },
-                // Set up the transaction
-                createOrder: function(data, actions) { // this will be executed when user initiate payment process
-                    return actions.order.create({
-                        purchase_units: [{
-                            reference_id: '<?php echo 'order-' . Auth::user()->id . '-' . $teacher->id; ?>',
-                            amount: {
-                                value: value
-                            },
-                            description: 'Test payment'
-                        }],
-                        application_context: {
-                            shipping_preference: 'NO_SHIPPING'
-                        }
-                    });
-                },
-                // Finalize the transaction
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        // When the payment is captured by Paypal, it will return captured info, we can use this to create ref in our db
-                        $.ajax({
-                            url: "/payments/completed?start={{$start}}&end={{$end}}" + "<?php echo $trail ? "&is_trial=1" : ""; ?>",
-                            type: 'POST',
-                            data: {
-                                _token: $('meta[name="csrf-token"]').attr('content'),
-                                teacher_id: '{{$teacher->id}}',
-                                details: details
-                            },
-                            beforeSend: function() {
-                                $('.loader-container').removeClass('d-none').addClass('d-block');
-                            },
-                            dataType: 'json',
-                            success: function(response) {
-                                if (response.status == 'success') {
-                                    location.href = '/payments/success?id=' + response.pid;
-                                } else {
-                                    alert('Something went wrong');
-                                }
-                            },
-                            error: function(error) {
-                                $('.loader-container').removeClass('d-block').addClass('d-none');
-                                alert('Something went wrong');
+
+                paypal.Buttons({ // initialize payment button
+                    style: {
+                        layout: 'horizontal'
+                    },
+                    // Set up the transaction
+                    createOrder: function (data, actions) { // this will be executed when user initiate payment process
+                        return actions.order.create({
+                            purchase_units: [{
+                                reference_id: '<?php echo 'order-' . Auth::user()->id . '-' . $teacher->id; ?>',
+                                amount: {
+                                    value: value
+                                },
+                                description: 'Test payment'
+                            }],
+                            application_context: {
+                                shipping_preference: 'NO_SHIPPING'
                             }
                         });
-                    });
-                }
-            }).render('#paypal-button-container');
+                    },
+                    // Finalize the transaction
+                    onApprove: function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            // When the payment is captured by Paypal, it will return captured info, we can use this to create ref in our db
+                            $.ajax({
+                                url: "/payments/completed?start={{$start}}&end={{$end}}" + "<?php echo $trail ? "&is_trial=1" : ""; ?>",
+                                type: 'POST',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    teacher_id: '{{$teacher->id}}',
+                                    details: details
+                                },
+                                beforeSend: function () {
+                                    $('.loader-container').removeClass('d-none').addClass('d-block');
+                                },
+                                dataType: 'json',
+                                success: function (response) {
+                                    if (response.status == 'success') {
+                                        location.href = '/payments/success?id=' + response.pid;
+                                    } else {
+                                        alert('Something went wrong');
+                                    }
+                                },
+                                error: function (error) {
+                                    $('.loader-container').removeClass('d-block').addClass('d-none');
+                                    alert('Something went wrong');
+                                }
+                            });
+                        });
+                    }
+                }).render('#paypal-button-container');
+            }else{
+                $.ajax({
+                    url: "/payments/completed?start={{$start}}&end={{$end}}" + "<?php echo $trail ? "&is_trial=1" : ""; ?>",
+                    type: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        teacher_id: '{{$teacher->id}}',
+                    },
+                    beforeSend: function() {
+                        $('.loader-container').removeClass('d-none').addClass('d-block');
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            // console.log(response)
+                            location.href = '/payments/success?id=' + response.pid;
+                        } else {
+                            alert('Something went wrong');
+                        }
+                    },
+                    error: function(error) {
+                        $('.loader-container').removeClass('d-block').addClass('d-none');
+                        alert('Something went wrong');
+                    }
+                });
+            }
         })
 
     });

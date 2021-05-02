@@ -16,6 +16,7 @@ class CreateSettingLessonIncludesTable extends Migration
         Schema::create('setting_lesson_includes', function (Blueprint $table) {
             $table->id();
             $table->string('include');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

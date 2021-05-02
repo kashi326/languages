@@ -19,7 +19,8 @@ class CreateTeachesToTable extends Migration
             $table->string('teaches_to');
             $table->integer('from_age');
             $table->integer('to_age');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

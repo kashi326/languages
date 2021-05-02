@@ -16,8 +16,9 @@ class CreateTeachTestPreparationsTable extends Migration
         Schema::create('teach_test_preparations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->string('test');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

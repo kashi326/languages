@@ -124,18 +124,18 @@
                                     <span>{{ __("text.users") }}</span>
                                 </li>
                             </a>
-                            <a href="{{ route('admin.lesson') }}">
-                                <li class="list-item">
-                                    <img src="{{ asset('icons/coaching.svg') }}" alt="user image" width="35" />
-                                    <span>{{ __("text.lessons") }}</span>
-                                </li>
-                            </a>
-                            <a href="{{ route('admin.lesson.homework') }}">
-                                <li class="list-item">
-                                    <img src="{{ asset('icons/homework.svg') }}" alt="user image" width="35" />
-                                    <span>{{ __("text.homeworks") }}</span>
-                                </li>
-                            </a>
+{{--                            <a href="{{ route('admin.lesson') }}">--}}
+{{--                                <li class="list-item">--}}
+{{--                                    <img src="{{ asset('icons/coaching.svg') }}" alt="user image" width="35" />--}}
+{{--                                    <span>{{ __("text.lessons") }}</span>--}}
+{{--                                </li>--}}
+{{--                            </a>--}}
+{{--                            <a href="{{ route('admin.lesson.homework') }}">--}}
+{{--                                <li class="list-item">--}}
+{{--                                    <img src="{{ asset('icons/homework.svg') }}" alt="user image" width="35" />--}}
+{{--                                    <span>{{ __("text.homeworks") }}</span>--}}
+{{--                                </li>--}}
+{{--                            </a>--}}
                             <!-- <a href="{{ route('admin.decks') }}">
                                 <li class="list-item">
                                     <img src="{{ asset('icons/sheets.svg') }}" alt="home image" width="35" />

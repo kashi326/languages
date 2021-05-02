@@ -20,6 +20,7 @@ class CreateEnterprisesTable extends Migration
             $table->string('organization_name');
             $table->string('email')->unique();
             $table->string('phone_number');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

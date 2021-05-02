@@ -20,12 +20,13 @@ class CreateDiscussionTable extends Migration
             $table->unsignedBigInteger('language_id');
             $table->string('heading');
             $table->text('body');
+            $table->softDeletes();
             $table->string('media_link')->nullable();
             $table->integer('upvote')->default(0);
             $table->integer('downvote')->default(0);
             $table->string('tags')->default('');
-            $table->foreign("user_id")->references('id')->on("users");
-            $table->foreign("language_id")->references('id')->on("languages");
+            $table->foreign("user_id")->references('id')->on("users")->onDelete('cascade');
+            $table->foreign("language_id")->references('id')->on("languages")->onDelete('cascade');
         });
 
     }

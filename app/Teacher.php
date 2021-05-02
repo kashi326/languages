@@ -53,5 +53,6 @@ class Teacher extends Model
     public function payments():HasMany{
         return $this->hasMany("App\Payment");
     }
+
 }
 

@@ -538,7 +538,13 @@ pre {
         top: 70px;
     }
 }
-
+@media (min-width: 850px){
+    .dropdown-button{
+        background: none;
+        border: none;
+        padding: 0px;
+    }
+}
 .notification-ui_dd:after {
     content: "";
     position: absolute;
@@ -738,4 +744,8 @@ pre {
         transform: scaleY(1);
         -webkit-transform: scaleY(1);
     }
+}
+.nav-item.dropdown{
+    display: flex;
+    align-items: center;
 }

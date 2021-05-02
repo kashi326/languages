@@ -22,7 +22,8 @@ class CreateHomeworkTable extends Migration
             $table->tinyInteger('isChecked')->default(0);
             $table->float('marks')->default(0);
             $table->text('remarks');
-            $table->foreign('lesson_id')->references('id')->on('lessons');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

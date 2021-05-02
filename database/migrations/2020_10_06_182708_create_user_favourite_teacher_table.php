@@ -17,8 +17,9 @@ class CreateUserFavouriteTeacherTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('teacher_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

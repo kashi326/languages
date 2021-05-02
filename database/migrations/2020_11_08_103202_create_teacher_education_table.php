@@ -22,7 +22,8 @@ class CreateTeacherEducationTable extends Migration
             $table->tinyInteger('isVerified')->default(0);
             $table->string('institute');
             $table->string('description');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->softDeletes();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
         });
     }

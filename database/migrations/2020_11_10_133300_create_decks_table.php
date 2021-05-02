@@ -22,9 +22,10 @@ class CreateDecksTable extends Migration
             $table->unsignedBigInteger("lang_in_id");
             $table->unsignedBigInteger('lang_to_id');
             $table->string("cover_image");
-            $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->foreign('lang_in_id')->references('id')->on('languages');
-            $table->foreign('lang_to_id')->references('id')->on('languages');
+            $table->softDeletes();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('lang_in_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->foreign('lang_to_id')->references('id')->on('languages')->onDelete('cascade');
             $table->timestamps();
         });
     }

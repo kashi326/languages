@@ -18,6 +18,7 @@ class CreateLanguagesTable extends Migration
             $table->string('name');
             $table->text("description");
             $table->string('code')->nullable();
+            $table->softDeletes();
             $table->string("avatar")->nullable();
             $table->timestamps();
         });

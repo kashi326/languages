@@ -16,6 +16,7 @@ class CreateSettingTeachingLevelsTable extends Migration
         Schema::create('setting_teaching_levels', function (Blueprint $table) {
             $table->id();
             $table->string('level');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

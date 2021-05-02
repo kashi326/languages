@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->string("ref_id");
             $table->float('amount');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

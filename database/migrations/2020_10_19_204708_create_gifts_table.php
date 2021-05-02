@@ -16,14 +16,15 @@ class CreateGiftsTable extends Migration
         Schema::create('gifts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references('id')->on("users");
+            $table->foreign("user_id")->references('id')->on("users")->onDelete('cascade');
             $table->unsignedBigInteger("reciever_id");
-            $table->foreign("reciever_id")->references('id')->on("users")->nullable();
+            $table->foreign("reciever_id")->references('id')->on("users")->nullable()->onDelete('cascade');
             $table->string('reciever_email');
             $table->string('amount');
             $table->string('status');
             $table->string('title')->nullable();
             $table->text('message')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

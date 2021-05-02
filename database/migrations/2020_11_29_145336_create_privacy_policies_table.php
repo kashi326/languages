@@ -17,6 +17,7 @@ class CreatePrivacyPoliciesTable extends Migration
             $table->id();
             $table->string('heading');
             $table->text('content')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

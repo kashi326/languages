@@ -17,8 +17,9 @@ class CreateUserVoteDiscussionTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('discussion_id');
-            $table->foreign("user_id")->references('id')->on("users");
-            $table->foreign("discussion_id")->references('id')->on("discussions");
+            $table->softDeletes();
+            $table->foreign("user_id")->references('id')->on("users")->onDelete('cascade');
+            $table->foreign("discussion_id")->references('id')->on("discussions")->onDelete('cascade');
             $table->string('vote');
             $table->timestamps();
         });

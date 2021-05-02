@@ -14,7 +14,7 @@ class AddSessionIdColumnToLessonsTable extends Migration
     public function up()
     {
         Schema::table('lessons', function (Blueprint $table) {
-            $table->string('session_id');
+            $table->string('session_id')->nullable();
         });
     }
 

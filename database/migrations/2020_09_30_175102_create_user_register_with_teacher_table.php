@@ -24,9 +24,10 @@ class CreateUserRegisterWithTeacherTable extends Migration
                 $table->string('platform')->nullable();
                 $table->string('link')->nullable();
                 $table->tinyInteger('isAttended')->default(0);
-                $table->foreign('user_id')->references('id')->on('users');
-                $table->foreign('teacher_id')->references('id')->on('teachers');
-                $table->foreign('timing_id')->references('id')->on('teacher_timings');
+                $table->softDeletes();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+                $table->foreign('timing_id')->references('id')->on('teacher_timings')->onDelete('cascade');
                 $table->timestamps();
             });
     }

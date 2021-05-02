@@ -19,8 +19,9 @@ class CreateCommentsOnTeacherTable extends Migration
             $table->unsignedBigInteger("user_id")->unsigned();
             $table->tinyInteger('star');
             $table->string('comment');
-            $table->foreign("teacher_id")->references('id')->on("teachers");
-            $table->foreign("user_id")->references('id')->on("users");
+            $table->softDeletes();
+            $table->foreign("teacher_id")->references('id')->on("teachers")->onDelete('cascade');
+            $table->foreign("user_id")->references('id')->on("users")->onDelete('cascade');
             $table->timestamps();
         });
     }

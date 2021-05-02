@@ -17,7 +17,8 @@ class CreateLessonIncludeTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->string('includes');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

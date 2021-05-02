@@ -17,6 +17,7 @@ class CreateFreeTrailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

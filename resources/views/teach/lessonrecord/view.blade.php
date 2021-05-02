@@ -44,8 +44,10 @@
                 <div class="row">
                     <div class="col-12 col-md-8 m-auto">
                         <div class="w-75 m-auto">
+                            @if(!$lesson->isAttended)
                             <a href="{{route('teacher.meeting',[$lesson->id,$lesson->teacher->user_id])}}" target="_blank" class="btn btn-primary">Start Meeting</a>
                             <p class="text-center"><b>OR</b></p>
+                            @endif
                             <form id="platformForm">
                                 <div id="summaryError"></div>
                                 <input type="text" name="id" value="{{$lesson->id}}" hidden>

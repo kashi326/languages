@@ -19,6 +19,7 @@ class CreateFeatureRequestsTable extends Migration
             $table->text('information');
             $table->string('status')->default('open');
             $table->tinyInteger('votes')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

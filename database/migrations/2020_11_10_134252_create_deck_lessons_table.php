@@ -16,11 +16,12 @@ class CreateDeckLessonsTable extends Migration
         Schema::create('deck_lessons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("deck_id");
-            $table->foreign('deck_id')->references('id')->on('decks');
+            $table->foreign('deck_id')->references('id')->on('decks')->onDelete('cascade');
             $table->string("name");
             $table->string('translation');
             $table->string("audio");
             $table->string('cover');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

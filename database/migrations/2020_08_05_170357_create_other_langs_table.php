@@ -16,7 +16,8 @@ class CreateOtherLangsTable extends Migration
         Schema::create('other_langs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("teacher_id");
-            $table->foreign("teacher_id")->references('id')->on("teachers");
+            $table->softDeletes();
+            $table->foreign("teacher_id")->references('id')->on("teachers")->onDelete('cascade');
             $table->string("code");
             $table->string('name');
             $table->string("level");

@@ -16,6 +16,7 @@ class CreateSettingTestPreparationsTable extends Migration
         Schema::create('setting_test_preparations', function (Blueprint $table) {
             $table->id();
             $table->string('test');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

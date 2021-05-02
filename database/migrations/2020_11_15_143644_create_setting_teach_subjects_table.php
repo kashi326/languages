@@ -15,6 +15,7 @@ class CreateSettingTeachSubjectsTable extends Migration
     {
         Schema::create('setting_teach_subjects', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->string('subject');
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UserRegisterWithTeacher;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class MeetingController extends Controller

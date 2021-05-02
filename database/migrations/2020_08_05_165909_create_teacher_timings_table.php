@@ -16,7 +16,8 @@ class CreateTeacherTimingsTable extends Migration
         Schema::create('teacher_timings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("teacher_id");
-            $table->foreign("teacher_id")->references('id')->on("teachers");
+            $table->softDeletes();
+            $table->foreign("teacher_id")->references('id')->on("teachers")->onDelete('cascade');
             $table->string("name");
             $table->tinyInteger("isOpen");
             $table->time("open");

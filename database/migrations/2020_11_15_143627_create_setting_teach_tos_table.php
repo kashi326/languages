@@ -17,6 +17,7 @@ class CreateSettingTeachTosTable extends Migration
             $table->id();
             $table->string('age');
             $table->string('from');
+            $table->softDeletes();
             $table->string('to');
             $table->timestamps();
         });
