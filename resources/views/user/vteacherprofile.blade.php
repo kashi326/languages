@@ -435,10 +435,15 @@
             },
             initialView: 'timeGridWeek',
             themeSystem: 'bootstrap',
+            slotDuration: '00:30',
             events: calendarEvents,
+            eventTimeFormat:{
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            },
             eventClick: function(info) {
                 var eventObj = info.event;
-
                 if (eventObj.url) {
                     alert(
                         'Clicked ' + eventObj.title + '.\n' +

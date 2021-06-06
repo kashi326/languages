@@ -96,7 +96,7 @@
                 <div class="row">
                     <div class="col-md-3 col-lg-2 col-sm-4 shadow-sm" id="sidebar">
                         <ul class="list-group">
-                            <a href="#">
+                            <a href="/admin">
                                 <li class="list-item">
                                     <img src="{{ asset('icons/home.png') }}" alt="home image" width="35" />
                                     <span>{{ __("text.home") }}</span>

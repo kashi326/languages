@@ -24,7 +24,7 @@ div.card:first-of-type {
 }
 
 .findtechcard {
-    margin-left: 0%;
+    margin-left: 0;
     width: 100%;
 }
 
@@ -63,7 +63,7 @@ div.card:first-of-type {
     min-width: 22rem;
 }
 .row > .col-4 > p {
-    margin: 0px;
+    margin: 0;
 }
 
 .sideBookingCard {
@@ -73,8 +73,8 @@ div.card:first-of-type {
 .bottomBookingCard {
     display: block;
     position: fixed;
-    bottom: 0%;
-    flex-grow: 100%;
+    bottom: 0;
+    flex-grow: 1;
     z-index: 999999999;
 }
 
@@ -110,7 +110,7 @@ div.card:first-of-type {
 
 .sideBookingCard {
     position: fixed;
-    right: 0%;
+    right: 0;
 }
 
 .sideBookingCard > .card {
@@ -132,7 +132,7 @@ div.card:first-of-type {
 
 .dropdown > button {
     font-size: 16px;
-    font-style: bold;
+    font-weight: bold;
 }
 
 .dropdown-item:hover {
@@ -150,7 +150,7 @@ div.card:first-of-type {
 }
 
 .discussion-language-card {
-    padding: 1rem 0px;
+    padding: 1rem 0;
     margin-top: 10px;
     display: block;
     text-align: left;
@@ -171,7 +171,7 @@ label {
     font-size: 14px;
     color: #838789;
     letter-spacing: 0;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .card-head,
@@ -272,10 +272,6 @@ label {
 
 /* Global style */
 
-.fc-timegrid-col-events {
-    padding: 20%;
-}
-
 main {
     min-height: 350px;
 }
@@ -303,7 +299,7 @@ main {
 pre {
     background: lightgray;
     padding: 5px 10px;
-    box-shadow: 1px 1px 5px 0px rgba(116, 128, 135, 1);
+    box-shadow: 1px 1px 5px 0 rgba(116, 128, 135, 1);
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 16px;
     font-weight: 500;
@@ -542,7 +538,7 @@ pre {
     .dropdown-button{
         background: none;
         border: none;
-        padding: 0px;
+        padding: 0;
     }
 }
 .notification-ui_dd:after {
@@ -660,12 +656,6 @@ pre {
 .image-area img {
     z-index: 2;
     position: relative;
-}
-.fc-timegrid-cols .tooltip {
-    opacity: 1 !important;
-}
-.fc-icon {
-    height: auto !important;
 }
 .navbar-nav .dropdown-menu {
     min-width: max-content !important;

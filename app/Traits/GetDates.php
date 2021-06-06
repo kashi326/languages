@@ -27,8 +27,8 @@ trait GetDates
         }
 
         for ($i = 0;$dateFrom <= $dateTo;$i++) {
-            $dates[$i]['start'] = $dateFrom->format("Y-m-d $startTime");
-            $dates[$i]['end'] = $dateFrom->format("Y-m-d $endTime");
+            $dates[$i]['start'] = $dateFrom->format("Y-m-d\T$startTime");
+            $dates[$i]['end'] = $dateFrom->format("Y-m-d\T$endTime");
             if($id){
                 $dates[$i]['url'] =  "/payments?start=" .$dates[$i]['start'] ."&end=" .$dates[$i]['end'];
                 $dates[$i]['url'].="&teacher_id=$id";

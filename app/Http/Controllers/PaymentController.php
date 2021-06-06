@@ -61,81 +61,80 @@ class PaymentController extends Controller
             $free_trail->user_id = request()->user()->id;
             $free_trail->teacher_id = $teacher_id;
             $free_trail->save();
-//            $user->notify(new BookingConfirmation($lesson));
-//            $teacher->notify(new BookingConfirmation($lesson));
-            return response()->json(['status' => 'success', 'pid' =>1]);
-        } else
-            if (request()->post('is_dummy')) { // Dummy for testing notification etc
-                $amount = request()->post('amount');
-                $p = new Payments();
-                $p->teacher_id = $teacher_id;
-                $p->user_id = $user_id;
-                $p->ref_id = uniqid();
-                $p->amount = $amount;
-                $p->save();
+            $user->notify(new BookingConfirmation($lesson));
+            $teacher->notify(new BookingConfirmation($lesson));
+//            return response()->json(['status' => 'success', 'pid' => 1]);
+        } else if (request()->post('is_dummy')) { // Dummy for testing notification etc
+            $amount = request()->post('amount');
+            $p = new Payments();
+            $p->teacher_id = $teacher_id;
+            $p->user_id = $user_id;
+            $p->ref_id = uniqid();
+            $p->amount = $amount;
+            $p->save();
 
-                $payment_id = $p->id;
-                $user = User::find($user_id);
-                // dd($user);
-                $user->notify(new NotificationsPaymentReceived($p));
-                $teacher = User::find($teacher_id);
-                $teacher->notify(new NotificationsPaymentReceived($p));
+            $payment_id = $p->id;
+            $user = User::find($user_id);
+            // dd($user);
+            $user->notify(new NotificationsPaymentReceived($p));
+            $teacher = User::find($teacher_id);
+            $teacher->notify(new NotificationsPaymentReceived($p));
 
-                $payment_notification['ref_id'] = $p->id;
-                $payment_notification['amount'] = $amount;
-                event(new PaymentReceived($payment_notification)); // Trigger pusher update
-            } else {
-                $data = request()->post('details');
-                $purchase_units = isset($data['purchase_units']) ? $data['purchase_units'] : NULL;
-                $capture = NULL;
-                if ($purchase_units) {
-                    $purchase_unit = array_shift($purchase_units); // get first element from array
-                    if ($purchase_unit && isset($purchase_unit['payments']['captures'])) {
-                        $capture = array_shift($purchase_unit['payments']['captures']); // get first element from array
-                    }
-                }
-                if ($capture) {
-                    // lets verify if it was a valid capture or not
-                    //   dd($capture);
-                    $payment_capture = $this->_verifyPaypalCapture($data['id']);
-                    if ($payment_capture && $data['status'] == 'COMPLETED') {
-                        $p = new Payments;
-                        $p->teacher_id = $teacher_id;
-                        $p->user_id = $user_id;
-                        $p->ref_id = $payment_capture['id'];
-                        $p->amount = $payment_capture['amount']['value'];
-                        $p->save();
-
-                        $payment_id = $p->id;
-                        $user = User::find($user_id);
-                        $user->notify(new NotificationsPaymentReceived($p));
-                        $teacher = User::find($teacher_id);
-                        $teacher->notify(new NotificationsPaymentReceived($p));
-
-                        $payment_notification['ref_id'] = $p->id;
-                        $payment_notification['amount'] = $capture['amount']['value'] . $capture['amount']['currency_code'];
-                        event(new PaymentReceived($payment_notification)); // Trigger pusher update
-                    } else {
-                        $payment_notification['ref_id'] = 'NULL';
-                        $payment_notification['amount'] = 'FAILED';
-                        event(new PaymentReceived($payment_notification)); // Trigger pusher update
-                    }
-                    $lesson = new UserRegisterWithTeacher;
-                    $lesson->user_id = $user_id;
-                    $lesson->timing_id = 1;
-                    $lesson->teacher_id = $teacher_id;
-                    $lesson->scheduled_date = request()->get('start');
-                    $lesson->save();
-                    if (request()->has('is_trial')) {
-                        $free_trail = new FreeTrail;
-                        $free_trail->user_id = request()->user()->id;
-                        $free_trail->teacher_id = $teacher_id;
-                        $free_trail->save();
-                    }
-                    $user->notify(new BookingConfirmation($lesson));
-                    $teacher->notify(new BookingConfirmation($lesson));
+            $payment_notification['ref_id'] = $p->id;
+            $payment_notification['amount'] = $amount;
+            event(new PaymentReceived($payment_notification)); // Trigger pusher update
+        } else {
+            $data = request()->post('details');
+            $purchase_units = isset($data['purchase_units']) ? $data['purchase_units'] : NULL;
+            $capture = NULL;
+            if ($purchase_units) {
+                $purchase_unit = array_shift($purchase_units); // get first element from array
+                if ($purchase_unit && isset($purchase_unit['payments']['captures'])) {
+                    $capture = array_shift($purchase_unit['payments']['captures']); // get first element from array
                 }
             }
+            if ($capture) {
+                // lets verify if it was a valid capture or not
+                //   dd($capture);
+                $payment_capture = $this->_verifyPaypalCapture($data['id']);
+                if ($payment_capture && $data['status'] == 'COMPLETED') {
+                    $p = new Payments;
+                    $p->teacher_id = $teacher_id;
+                    $p->user_id = $user_id;
+                    $p->ref_id = $payment_capture['id'];
+                    $p->amount = $payment_capture['amount']['value'];
+                    $p->save();
+
+                    $payment_id = $p->id;
+                    $user = User::find($user_id);
+                    $user->notify(new NotificationsPaymentReceived($p));
+                    $teacher = User::find($teacher_id);
+                    $teacher->notify(new NotificationsPaymentReceived($p));
+
+                    $payment_notification['ref_id'] = $p->id;
+                    $payment_notification['amount'] = $capture['amount']['value'] . $capture['amount']['currency_code'];
+                    event(new PaymentReceived($payment_notification)); // Trigger pusher update
+                } else {
+                    $payment_notification['ref_id'] = 'NULL';
+                    $payment_notification['amount'] = 'FAILED';
+                    event(new PaymentReceived($payment_notification)); // Trigger pusher update
+                }
+                $lesson = new UserRegisterWithTeacher;
+                $lesson->user_id = $user_id;
+                $lesson->timing_id = 1;
+                $lesson->teacher_id = $teacher_id;
+                $lesson->scheduled_date = request()->get('start');
+                $lesson->save();
+                if (request()->has('is_trial')) {
+                    $free_trail = new FreeTrail;
+                    $free_trail->user_id = request()->user()->id;
+                    $free_trail->teacher_id = $teacher_id;
+                    $free_trail->save();
+                }
+                $user->notify(new BookingConfirmation($lesson));
+                $teacher->notify(new BookingConfirmation($lesson));
+            }
+        }
         if (request()->ajax()) {
             return response()->json(['status' => 'success', 'pid' => $payment_id]);
         } else {
