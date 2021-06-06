@@ -9,9 +9,10 @@ use App\Notifications\BookingConfirmation;
 use App\Notifications\PaymentReceived as NotificationsPaymentReceived;
 use App\Payments;
 use App\Teacher;
+use App\TeacherTiming;
 use App\User;
 use App\UserRegisterWithTeacher;
-use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -48,12 +49,19 @@ class PaymentController extends Controller
         $teacher_id = request()->post('teacher_id');
         $payment_notification = [];
         $payment_id = 0;
+        $stime = Carbon::parse(request()->get('start'))->toTimeString();
+        $etime = Carbon::parse(request()->get('end'))->toTimeString();
+        $timing = TeacherTiming::whereTime('open', '>', $stime)->whereTime('close', '>', $etime)->first();
+        if ($timing == null) {
+            return response()->json(['status' => 'success', 'pid' => 0]);
+        }
+        $teacher = Teacher::find($teacher_id);
+        $teacher_user = User::find($teacher->user_id);
         if (request()->has('is_trial')) {
             $user = User::find($user_id);
-            $teacher = User::find($teacher_id);
             $lesson = new UserRegisterWithTeacher;
             $lesson->user_id = $user_id;
-            $lesson->timing_id = 1;
+            $lesson->timing_id = $timing->id;
             $lesson->teacher_id = $teacher_id;
             $lesson->scheduled_date = request()->get('start');
             $lesson->save();
@@ -62,28 +70,31 @@ class PaymentController extends Controller
             $free_trail->teacher_id = $teacher_id;
             $free_trail->save();
             $user->notify(new BookingConfirmation($lesson));
-            $teacher->notify(new BookingConfirmation($lesson));
-//            return response()->json(['status' => 'success', 'pid' => 1]);
-        } else if (request()->post('is_dummy')) { // Dummy for testing notification etc
-            $amount = request()->post('amount');
-            $p = new Payments();
-            $p->teacher_id = $teacher_id;
-            $p->user_id = $user_id;
-            $p->ref_id = uniqid();
-            $p->amount = $amount;
-            $p->save();
+            $teacher_user->notify(new BookingConfirmation($lesson));
+            return response()->json(['status' => 'success', 'pid' => 1]);
+        }
+        // if (request()->post('is_dummy')) { // Dummy for testing notification etc
+        //     $amount = request()->post('amount');
+        //     $p = new Payments();
+        //     $p->teacher_id = $teacher_id;
+        //     $p->user_id = $user_id;
+        //     $p->ref_id = uniqid();
+        //     $p->amount = $amount;
+        //     $p->save();
 
-            $payment_id = $p->id;
-            $user = User::find($user_id);
-            // dd($user);
-            $user->notify(new NotificationsPaymentReceived($p));
-            $teacher = User::find($teacher_id);
-            $teacher->notify(new NotificationsPaymentReceived($p));
+        //     $payment_id = $p->id;
+        //     $user = User::find($user_id);
+        //     // dd($user);
+        //     $user->notify(new NotificationsPaymentReceived($p));
 
-            $payment_notification['ref_id'] = $p->id;
-            $payment_notification['amount'] = $amount;
-            event(new PaymentReceived($payment_notification)); // Trigger pusher update
-        } else {
+        //     $teacher = Teacher::find($teacher_id);
+        //     $teacher->notify(new NotificationsPaymentReceived($p));
+
+        //     $payment_notification['ref_id'] = $p->id;
+        //     $payment_notification['amount'] = $amount;
+        //     event(new PaymentReceived($payment_notification)); // Trigger pusher update
+        // } else
+        else {
             $data = request()->post('details');
             $purchase_units = isset($data['purchase_units']) ? $data['purchase_units'] : NULL;
             $capture = NULL;
@@ -108,8 +119,8 @@ class PaymentController extends Controller
                     $payment_id = $p->id;
                     $user = User::find($user_id);
                     $user->notify(new NotificationsPaymentReceived($p));
-                    $teacher = User::find($teacher_id);
-                    $teacher->notify(new NotificationsPaymentReceived($p));
+
+                    $teacher_user->notify(new NotificationsPaymentReceived($p));
 
                     $payment_notification['ref_id'] = $p->id;
                     $payment_notification['amount'] = $capture['amount']['value'] . $capture['amount']['currency_code'];
@@ -121,7 +132,7 @@ class PaymentController extends Controller
                 }
                 $lesson = new UserRegisterWithTeacher;
                 $lesson->user_id = $user_id;
-                $lesson->timing_id = 1;
+                $lesson->timing_id = $timing->id;
                 $lesson->teacher_id = $teacher_id;
                 $lesson->scheduled_date = request()->get('start');
                 $lesson->save();
@@ -132,7 +143,7 @@ class PaymentController extends Controller
                     $free_trail->save();
                 }
                 $user->notify(new BookingConfirmation($lesson));
-                $teacher->notify(new BookingConfirmation($lesson));
+                $teacher_user->notify(new BookingConfirmation($lesson));
             }
         }
         if (request()->ajax()) {
