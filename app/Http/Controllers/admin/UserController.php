@@ -10,7 +10,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', 'user')->withTrashed()->paginate(10);
+
+        $pageSize = request()->has('pageSize')?request()->get('pageSize'):10;
+        $users = User::where('role', 'user')->withTrashed()->paginate($pageSize);
         return view('admin.users.index')->with('users', $users);
     }
 

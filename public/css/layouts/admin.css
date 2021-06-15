@@ -78,3 +78,7 @@ nav .navbar-brand {
     transform: none;
     right: 0;
 }
+nav .pagination{
+    margin-left: 5px !important;
+    margin-bottom: 0px !important;
+}

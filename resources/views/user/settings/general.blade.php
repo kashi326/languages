@@ -30,11 +30,11 @@
                                                        href="{{route('setting.password.get')}}" data-remote="true"
                                                        data-method="get"> <img src="{{asset('icons/lock.svg')}}" alt=""
                                                                                width="25" height="25"> Password</a></li>
-                        <li class="list-group-item"><a class="text-decoration-none profile-link"
-                                                       href="{{route('setting.notification.get')}}" data-remote="true"
-                                                       data-method="get"> <img
-                                    src="{{asset('icons/appointment_reminders.svg')}}" alt="" width="25" height="25">
-                                Notifications</a></li>
+{{--                        <li class="list-group-item"><a class="text-decoration-none profile-link"--}}
+{{--                                                       href="{{route('setting.notification.get')}}" data-remote="true"--}}
+{{--                                                       data-method="get"> <img--}}
+{{--                                    src="{{asset('icons/appointment_reminders.svg')}}" alt="" width="25" height="25">--}}
+{{--                                Notifications</a></li>--}}
                         <li class="list-group-item"><a class="text-decoration-none profile-link"
                                                        href="{{route('setting.payments.get')}}" data-remote="true"
                                                        data-method="get"> <img src="{{asset('icons/card_in_use.svg')}}"
@@ -76,7 +76,7 @@
             }
         })
         $(document).bind('ajax:error', 'form', function (event, xhr, status, error) {
-            if (xhr.status == 401) {
+            if (xhr.status == 401||xhr.status == 400) {
                 var errors = JSON.parse(xhr.responseText);
                 Object.entries(errors.message).map(([index, value]) => {
                     $("#" + index).addClass("is-invalid");
@@ -153,21 +153,32 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    $('#message').html('<div class="valid-feedback" style="display:block"><span class="alert alert-success d-block">' + data.message + '</span></div>')
+                    console.log(data)
+                    $('#message-profile').html('<div class="valid-feedback" style="display:block"><span class="alert alert-success d-block">' + data.message + '</span></div>')
                     $('#profile').html(data.profilePicture);
                     setTimeout(() => {
-                        $('#message').remove()
+                        $('#message-profile').html("")
                     }, 2500)
                 },
                 error: function (data) {
-                    console.log(data)
-                    $('#message').html("<h2>this file type is not supported</h2>");
-
+                    let errors = data.responseJSON;
+                    Object.keys(errors).map(err=>{
+                        $('#message-profile').append(`<div class="alert alert-danger">${errors[err]}</div>`);
+                    })
                     setTimeout(() => {
-                        $('#message').remove()
-                    }, 2500)
+                        $('#message-profile').html("")
+                    }, 3000)
                 }
             });
         }
+
+        // $('.list-group-item').click(function (){
+        //     var value = $(this).find('a').attr('href')
+        //     var searchParams = new URLSearchParams(window.location.search);
+        //     searchParams.set('current', value)
+        //     var newParams = searchParams.toString();
+        //     const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
+        //     location.replace(newUrl);
+        // })
     </script>
 @endsection

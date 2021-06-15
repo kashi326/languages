@@ -3,6 +3,7 @@
         Update Profile Picture
     </div>
     <div class="card-body">
+        <div id="message-profile"></div>
         <div class="prfile-image d-flex justify-content-center" id="">
             <img src="{{asset(Auth::user()->avatar)}}" alt="" width="200" height="200" >
         </div>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="card my-5" id="main-card">
         <div class="card-body">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
             <h3>Teaching Level Panel</h3>
             <a href="#addLevel" data-toggle="modal" data-target="#addLevel" class="btn btn-primary">Add<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
         </div>

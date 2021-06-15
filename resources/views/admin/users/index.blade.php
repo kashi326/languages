@@ -72,23 +72,34 @@
                             <td>{{$user->email}}</td>
                             <td class="d-flex">
                                 @if ($user->deleted_at)
-                                <a href="{{route('admin.user.restore')}}" class="btn btn-info btn-sm mx-1" data-remote="true" data-method="post" data-params="id={{$user->id}}">Restore</a>
+                                    <a href="{{route('admin.user.restore')}}" class="btn btn-info btn-sm mx-1" data-remote="true" data-method="post" data-params="id={{$user->id}}">Restore</a>
+                                @else
+                                    <form action="{{route('admin.user.destroy',$user)}}" method="POST" onsubmit="return confirm('Are you sure want to delete this user?')">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button class="btn btn-danger btn-sm hvr-shadow" type="submit">
+                                            <i class="far fa-trash-alt"></i> Delete
+                                        </button>
+                                    </form>
                                 @endif
-                                <form action="{{route('admin.user.destroy',$user)}}" method="POST" onsubmit="return confirm('Are you sure want to delete this user?')">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button class="btn btn-danger btn-sm hvr-shadow" type="submit">
-                                        <i class="far fa-trash-alt"></i> Delete
-                                    </button>
-                                </form>
-
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            {{$users->links()}}
+                <div class="d-flex justify-content-end pr-3">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <select id="pageSize" class="form-control form-select" style="max-width:max-content">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        {{$users->links()}}
+                    </div>
+                </div>
+
             @else
             <p>No user found.</p>
             @endif
@@ -98,6 +109,25 @@
 @endsection
 
 @section('scripts')
+
+    <script>
+        function currentPageSize() {
+            var searchParams = new URLSearchParams(window.location.search);
+            var size = searchParams.get('pageSize')
+            $('#pageSize').val(size ? size : 10)
+        }
+        currentPageSize()
+        $(function() {
+            $('#pageSize').change(function() {
+                var value = $(this).val()
+                var searchParams = new URLSearchParams(window.location.search);
+                searchParams.set('pageSize', value)
+                var newParams = searchParams.toString();
+                const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
+                location.replace(newUrl);
+            })
+        })
+    </script>
 <script>
     $("#search").on('keyup', function(e) {
         if (e.which == 13) {
@@ -110,7 +140,13 @@
             }
         }
     });
-
+    $('a').bind('ajax:success', function(data, status, xhr, code) {
+        $(this).remove()
+        $('#message').html('<div class="alert alert-success">User restored successfully</div>')
+        setTimeout(() => {
+            $('#message').html('')
+        }, 2500);
+    })
     function formSubmit(event) {
         event.preventDefault();
         var input = $("#search").val();

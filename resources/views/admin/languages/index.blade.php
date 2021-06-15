@@ -58,9 +58,19 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </TABLE>
             </div>
-            {{$langs->links()}}
+                <div class="d-flex justify-content-end pr-3">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <select id="pageSize" class="form-control form-select" style="max-width:max-content">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        {{$langs->links()}}
+                    </div>
+                </div>
             @else
             <div class="container-fluid">
                 @include("includes.notfound")
@@ -73,4 +83,22 @@
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+    function currentPageSize() {
+        var searchParams = new URLSearchParams(window.location.search);
+        var size = searchParams.get('pageSize')
+        $('#pageSize').val(size ? size : 10)
+    }
+    currentPageSize()
+    $(function() {
+        $('#pageSize').change(function() {
+            var value = $(this).val()
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set('pageSize', value)
+            var newParams = searchParams.toString();
+            const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
+            location.replace(newUrl);
+        })
+    })
+</script>
 @endsection

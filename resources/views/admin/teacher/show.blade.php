@@ -140,7 +140,7 @@
                         <div class="form-group">
                             <label for="language_id">Primary Language</label>
                             <select name="language_id" id="language_id" placeholder="Select language"
-                                    class="chosen form-control">
+                                    class="chosen form-control w-100">
                                 @foreach($languages as $language)
                                     @if($teacher->language_id == $language->id)
                                         <option value="{{$language->id}}" selected>{{$language->name}}</option>
@@ -272,5 +272,6 @@
     </script>
     <script type="text/javascript">
         $(".chosen").chosen();
+        $("#language_id_chosen").css('width',"100%")
     </script>
 @endsection

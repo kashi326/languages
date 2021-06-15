@@ -145,7 +145,7 @@ class IndexController extends Controller
         $data['setting_teach_to'] = SettingTeachTo::get();
         $data['setting_subjects'] = SettingTeachSubjects::get();
         $data['setting_level'] = SettingTeachingLevel::get();
-
+        $data['languages'] = Language::get();
         return view('teach.profile.TeachingProfile', $data);
     }
     public function updateTeachingProfile(Request $request, $update)
@@ -364,6 +364,25 @@ class IndexController extends Controller
                 $teacher->trail_price = $request->has('trail_price') ? $request->trail_price : 0.01;
                 $teacher->update();
                 return response()->json(['message' => 'Price & Discount updated Successfully'], 208);
+                break;
+            case 'accentAdd':
+                $validator = Validator::make($request->all(), [
+                    'lang' => 'required',
+                ]);
+                if ($validator->fails()) {
+                    return response()->json(['message' => $validator->errors()], 401);
+                }
+                $other_langs = new OtherLangs;
+                $other_langs->name = $request->lang;
+                $other_langs->code = $request->lang;
+                $other_langs->level = "Intermediate";
+                $other_langs->teacher_id = $teacher->id;
+                $other_langs->save();
+                return response()->json(['message' => 'Accent added'], 201);
+                break;
+            case 'accentDelete':
+                OtherLangs::destroy($request->lang);
+                return response()->json(['message' => 'Accent Deleted Successfully'], 202);
                 break;
         }
     }

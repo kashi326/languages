@@ -64,15 +64,25 @@ class SettingController extends Controller
         }
         if ($request->hasFile('profilepic')) {
             if ($request->file('profilepic')->isValid()) {
-                $request->validate([
+                $rules = [
                     'profilepic' => 'mimes:jpeg,png|max:2048',
-                ]);
+                ];
+
+                $validator = Validator::make($request->all(), $rules);
+
+                if ($validator->fails()) {
+                    return response()->json($validator->errors(), 400);
+                }
                 $oldpicture = Auth::user()->avatar;
                 if(file_exists(public_path($oldpicture))){
-                    unlink(public_path($oldpicture));
+                    try {
+                        unlink(public_path($oldpicture));
+                    }catch(\Exception $e){
+
+                    }
                 }
                 $image = $request->file('profilepic');
-                $name = $image->getClientOriginalName();
+                $name = trim($image->getClientOriginalName());
                 $image->move(public_path().'/profilepicture/',$name);
                 $image_path = 'profilepicture/'.$name;
 
@@ -81,7 +91,7 @@ class SettingController extends Controller
                 $user->update();
                 Auth::user()->fresh()->avatar;
             }
-            return response()->json(['message' => 'Profile Updated successfully','profilePicture'=>'<img src="'.asset(Auth::user()->avatar).'" alt="" width="200" height="200" >']);
+            return response()->json(['message' => 'Profile Updated successfully','profilePicture'=>'<img src="'.asset($image_path).'" alt="" width="200" height="200" >']);
         }
         return response()->json(['message' => 'Either the File was not an image or size exceed our limit (2MB)'], 500);
     }
@@ -99,7 +109,7 @@ class SettingController extends Controller
         return response()->view('user.settings.languages',compact('other_langs'));
     }
     public function deletelanguage($id){
-        UserSpeak::destroy($id);
+        UserSpeak::where('id',$id)->delete();
         return response()->json('Delete successfully '.$id,200);
     }
     public function updateLevel(Request $request)
@@ -201,18 +211,18 @@ class SettingController extends Controller
         }
     }
     public function addSpeak(Request $request){
-        $validator = Validator::make($request->all(),[
-            'UserSpeak'=>'required'
+        $validator = Validator::make($request->all(), [
+            'UserSpeak' => 'required'
         ]);
-        if($validator->fails()){
-            return response()->json(["message"=>$validator->errors()],401);
+        if ($validator->fails()) {
+            return response()->json(["message" => $validator->errors()], 401);
         }
         $speak = new UserSpeak;
         $speak->language_id = $request->UserSpeak;
         $speak->user_id = Auth::id();
-        $speak->level = 'beginner';
-        $speak->motivation = 'other';
+        $speak->level = $request->level;
+        $speak->motivation = $request->motivation;
         $speak->save();
-        return response()->json(['message'=>'Language added'],201);
+        return response()->json(['message' => 'Language added'], 201);
     }
 }

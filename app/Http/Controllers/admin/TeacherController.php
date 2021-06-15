@@ -17,7 +17,8 @@ class TeacherController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::paginate(10);
+        $pageSize = request()->has('pageSize')?request()->get('pageSize'):10;
+        $teachers = Teacher::paginate($pageSize);
         return view('admin.teacher.index', compact('teachers'));
     }
 

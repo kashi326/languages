@@ -21,7 +21,6 @@ class CreateUserSpeaksTable extends Migration
             $table->foreign("language_id")->references('id')->on("languages")->onDelete('cascade');
             $table->string('level');
             $table->string('motivation');
-            $table->softDeletes();
             $table->tinyInteger('currently_learning')->default(1);
             $table->timestamps();
         });
