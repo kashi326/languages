@@ -43,7 +43,7 @@
                 <div class="card-body tab-pane active" id="personal_details" role="tabpanel">
                     <div class="avatar-img mb-3">
                         @if($teacher->user->avatar)
-                        <img src="{{asset('$teacher->user->avatar')}}" alt="avatar" class="">
+                        <img src='{{asset("$teacher->user->avatar")}}' alt="avatar" class="">
                         @else
                         <img src="{{asset('images/avatar.png')}}" alt="avatar" class="">
                         @endif
