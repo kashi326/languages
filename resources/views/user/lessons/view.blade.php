@@ -163,7 +163,9 @@
 
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn btn-danger btn-sm">Cancel</a>
+                @if(!$lesson->isAttended)
                 <a href="{{ route('lesson.reschedule',$lesson->id) }}" class="btn btn-success btn-sm">Reschedule</a>
+                @endif
             </div>
         </div>
     </div>
