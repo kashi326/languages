@@ -13,7 +13,7 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        $pageSize = request()->has('pageSize')?request()->get('pageSize'):10;
+        $pageSize = request()->has('pageSize') ? request()->get('pageSize') : 10;
         $langs = Language::paginate($pageSize);
         return view('admin.languages.index')->with('langs', $langs);
     }
@@ -27,19 +27,18 @@ class LanguageController extends Controller
     {
         $request->validate([
             'name' => "required|min: 2|max: 255",
-            'description' => "required|min: 10",
-            'avatar' => "required|mimes: jpeg,jpg,png,svg,gif"
         ]);
         $lang = new Language;
         $lang->name = $request->name;
         $lang->description = $request->description;
-//storing image
-        $image = $request->file('avatar');
-        $name = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path() . '/lang_images/', $name);
-        $image_path = '/lang_images/' . $name;
-
-        $lang->avatar = $image_path;
+        //storing image
+        if ($request->has('avatar')) {
+            $image = $request->file('avatar');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path() . '/lang_images/', $name);
+            $image_path = '/lang_images/' . $name;
+            $lang->avatar = $image_path;
+        }
         $lang->code = $request->code;
         $lang->save();
         flash("Language created successfully.")->success();
@@ -55,8 +54,6 @@ class LanguageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => "required|min: 2|max: 255",
-            'description' => "required|min: 10",
-            "avatar" => "mimes: jpeg,jpg,png,gif,svg",
         ]);
         $validator->sometimes('image', "mimes:jpg,jpeg,png,svg,gif", function ($input) {
             return $input->image != null ? true : false;
@@ -66,17 +63,16 @@ class LanguageController extends Controller
         } else if ($request->hasFile('avatar')) {
             $lang->name = $request->name;
             $lang->description = $request->description;
-            $image = $request->file('avatar');
-            $name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path() . '/lang_images/', $name);
-            $image_path = '/lang_images/' . $name;
-
-
-            if (file_exists(public_path($lang->avatar)) && $lang->avatar != null) {
-                unlink(public_path($lang->avatar));
+            if ($request->has('avatar')) {
+                $image = $request->file('avatar');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path() . '/lang_images/', $name);
+                $image_path = '/lang_images/' . $name;
+                if (file_exists(public_path($lang->avatar)) && $lang->avatar != null) {
+                    unlink(public_path($lang->avatar));
+                }
+                $lang->avatar = $image_path;
             }
-
-            $lang->avatar = $image_path;
             $lang->code = $request->code;
             $lang->save();
             flash("Language updated successfully")->warning();

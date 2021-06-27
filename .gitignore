@@ -13,3 +13,4 @@ yarn-error.log
 *.sql
 *.mp3
 .idea
+public/profilepicture

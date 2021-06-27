@@ -37,9 +37,9 @@
                             <td>{{$item->id}}</td>
                             <td style="width: 40%"><strong>{{$item->name}}</strong></td>
                             <td>
-                                <a href="{{asset($item->avatar)}}" data-fancybox="gallery">
-                                    <img src='{{asset($item->avatar)}}' alt="language image"
-                                        class="img-thumbnail lang-image">
+                                <a href="{{$item->avatar?asset($item->avatar):asset('/icons/language.svg')}}" data-fancybox="gallery">
+                                    <img src='{{$item->avatar?asset($item->avatar):asset('/icons/language.svg')}}' width="50" height="50" alt="language image"
+                                        class="img-thumbnail">
                                 </a>
                             </td>
                             <td style="width: 20%">
