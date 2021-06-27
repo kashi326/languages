@@ -26,15 +26,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         $langaugeLevel = [
-            'totalbeginner'=> '<p id="level-red">C -</p>',
-            'beginner'=> '<p id="level-yellow">C</p>',
-            'upperbeginner'=> '<p id="level-green">C +</p>',
-            'totalintermediate'=> '<p id="level-red">B -</p>',
-            'intermediate'=> '<p id="level-yellow">B</p>',
-            'upperintermediate'=> '<p id="level-green">B +</p>',
-            'totaladvanced'=> '<p id="level-red">A -</p>',
-            'advanced'=> '<p id="level-yellow">A</p>',
-            'totaladvanced'=> '<p id="level-green">A +</p>',
+            'totalbeginner' => '<p id="level-red">C -</p>',
+            'beginner' => '<p id="level-yellow">C</p>',
+            'upperbeginner' => '<p id="level-green">C +</p>',
+            'totalintermediate' => '<p id="level-red">B -</p>',
+            'intermediate' => '<p id="level-yellow">B</p>',
+            'upperintermediate' => '<p id="level-green">B +</p>',
+            'totaladvanced' => '<p id="level-red">A -</p>',
+            'advanced' => '<p id="level-yellow">A</p>',
+            'totaladvanced' => '<p id="level-green">A +</p>',
+            'upperadvanced' => '<p id="level-green">Native</p>',
         ];
         view()->share('languageLevel', $langaugeLevel);
     }
