@@ -4,9 +4,9 @@
     <div class="card my-5" id="main-card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-            <h3>Subjects Panel</h3>
-            <a href="#addSubject" data-toggle="modal" data-target="#addSubject" class="btn btn-primary">Add<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
-        </div>
+                <h3>Subjects Panel</h3>
+                <a href="#addSubject" data-toggle="modal" data-target="#addSubject" class="btn btn-primary d-flex align-items-center justify-content-between"><span> Add</span> &nbsp;<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
+            </div>
             <hr />
             @if(!$subjects->isEmpty())
             <div class="table-responsive mt-5">
@@ -58,24 +58,24 @@
     </div>
 </div>
 <script>
-    $(function(){
+    $(function() {
         $('form').on('ajax:error', function(event, xhr, status, error) {
-        console.log(xhr.responseText);
-        $(this).prepend(`<div class="alert alert-danger">${status.message}</div>`)
-        setTimeout(() => {
-            $('.alert').remove()
-        }, 3000);
-    });
-    $('form').on('ajax:success', function(data, status, xhr) {
-        $(this).prepend(`<div class="alert alert-success">${status.message}</div>`)
-        setTimeout(() => {
-            $('.alert').remove()
-        }, 10000);
-        location.reload();
-    });
+            console.log(xhr.responseText);
+            $(this).prepend(`<div class="alert alert-danger">${status.message}</div>`)
+            setTimeout(() => {
+                $('.alert').remove()
+            }, 3000);
+        });
+        $('form').on('ajax:success', function(data, status, xhr) {
+            $(this).prepend(`<div class="alert alert-success">${status.message}</div>`)
+            setTimeout(() => {
+                $('.alert').remove()
+            }, 10000);
+            location.reload();
+        });
 
-    $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr){
-        $(e.target).closest('tr').remove();
+        $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr) {
+            $(e.target).closest('tr').remove();
         });
     })
 </script>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Teacher;
 use App\User;
 use App\Homework;
+use App\TeacherTiming;
+use App\Traits\GetDates;
 use App\UserRegisterWithTeacher;
 use Illuminate\Http\Request;
 
@@ -13,6 +15,7 @@ use Auth;
 
 class LessonsController extends Controller
 {
+    use GetDates;
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +46,7 @@ class LessonsController extends Controller
     {
 
         $homework = Homework::where("id", $id)->first();
-        $url =storage_path('app/'.$homework->homework_path);
+        $url = storage_path('app/' . $homework->homework_path);
 
         $arr = explode('/', $url);
         $file_name = $arr[count($arr) - 1];
@@ -62,13 +65,13 @@ class LessonsController extends Controller
                 ]);
                 if (empty($homework->isExpired) || $homework->isExpired > date('Y-m-d H:i:s')) {
                     $oldhomework = $homework->response_path;
-                    if ($oldhomework != null && file_exists(storage_path('app/'.$oldhomework))) {
-                        unlink(storage_path('app/'.$oldhomework));
+                    if ($oldhomework != null && file_exists(storage_path('app/' . $oldhomework))) {
+                        unlink(storage_path('app/' . $oldhomework));
                     }
                     $File = $request->file('responseFile');
                     $file_path =  $request->file('responseFile')->storeAs('homework/response_path', time() . '.' . $File->getClientOriginalExtension());
                     $homework->response_path = '/' . $file_path;
-                    if($homework->isExpired == null){
+                    if ($homework->isExpired == null) {
                         $homework->isExpired = date('Y-m-d H:i:s');
                     }
                     $homework->update();
@@ -122,7 +125,14 @@ class LessonsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $lesson = UserRegisterWithTeacher::find($id);
+        if (UserRegisterWithTeacher::where("teacher_id", $request->teacher_id)->where('scheduled_date', $request->start)->where('id', '!=', $id)->exists()) {
+            return response()->json(['error' => "Slot already booked"]);
+        }
+        $lesson->scheduled_date = $request->start;
+        $lesson->save();
+        return response()->json(['message' => "Class rescheduled, await teacher approval."]);
     }
 
     /**
@@ -138,6 +148,15 @@ class LessonsController extends Controller
 
     public function reschedule($id)
     {
-        return view('user.lessons.reschedule');
+        $lesson = UserRegisterWithTeacher::where("id", $id)->first();
+        $allClasses = TeacherTiming::where('teacher_id', $lesson->teacher_id)->where('isOpen', 1)->select('name', 'open', 'close')->get();
+        $dateFromString = date('Y-m-d');
+        $dateToString = date('Y-m-d', strtotime(date("Y-m-d", time()) . " + 365 day"));
+        $classes = [];
+        foreach ($allClasses as $c) {
+            $classes = array_merge($classes, $this->getRescheduleDates($dateFromString, $dateToString, $c->name, $c->open, $c->close, $id));
+        }
+
+        return view('user.lessons.reschedule', compact('classes'));
     }
 }

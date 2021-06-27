@@ -47,7 +47,11 @@
                     <div class="col-4">
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
+                            @if(auth()->user()->role == 'user')
                             <input type="text" class="form-control" id="searchbyteacher" placeholder="Search by Teacher name">
+                            @else
+                            <input type="text" class="form-control" id="searchbyteacher">
+                            @endif
                         </div>
                     </div>
                 </div>

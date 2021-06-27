@@ -4,9 +4,9 @@
     <div class="card my-5" id="main-card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-            <h3>Teaches To Panel</h3>
-            <a href="#addSubject" data-toggle="modal" data-target="#addSubject" class="btn btn-primary">Add<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
-        </div>
+                <h3>Teaches To Panel</h3>
+                <a href="#addSubject" data-toggle="modal" data-target="#addSubject" class="btn btn-primary d-flex align-items-center justify-content-between"><span> Add</span> &nbsp;<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
+            </div>
             <hr />
             @if(!$tos->isEmpty())
             <div class="table-responsive mt-5">
@@ -72,7 +72,7 @@
     </div>
 </div>
 <script>
-    $(function(){
+    $(function() {
         $('form').on('ajax:error', function(event, xhr, status, error) {
             if (xhr.status == 401) {
                 var errors = JSON.parse(xhr.responseText);
@@ -95,8 +95,8 @@
             location.reload();
         });
 
-        $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr){
-console.log('hello')
+        $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr) {
+            console.log('hello')
             $(e.target).closest('tr').remove();
         });
     })

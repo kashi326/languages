@@ -4,9 +4,9 @@
     <div class="card my-5" id="main-card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-            <h3>Teaching Level Panel</h3>
-            <a href="#addLevel" data-toggle="modal" data-target="#addLevel" class="btn btn-primary">Add<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
-        </div>
+                <h3>Teaching Level Panel</h3>
+                <a href="#addLevel" data-toggle="modal" data-target="#addLevel" class="btn btn-primary d-flex align-items-center justify-content-between"><span> Add</span> &nbsp;<img src="{{asset('icons/plus.svg')}}" width="20" height="20"></a>
+            </div>
             <hr />
             @if(!$levels->isEmpty())
             <div class="table-responsive mt-5">
@@ -59,7 +59,7 @@
     </div>
 </div>
 <script>
-    $(function(){
+    $(function() {
         $('a, form').on('ajax:error', function(event, xhr, status, error) {
             if (xhr.status == 401) {
                 var errors = JSON.parse(xhr.responseText);
@@ -74,19 +74,19 @@
                 );
             }
         });
-        $('a, form').on('ajax:success', function(data, status, xhr,code) {
-            if(code.status == 201){
+        $('a, form').on('ajax:success', function(data, status, xhr, code) {
+            if (code.status == 201) {
                 $(this).prepend(`<div class="alert alert-success">${status.message}</div>`)
                 setTimeout(() => {
                     $('.alert').remove()
                     location.reload();
                 }, 5000);
-            }else if(code.status == 200){
+            } else if (code.status == 200) {
                 $(this).prepend(`<div class="alert alert-info">${status.message}</div>`)
                 setTimeout(() => {
                     $('.alert').remove()
                 }, 5000);
-            }else{
+            } else {
                 $(this).prepend(`<div class="alert alert-danger">Something Went Wrong!</div>`)
                 setTimeout(() => {
                     $('.alert').remove()
@@ -94,7 +94,7 @@
             }
         });
 
-        $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr){
+        $('.destroy-btn').bind('ajax:success', function(e, data, status, xhr) {
             $(e.target).closest('tr').remove();
         });
     })
