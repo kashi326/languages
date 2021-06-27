@@ -109,7 +109,7 @@ class PaymentController extends Controller
                 //   dd($capture);
                 $payment_capture = $this->_verifyPaypalCapture($data['id']);
                 if ($payment_capture && $data['status'] == 'COMPLETED') {
-                    $p = new Payments;
+                    $p = new Payments();
                     $p->teacher_id = $teacher_id;
                     $p->user_id = $user_id;
                     $p->ref_id = $payment_capture['id'];
