@@ -29,7 +29,6 @@
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
                     @if(!$row->isAttended)<li class="dropdown-item"><a href="#" class="text-decoration-none text-dark">Reschedule</a></li>@endif
-                    <li class="dropdown-item"><a href="#" class="text-decoration-none text-dark">Delete</a></li>
                 </ul>
             </div>
 
