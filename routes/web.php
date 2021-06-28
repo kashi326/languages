@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('lessons/reschedule/{id}', 'LessonsController@reschedule')->name('lesson.reschedule');
     Route::get('lessons/destroy/{id}', 'LessonsController@destroy');
     Route::post("/lesson/feedback", "LessonsController@feedback")->name('lesson.feedback.submit');
-    Route::post("/lesson/reschedule", "LessonsController@updateReschudle")->name('lesson.reschedule.update');
+    Route::post("/lesson/reschedule/{id}", "LessonsController@update")->name('lesson.reschedule.update');
     Route::get('/homework/download/{id}', 'LessonsController@download')->name('homework.download');
     Route::post('/homework/response', 'LessonsController@response')->name('homework.response');
     //settings routes
