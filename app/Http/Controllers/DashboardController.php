@@ -196,9 +196,7 @@ class DashboardController extends Controller
             return $q->whereDate('scheduled_date', "<", Carbon::now())->where('isAttended', 0)->where('user_id', FacadesAuth::id());
         }])->withCount(['lessons as upcoming' => function ($q) {
             return $q->whereDate('scheduled_date', ">", Carbon::now())->where('isAttended', 0)->where('user_id', FacadesAuth::id());
-        }])->whereHas(['lessons' => function ($q) {
-            $q->where("user_id", FacadesAuth::id());
-        }])->get();
+        }])->leftJoin('lessons', 'lessons.teacher_id', 'teachers.id')->where('lessons.user_id', auth()->user()->id)->get();
         // $my_teachers = DB::table('user_favourite_teacher as uft')
         //     ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
         //     ->LeftJoin('languages', 'languages.id', 'teachers.language_id')
