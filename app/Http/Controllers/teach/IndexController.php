@@ -393,7 +393,7 @@ class IndexController extends Controller
         $timing = new TeacherTiming;
         $timing->name = strtolower($start_class->format('l'));
         $timing->open = $start_class->format('H:i:s');
-        $timing->close = $end_class->add(\DateInterval::createFromDateString("-10 minutes"))->format('H:i:s');
+        $timing->close = $end_class->format('H:i:s');
         $timing->isOpen = 1;
         $timing->teacher_id = $request->teacher_id;
         try {
