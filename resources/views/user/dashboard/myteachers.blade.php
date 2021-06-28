@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="btn-group h-25 ml-auto">
-                        <a href="#" class="btn btn-primary btn-sm h-25">Buy Lesson</a>
+                        <a href="/view/{{$myteacher->teacher_id}}/{{$myteacher->teacher_name}}" class="btn btn-primary btn-sm h-25">Buy Lesson</a>
                     </div>
                 </div>
                 <div class="footer pl-3 d-flex justify-content-between">
