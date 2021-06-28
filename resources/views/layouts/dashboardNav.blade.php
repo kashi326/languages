@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="DashboardNav">
             <ul class="navbar-nav">
                 <li class="nav-item dashboardNav" id="dashboard">
-                    <a href="/dashboard" class="nav-link side-link "> <img src="{{asset('icons/home.png')}}" alt="" width="24" height="24">Profile/a>
+                    <a href="/dashboard" class="nav-link side-link "> <img src="{{asset('icons/home.png')}}" alt="" width="24" height="24">Profile</a>
                 </li>
                 <li class="nav-item dashboardNav" id="lessons">
                     <a href="/dashboard/lessons" class="nav-link side-link dashboard-links"> <img src="{{asset('icons/class.png')}}" alt="" width="24" height="24"> Lessons</a>

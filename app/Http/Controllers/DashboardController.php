@@ -188,7 +188,7 @@ class DashboardController extends Controller
             ->LeftJoin('languages', 'languages.id', 'teachers.language_id')
             ->LeftJoin('users', 'users.id', 'teachers.user_id')
             ->where('urwt.user_id', Auth::id())
-            ->select('teachers.name as teacher_name', 'teachers.country as teacher_country', 'languages.name as language_name', 'languages.code as language_code', 'users.avatar as teacher_avatar');
+            ->select('urwt.teacher_id as teacher_id', 'teachers.name as teacher_name', 'teachers.country as teacher_country', 'languages.name as language_name', 'languages.code as language_code', 'users.avatar as teacher_avatar');
 
         $my_teachers = DB::table('user_favourite_teacher as uft')
             ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
