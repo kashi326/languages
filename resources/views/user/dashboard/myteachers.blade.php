@@ -19,8 +19,8 @@
                 <div class="card-body">
                     @foreach($myteachers as $myteacher)
                     <div class="hoverCardWrapper ml-2">
-                        <a href="/view/{{$myteacher->teacher_id}}/{{$myteacher->teacher_name}}">
-                            <h6><i></i>{{$myteacher->teacher_name}}</h6>
+                        <a href="/view/{{$myteacher->id}}/{{$myteacher->name}}">
+                            <h6><i></i>{{$myteacher->name}} {{$myteacher->lastname}}</h6>
                         </a>
                     </div>
                     @endforeach
@@ -32,26 +32,26 @@
             <div class="card mb-2 lesson-card">
                 <div class="card-body d-flex">
                     <!-- <img src="{{asset('images/profile/$myteacher->teacher_avatar')??asset('images/avatar.png')}}" alt="" width="80" height="80" style="border-radius: 100%;"> -->
-                    <img src="{{asset($myteacher->teacher_avatar)??asset('images/avatar.png')}}" alt="" width="80" height="80" style="border-radius: 100%;">
+                    <img src="{{asset($myteacher->user->avatar)??asset('images/avatar.png')}}" alt="" width="80" height="80" style="border-radius: 100%;">
                     <div class="ml-2 mr-2 mr-md-4">
-                        <span>{{$myteacher->teacher_name}}</span>
+                        <span>{{$myteacher->name}}</span>
                         <div>
-                            <span>{{$myteacher->teacher_country}}</span>
-                            <span>{{$myteacher->teacher_country}}</span>
+                            <span>{{$myteacher->country}}</span>
+                            <span>{{$myteacher->country}}</span>
                         </div>
                         <div>
-                            <span>Last Online: 5min ago</span>
+                            <!-- <span>Last Online: 5min ago</span> -->
                         </div>
                     </div>
                     <div class="btn-group h-25 ml-auto">
-                        <a href="/view/{{$myteacher->teacher_id}}/{{$myteacher->teacher_name}}" class="btn btn-primary btn-sm h-25">Buy Lesson</a>
+                        <a href="/view/{{$myteacher->id}}/{{$myteacher->name}}" class="btn btn-primary btn-sm h-25">Buy Lesson</a>
                     </div>
                 </div>
                 <div class="footer pl-3 d-flex justify-content-between">
-                    <span><b>Teaches</b> <br>{{$myteacher->language_name}}</span>
-                    <span><b>Upcoming</b> <br>0</span>
-                    <span><b>Past</b> <br>0</span>
-                    <span><b>Needs rescheduling</b> <br>0</span>
+                    <span><b>Teaches</b> <br>{{$myteacher->language->name}}</span>
+                    <span><b>Upcoming</b> <br>{{$myteacher->upcoming}}</span>
+                    <span><b>Attended</b> <br>{{$myteacher->attended}}</span>
+                    <span><b>Needs rescheduling</b> <br>{{$myteacher->reschedule}}</span>
                 </div>
             </div>
             @endforeach
