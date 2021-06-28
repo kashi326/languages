@@ -92,7 +92,7 @@
         $('#per_page').change(function() {
             var value = $(this).val()
             var searchParams = new URLSearchParams(window.location.search);
-            searchParams.set('pageSize', value)
+            searchParams.set('per_page', value)
             var newParams = searchParams.toString();
             const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
             location.replace(newUrl);
