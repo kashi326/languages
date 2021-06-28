@@ -4,7 +4,7 @@
      </div>
      <div class="card-body">
          <div id="message-profile"></div>
-         <div class="prfile-image d-flex justify-content-center" id="profile">
+         <div class="prfile-image d-flex justify-content-center" id="profile-container">
              <img src="{{asset(Auth::user()->avatar?:'/images/avatar.png')}}" alt="" width="200" height="200">
          </div>
          <div class="mt-3">
@@ -26,7 +26,7 @@
          <form id="profileForm" enctype="multipart/form-data">
              <label for="profile" class="file-upload w-75 mx-auto btn btn-primary btn-block rounded-pill shadow">
                  <i class="fa fa-upload mr-2 "></i>Browse for file ...
-                 <input id="profile" name="profilepic" type="file" accept="image/*" style="opacity: 0;" onchange="sendPostImageRequest('/setting/profilepicture')" />
+                 <input id="profile" name="profilepic" type="file" accept="image/*" style="display: none;" onchange="sendPostImageRequest('/setting/profilepicture')" />
              </label>
              <form>
      </div>

@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
 
-{{--    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/locales-all.min.js"></script>--}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/locales-all.min.js"></script>--}}
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="{{asset('css/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
@@ -131,7 +131,7 @@
                                 </a>
                                 @endif
                                 @if(Auth::user()->role != 'admin')
-                                <a class="dropdown-item" href="{{route('dashboard')}}"> Dashboard</a>
+                                <a class="dropdown-item" href="{{route('dashboard')}}"> Profile</a>
                                 @endif
                                 <a class="dropdown-item" href="{{route('setting.profile.get')}}"> Setting</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

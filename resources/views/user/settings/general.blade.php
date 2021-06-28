@@ -137,7 +137,7 @@
             success: function(data) {
                 console.log(data)
                 $('#message-profile').html('<div class="valid-feedback" style="display:block"><span class="alert alert-success d-block">' + data.message + '</span></div>')
-                $('#profile').html(data.profilePicture);
+                $('#profile-container').html(data.profilePicture);
                 setTimeout(() => {
                     $('#message-profile').html("")
                 }, 2500)

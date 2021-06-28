@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @foreach($myteachers as $myteacher)
                     <div class="hoverCardWrapper ml-2">
-                        <a href="#">
+                        <a href="/view/{{$myteacher->id}}/{{$myteacher->teacher_name}}">
                             <h6><i></i>{{$myteacher->teacher_name}}</h6>
                         </a>
                     </div>

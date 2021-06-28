@@ -279,7 +279,7 @@
 
 
                                     @if(Auth::user()->role != 'admin')
-                                    <a class="dropdown-item" href="{{route('dashboard')}}"> Dashboard</a>
+                                    <a class="dropdown-item" href="{{route('dashboard')}}"> Profile</a>
                                     @endif
                                     <a class="dropdown-item" href="{{route('setting.profile.get')}}"> Setting</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
