@@ -19,6 +19,7 @@ class TeacherController extends Controller
     {
         $per_page = request()->has('per_page') ? request()->get('per_page') : 10;
         $teachers = Teacher::paginate($per_page);
+        $teachers->appends(['per_page' => $per_page]);
         return view('admin.teacher.index', compact('teachers'));
     }
 

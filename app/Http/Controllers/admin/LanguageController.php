@@ -15,6 +15,7 @@ class LanguageController extends Controller
     {
         $per_page = request()->has('per_page') ? request()->get('per_page') : 10;
         $langs = Language::paginate($per_page);
+        $langs->appends(['per_page' => $per_page]);
         return view('admin.languages.index')->with('langs', $langs);
     }
 

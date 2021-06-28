@@ -13,6 +13,7 @@ class UserController extends Controller
 
         $per_page = request()->has('per_page') ? request()->get('per_page') : 10;
         $users = User::where('role', 'user')->withTrashed()->paginate($per_page);
+        $users->appends(['per_page' => $per_page]);
         return view('admin.users.index')->with('users', $users);
     }
 
