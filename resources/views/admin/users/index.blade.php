@@ -92,7 +92,7 @@
             </div>
             <div class="d-flex justify-content-end pr-3">
                 <div class="d-flex justify-content-end align-items-center">
-                    <select id="pageSize" class="form-control form-select" style="max-width:max-content">
+                    <select id="per_page" class="form-control form-select" style="max-width:max-content">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -113,17 +113,17 @@
 @section('scripts')
 
 <script>
-    function currentPageSize() {
+    function currentper_page() {
         var searchParams = new URLSearchParams(window.location.search);
-        var size = searchParams.get('pageSize')
-        $('#pageSize').val(size ? size : 10)
+        var size = searchParams.get('per_page')
+        $('#per_page').val(size ? size : 10)
     }
-    currentPageSize()
+    currentper_page()
     $(function() {
-        $('#pageSize').change(function() {
+        $('#per_page').change(function() {
             var value = $(this).val()
             var searchParams = new URLSearchParams(window.location.search);
-            searchParams.set('pageSize', value)
+            searchParams.set('per_page', value)
             var newParams = searchParams.toString();
             const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
             location.replace(newUrl);

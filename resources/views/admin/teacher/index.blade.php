@@ -40,9 +40,7 @@
                                 <a href="{{route('admin.teacher.show',$item)}}" class="btn btn-primary">
                                     <i class="fas fa-eye"></i> Show
                                 </a>
-                                <form action="{{route('admin.teacher.destroy',$item)}}" class="d-inline-block"
-                                    method="POST"
-                                    onsubmit="return confirm('Are you sure want to delete this teacher?')">
+                                <form action="{{route('admin.teacher.destroy',$item)}}" class="d-inline-block" method="POST" onsubmit="return confirm('Are you sure want to delete this teacher?')">
                                     @csrf
                                     @method("DELETE")
                                     <button type="submit" class="btn btn-danger">
@@ -53,9 +51,10 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table> <div class="d-flex justify-content-end pr-3">
+                </table>
+                <div class="d-flex justify-content-end pr-3">
                     <div class="d-flex justify-content-end align-items-center">
-                        <select id="pageSize" class="form-control form-select" style="max-width:max-content">
+                        <select id="per_page" class="form-control form-select" style="max-width:max-content">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -73,17 +72,17 @@
     </div>
 </div>
 <script>
-    function currentPageSize() {
+    function currentper_page() {
         var searchParams = new URLSearchParams(window.location.search);
-        var size = searchParams.get('pageSize')
-        $('#pageSize').val(size ? size : 10)
+        var size = searchParams.get('per_page')
+        $('#per_page').val(size ? size : 10)
     }
-    currentPageSize()
+    currentper_page()
     $(function() {
-        $('#pageSize').change(function() {
+        $('#per_page').change(function() {
             var value = $(this).val()
             var searchParams = new URLSearchParams(window.location.search);
-            searchParams.set('pageSize', value)
+            searchParams.set('per_page', value)
             var newParams = searchParams.toString();
             const newUrl = window.location.origin + window.location.pathname + "?" + newParams;
             location.replace(newUrl);

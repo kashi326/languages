@@ -13,8 +13,8 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        $pageSize = request()->has('pageSize') ? request()->get('pageSize') : 10;
-        $langs = Language::paginate($pageSize);
+        $per_page = request()->has('per_page') ? request()->get('per_page') : 10;
+        $langs = Language::paginate($per_page);
         return view('admin.languages.index')->with('langs', $langs);
     }
 
