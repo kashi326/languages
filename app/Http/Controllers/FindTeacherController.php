@@ -23,11 +23,8 @@ class FindTeacherController extends Controller
     public function index()
     {
         DB::enableQueryLog();
-        $teachers = Teacher::
-            LeftJoin('users', 'users.id', '=', 'teachers.user_id')
+        $teachers = Teacher::LeftJoin('users', 'users.id', '=', 'teachers.user_id')
             ->LeftJoin('languages', 'languages.id', '=', 'teachers.language_id')
-            ->leftJoin('lessons', 'lessons.teacher_id', '=', 'teachers.id')
-//            ->distinct()
             ->select(
                 'teachers.name as teachername',
                 'users.*',
