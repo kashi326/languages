@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
+<?php
 
+use Carbon\Carbon;
+
+$start = Carbon::parse($lesson->timing->open);
+$close = Carbon::parse($lesson->timing->close);
+$timeDiff = $close->diffInMinutes($start)
+
+?>
 <div class="row mt-2">
     <div class=" ml-auto mr-auto col-12 col-md-10 col-lg-8">
         <div class="card">
@@ -36,7 +44,7 @@
                         <p class="font-2">Lesson Start at: <strong class="text-main">{{$lesson->timing->open}}</strong></p>
                         <p class="font-2">Lesson Ends at: <strong class="text-main">{{$lesson->timing->close}}</strong></p>
                         <p class="font-2">Date: <strong class="text-main">{{date('l', strtotime($lesson->scheduled_date))}}, {{date('jS F Y\ ', strtotime($lesson->scheduled_date))}}</strong></p>
-                        <p class="font-2">Duration: <strong class="text-main">60 Min Lesson</strong></p>
+                        <p class="font-2">Duration: <strong class="text-main">{{$timeDiff}} Min Lesson</strong></p>
                     </div>
                 </div>
                 <hr>

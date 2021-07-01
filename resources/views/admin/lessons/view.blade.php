@@ -1,5 +1,14 @@
 @extends("layouts.admin")
 @section('content')
+<?php
+
+use Carbon\Carbon;
+
+$start = Carbon::parse($lesson->timing->open);
+$close = Carbon::parse($lesson->timing->close);
+$timeDiff = $close->diffInMinutes($start)
+
+?>
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -34,7 +43,7 @@
                     <p class="font-2">Lesson Start at: <strong class="text-main">{{$lesson->timing->open}}</strong></p>
                     <p class="font-2">Lesson Ends at: <strong class="text-main">{{$lesson->timing->close}}</strong></p>
                     <p class="font-2">Date: <strong class="text-main">{{date('l', strtotime($lesson->scheduled_date))}}, {{date('jS F Y\ ', strtotime($lesson->scheduled_date))}}</strong></p>
-                    <p class="font-2">Duration: <strong class="text-main">60 Min Lesson</strong></p>
+                    <p class="font-2">Duration: <strong class="text-main">{{$timeDiff}} Min Lesson</strong></p>
                 </div>
             </div>
             <hr>
@@ -46,9 +55,9 @@
                     <pre>{{$lesson->link}}</pre>
                     @else
                     <div class="row justify-content-content">
-                            <img src="{{ asset('/icons/collaborationfemalemale.svg') }}" width="50" height="50" alt="img" style="margin-left:45%">
-                            <h4 class="text-center w-100">No Platform has been added yet.</h4>
-                        </div>
+                        <img src="{{ asset('/icons/collaborationfemalemale.svg') }}" width="50" height="50" alt="img" style="margin-left:45%">
+                        <h4 class="text-center w-100">No Platform has been added yet.</h4>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -67,9 +76,9 @@
 
                     @else
                     <div class="row justify-content-content">
-                            <img src="{{ asset('/icons/collaborationfemalemale.svg') }}" width="50" height="50" alt="img" style="margin-left:45%">
-                            <h4 class="text-center w-100">No Feedback has been given yet.</h4>
-                        </div>
+                        <img src="{{ asset('/icons/collaborationfemalemale.svg') }}" width="50" height="50" alt="img" style="margin-left:45%">
+                        <h4 class="text-center w-100">No Feedback has been given yet.</h4>
+                    </div>
                     @endif
                 </div>
             </div>

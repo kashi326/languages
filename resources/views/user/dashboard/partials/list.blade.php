@@ -1,7 +1,17 @@
+<?php
+
+use Carbon\Carbon;
+?>
+
 @if(count($lessons)>0)
 @foreach($lessons as $key => $lesson)
 <h5 class="mb-2 mt-2 text-muted">{{substr($key,0,11)}}</h5>
 @foreach($lesson as $row)
+<?php
+$start = Carbon::parse($row->open);
+$close = Carbon::parse($row->close);
+$timeDiff = $close->diffInMinutes($start)
+?>
 <div class="card mb-2 lesson-card">
     <div class="card-body d-flex">
         <img src="{{asset(Auth::user()->avatar)??asset('images/avatar.png')}}" alt="" width="150" height="150" style="border-radius: 100%;">
@@ -13,15 +23,14 @@
                 @else
                 <p style="color: #d84315;">Missed</p>
                 @endif
-                <p>{{$row->open}}</p>
-                <p>{{date('l', strtotime($row->scheduled_date))}}</p>
-                <p>{{date('F Y\, jS', strtotime($row->scheduled_date))}}</p>
+                <p>Start At: {{$row->open}}</p>
+                <p>Day: {{date('l', strtotime($row->scheduled_date))}}</p>
+                <p>Date: {{date('F Y\, jS', strtotime($row->scheduled_date))}}</p>
         </div>
         <div class="ml-2 ml-md-4">
             <h6 class=text-muted>Details</h6>
-            <p>Pakistan</p>
-            <p>60 Min Lesson</p>
-            <p>{{$row->name}}</p>
+            <p>Duration: {{$timeDiff}} Min Lesson</p>
+            <p>Teacher: {{$row->name}}</p>
         </div>
         <div class="btn-group h-25 ml-auto">
             <a href="/lessons/view/{{$row->id}}" class="btn btn-primary h-25">View</a>

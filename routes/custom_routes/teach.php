@@ -19,4 +19,5 @@ Route::group(['prefix' => "teacher", "namespace" => "teach", 'middleware' => "Pr
     Route::resource('decks', 'DecksController');
     Route::resource('decksLesson', 'DeckLessonsController');
     Route::get('/meeting/{id}/{teacher}', "MeetingController@index")->name('teacher.meeting');
+    Route::post("/update/profile/timing/batch", "IndexController@batchAddTiming")->name('teach.profile.timing.batch');
 });

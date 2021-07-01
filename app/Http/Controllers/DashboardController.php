@@ -78,8 +78,8 @@ class DashboardController extends Controller
         }
 
         $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where('user_id', Auth::id())->count();
-        $lessonscount['past'] = DB::table('lessons')->where('scheduled_date', '<', date('yy-m-d H:i:s'))->where('user_id', Auth::id())->count();
-        $lessonscount['upcoming'] = DB::table('lessons')->where('scheduled_date', '>=', date('yy-m-d H:i:s'))->where('user_id', Auth::id())->count();
+        $lessonscount['past'] = DB::table('lessons')->whereDate('scheduled_date', '<', Carbon::now())->where('isAttended', "!=", 1)->where('user_id', Auth::id())->count();
+        $lessonscount['upcoming'] = DB::table('lessons')->whereDate('scheduled_date', '>=', Carbon::now())->where('user_id', Auth::id())->count();
 
         $favourite_teacher = DB::table('user_favourite_teacher as uft')
             ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')

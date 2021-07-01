@@ -416,4 +416,31 @@ class IndexController extends Controller
         }
         return response()->json($timing);
     }
+    public function batchAddTiming(Request $request)
+    {
+        $request->validate([
+            'day' => 'required|array',
+            'to' => 'required|array',
+            'from' => 'required|array',
+        ]);
+        $teacher = Teacher::where('user_id', auth()->user()->id)->first();
+        foreach ($request->day as $key => $day) {
+            $start  = Carbon::parse($request->from[$key]);
+            $end  = Carbon::parse($request->to[$key]);
+            while ($start <= $end) {
+                $startBeforeAdd = $start->format('H:i:s');
+                $startAddUp = $start->addMinutes('60')->format("H:i:s");
+                $teacher_timing = TeacherTiming::whereTime('open', '>=', $startBeforeAdd)->whereTime("close", "<=", $startAddUp)->where('teacher_id', $teacher->id)->where('name', $day)->first();
+                if ($teacher_timing) continue;
+                $time = new TeacherTiming();
+                $time->name = strtolower($day);;
+                $time->isOpen = 1;
+                $time->open = $startBeforeAdd;
+                $time->close = $startAddUp;
+                $time->teacher_id = $teacher->id;
+                $time->save();
+            }
+        }
+        return redirect()->back();
+    }
 }

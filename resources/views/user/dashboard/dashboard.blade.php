@@ -58,18 +58,18 @@
                             <b>Add language</b> <i class="fas fa-pencil-alt"></i> </a>
                     </div>
                     <hr>
-                    <div class='mt-2 d-flex'>
-                        <div class="ml-aut">
+                    <div class='mt-2 d-flex align-items-center justify-content-around'>
+                        <div>
                             <div class="text-center">{{$count['attended']}}</div>
-                            <h5>Attended</h5>
+                            <p class="mt-1">Attended</p>
                         </div>
-                        <div class="ml-auto">
+                        <div>
                             <div class="text-center">{{$count['past']}}</div>
-                            <h5>Past</h5>
+                            <p class="mt-1">Past</p>
                         </div>
-                        <div class="ml-auto">
+                        <div>
                             <div class="text-center">{{$count['upcoming']}}</div>
-                            <h5>UpComing</h5>
+                            <p class="mt-1">UpComing</p>
                         </div>
                     </div>
                 </div>

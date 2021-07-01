@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\UserRegisterWithTeacher;
+use Illuminate\Support\Facades\DB;
+
 trait GetDates
 {
     public function getMondaysInRange($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null)
@@ -25,8 +28,15 @@ trait GetDates
         if ($days[strtolower($day)] != $dateFrom->format('N')) {
             $dateFrom->modify("next $day");
         }
-
+        DB::enableQueryLog();
         for ($i = 0; $dateFrom <= $dateTo; $i++) {
+            if ($id) {
+                $teacher = UserRegisterWithTeacher::where("scheduled_date", $dateFrom->format("Y-m-d $startTime"))->where('teacher_id', $id)->first();
+                if ($teacher != null) {
+                    $dateFrom->modify('+1 week');
+                    continue;
+                }
+            }
             $dates[$i]['start'] = $dateFrom->format("Y-m-d $startTime");
             $dates[$i]['end'] = $dateFrom->format("Y-m-d $endTime");
             if ($id) {
@@ -38,7 +48,7 @@ trait GetDates
 
         return $dates;
     }
-    public function getRescheduleDates($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null)
+    public function getRescheduleDates($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null, $teacher_id = null)
     {
         $dateFrom = new \DateTime($dateFromString);
         $dateTo = new \DateTime($dateToString);
@@ -61,11 +71,18 @@ trait GetDates
         }
 
         for ($i = 0; $dateFrom <= $dateTo; $i++) {
+            if ($id) {
+                $teacher = UserRegisterWithTeacher::where("scheduled_date", $dateFrom->format("Y-m-d $startTime"))->where('teacher_id', $teacher_id)->first();
+                if ($teacher != null) {
+                    $dateFrom->modify('+1 week');
+                    continue;
+                }
+            }
             $dates[$i]['start'] = $dateFrom->format("Y-m-d $startTime");
             $dates[$i]['end'] = $dateFrom->format("Y-m-d $endTime");
             if ($id) {
                 $dates[$i]['link'] =  "/lesson/reschedule/$id?start=" . $dates[$i]['start'] . "&end=" . $dates[$i]['end'];
-                $dates[$i]['link'] .= "&teacher_id=$id";
+                $dates[$i]['link'] .= "&teacher_id=$teacher_id";
             }
             $dateFrom->modify('+1 week');
         }

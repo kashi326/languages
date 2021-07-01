@@ -67,24 +67,18 @@
                     <h3 class="ml-2">Lessons Overview</h3>
                 </div>
                 <div class="card-boy m-2">
-                    <div class='mt-2 d-flex'>
-                        <div class="ml-aut">
-                            <div class="text-center">
-                                <h5>{{$count['attended']}}</h5>
-                            </div>
-                            <h5 for="">Attended</h5>
+                    <div class='mt-2 d-flex align-items-center justify-content-around'>
+                        <div>
+                            <div class="text-center">{{$count['attended']}}</div>
+                            <p class="mt-1">Attended</p>
                         </div>
-                        <div class="ml-auto">
-                            <div class="text-center">
-                                <h5>{{$count['past']}}</h5>
-                            </div>
-                            <h5 for="">Past</h5>
+                        <div>
+                            <div class="text-center">{{$count['past']}}</div>
+                            <p class="mt-1">Past</p>
                         </div>
-                        <div class="ml-auto">
-                            <div class="text-center">
-                                <h5>{{$count['upcoming']}}</h5>
-                            </div>
-                            <h5 for="">UpComing</h5>
+                        <div>
+                            <div class="text-center">{{$count['upcoming']}}</div>
+                            <p class="mt-1">UpComing</p>
                         </div>
                     </div>
                 </div>

@@ -72,8 +72,7 @@ class FindTeacherController extends Controller
             ->where('teachers.id', $id)
             ->LeftJoin('users', 'users.id', '=', 'teachers.user_id')
             ->select("teachers.*", 'users.avatar')
-            ->get();
-        $teacher = $teacher[0];
+            ->first();
 
         $teacher_resume = Teacher::with('teacher_education', 'teacher_experience', 'teacher_certificates')->withCount('lessons')->where('id', $id)->first();
 

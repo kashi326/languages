@@ -154,7 +154,7 @@ class LessonsController extends Controller
         $dateToString = date('Y-m-d', strtotime(date("Y-m-d", time()) . " + 365 day"));
         $classes = [];
         foreach ($allClasses as $c) {
-            $classes = array_merge($classes, $this->getRescheduleDates($dateFromString, $dateToString, $c->name, $c->open, $c->close, $id));
+            $classes = array_merge($classes, $this->getRescheduleDates($dateFromString, $dateToString, $c->name, $c->open, $c->close, $id, $lesson->teacher_id));
         }
 
         return view('user.lessons.reschedule', compact('classes'));

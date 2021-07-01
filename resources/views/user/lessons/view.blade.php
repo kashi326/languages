@@ -7,6 +7,15 @@
         display: none;
     }
 </style>
+<?php
+
+use Carbon\Carbon;
+
+$start = Carbon::parse($lesson->timing->open);
+$close = Carbon::parse($lesson->timing->close);
+$timeDiff = $close->diffInMinutes($start)
+
+?>
 <div class="row mt-2">
     <div class=" ml-auto mr-auto col-12 col-md-10 col-lg-8">
         <div class="card">
@@ -65,7 +74,7 @@
                         </p>
                         <p class="font-2">
                             Duration:
-                            <strong class="text-main">60 Min Lesson</strong>
+                            <strong class="text-main">{{$timeDiff}} Min Lesson</strong>
                         </p>
                     </div>
                 </div>
@@ -74,7 +83,7 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         @if(!$lesson->isAttended )
-                        @if($dateDiff = Carbon\Carbon::now()->diffInMinutes($lesson->scheduled_date,false)<=15) <div class="d-flex justify-content-center">
+                        @if($dateDiff = Carbon::now()->diffInMinutes($lesson->scheduled_date,false)<=15) <div class="d-flex justify-content-center">
                             <a href="{{route('meeting.student',[$lesson->id,$lesson->user_id])}}" target="_blank" class="btn btn-primary mx-auto">Start Meeting</a>
                     </div>
                     <p class="text-center"><b>OR</b></p>
