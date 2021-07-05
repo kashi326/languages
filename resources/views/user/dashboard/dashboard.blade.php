@@ -303,6 +303,7 @@
                     },
                     initialView: 'timeGridWeek',
                     themeSystem: 'bootstrap',
+                    slotDuration: "01:00",
                     events: <?php echo json_encode($classesTime) ?>
                 });
                 calendar.render();
