@@ -571,7 +571,7 @@
                 hour12: true
             },
             eventClick: function(info) {
-                UIkit.modal.confirm('Are you want to add this timing to your timetable?').then(function() {
+                UIkit.modal.confirm('Are you want to remove this timing from your timetable?').then(function() {
                     var event = info.event;
                     $.ajax({
                         type: 'POST',
@@ -583,9 +583,6 @@
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        beforeSend: function() {
-                            return UIkit.modal.confirm('Are you want to delete this timing to your timetable?')
                         },
                         success: function(response) {
                             console.log(`sucess: ${response}`)

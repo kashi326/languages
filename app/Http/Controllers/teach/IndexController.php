@@ -406,10 +406,10 @@ class IndexController extends Controller
     public function deleteTiming(Request $request)
     {
         $start_class = new DateTime($request->start, new DateTimeZone('UTC'));
-        $end_class = new DateTime($request->end, new DateTimeZone('UTC'));
+        $end_class = Carbon::parse($request->start)->addMinutes(60)->format('H:i:s');
         $timing = null;
         try {
-            $timing = TeacherTiming::where('name', strtolower($start_class->format('l')))->where('open', $start_class->format('H:i:s'))->where('close', $end_class->format('H:i:s'))->where('teacher_id', $request->teacher_id)->first();
+            $timing = TeacherTiming::where('name', strtolower($start_class->format('l')))->where('open', $start_class->format('H:i:s'))->where('close', $end_class)->where('teacher_id', $request->teacher_id)->first();
             $timing->delete();
         } catch (\Throwable $th) {
             return response()->json(['error' => $th], 400);
