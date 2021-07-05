@@ -26,6 +26,7 @@
         },
         initialView: 'timeGridWeek',
         themeSystem: 'bootstrap',
+        themeName: 'flatly',
         slotDuration: '01:00',
         events: calendarEvents,
         eventTimeFormat: {
