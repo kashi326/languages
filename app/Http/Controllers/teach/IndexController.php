@@ -393,7 +393,7 @@ class IndexController extends Controller
         $timing = new TeacherTiming;
         $timing->name = strtolower($start_class->format('l'));
         $timing->open = $start_class->format('H:i:s');
-        $timing->close = $end_class->format('H:i:s');
+        $timing->close = Carbon::parse($start_class)->addMinutes(60)->format('H:i:s');
         $timing->isOpen = 1;
         $timing->teacher_id = $request->teacher_id;
         try {
@@ -416,6 +416,7 @@ class IndexController extends Controller
         }
         return response()->json($timing);
     }
+
     public function batchAddTiming(Request $request)
     {
         $request->validate([
