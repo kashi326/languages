@@ -26,7 +26,7 @@
         },
         initialView: 'timeGridWeek',
         themeSystem: 'bootstrap',
-        slotDuration: '00:30',
+        slotDuration: '01:00',
         events: calendarEvents,
         eventTimeFormat: {
             hour: 'numeric',

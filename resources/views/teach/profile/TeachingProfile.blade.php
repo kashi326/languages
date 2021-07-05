@@ -564,7 +564,7 @@
             events: calendarEvents,
             selectable: true,
             editable: true,
-            slotDuration: '00:30:00',
+            slotDuration: '01:00:00',
             eventTimeFormat: {
                 hour: 'numeric',
                 minute: '2-digit',
