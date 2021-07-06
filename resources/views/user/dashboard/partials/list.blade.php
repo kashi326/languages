@@ -33,7 +33,11 @@ $timeDiff = $close->diffInMinutes($start)
             <p>Teacher: {{$row->name}}</p>
         </div>
         <div class="btn-group h-25 ml-auto">
+            @if(auth()->user()->role!='teacher')
             <a href="/lessons/view/{{$row->id}}" class="btn btn-primary h-25">View</a>
+            @else
+            <a href="/teacher/lesson/{{$row->id}}" class="btn btn-primary h-25">View</a>
+            @endif
             <div class="btn-group">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
