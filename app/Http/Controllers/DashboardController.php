@@ -24,6 +24,16 @@ class DashboardController extends Controller
     ];
     public function index(Request $request)
     {
+        $id = null;
+        $user_id = "";
+        if (auth()->user()->role != 'teacher') {
+            $user_id = "user_id";
+            $id = Auth::id();
+        } else {
+            $user_id = "teacher_id";
+            $teacher = Teacher::where("user_id", Auth::id())->first();
+            $id = $teacher->id;
+        }
 
         $other_langs = DB::table("user_speaks")
             ->where('user_id', Auth::id())
@@ -33,7 +43,7 @@ class DashboardController extends Controller
         $lessonsList = DB::table('lessons as registered')
             ->LeftJoin('teacher_timings as timing', 'timing.id', '=', 'registered.timing_id')
             ->LeftJoin('teachers', 'teachers.id', '=', 'registered.teacher_id')
-            ->where('registered.user_id', Auth::id());
+            ->where("registered.$user_id", $id);
         if (isset($_GET['search'])) {
             $lessonsList = $lessonsList->where('teachers.name', 'LIKE', '%' . $_GET['search'] . '%');
         }
@@ -61,7 +71,7 @@ class DashboardController extends Controller
             }
         }
         $lessonsList = $lessonsList->select('registered.*', 'timing.open', 'timing.close', 'teachers.name')->get();
-        $lessonsDate = DB::table('lessons')->where('user_id', Auth::id())->select('created_at')->get();
+        $lessonsDate = DB::table('lessons')->where("$user_id", $id)->select('created_at')->get();
         $alllessons = [];
         foreach ($lessonsDate as  $ld) {
             foreach ($lessonsList as $ll) {
@@ -77,17 +87,20 @@ class DashboardController extends Controller
             $lessons[$key] = array_map('json_decode', $array);
         }
 
-        $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where('user_id', Auth::id())->count();
-        $lessonscount['past'] = DB::table('lessons')->whereDate('scheduled_date', '<', Carbon::now())->where('isAttended', "!=", 1)->where('user_id', Auth::id())->count();
-        $lessonscount['upcoming'] = DB::table('lessons')->whereDate('scheduled_date', '>=', Carbon::now())->where('user_id', Auth::id())->count();
+        $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where($user_id, $id)->count();
+        $lessonscount['past'] = DB::table('lessons')->whereDate('scheduled_date', '<', Carbon::now())->where('isAttended', "!=", 1)->where($user_id, $id)->count();
+        $lessonscount['upcoming'] = DB::table('lessons')->whereDate('scheduled_date', '>=', Carbon::now())->where($user_id, $id)->count();
+        if (auth()->user()->role != 'teacher') {
 
-        $favourite_teacher = DB::table('user_favourite_teacher as uft')
-            ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
-            ->LeftJoin('users', 'users.id', 'teachers.user_id')
-            ->where('uft.user_id', Auth::id())
-            ->select('teachers.id as teacher_id', 'users.avatar as avatar', 'teachers.name as teacher_name')->paginate(3);
+            $favourite_teacher = DB::table('user_favourite_teacher as uft')
+                ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
+                ->LeftJoin('users', 'users.id', 'teachers.user_id')
+                ->where('uft.user_id', Auth::id())
+                ->select('teachers.id as teacher_id', 'users.avatar as avatar', 'teachers.name as teacher_name')->paginate(3);
+        } else {
+            $favourite_teacher = [];
+        }
         $classes = [];
-        // dd($lessonsList);
         foreach ($lessonsList as $c) {
             $classes[] = [
                 'title' => 'Class',
