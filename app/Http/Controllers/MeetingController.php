@@ -18,10 +18,10 @@ class MeetingController extends Controller
     {
         $lesson = UserRegisterWithTeacher::where('id', $id)->first();
         if ($lesson && $lesson->platform && $lesson->link) {
-            $lesson->user->notify(new ClassStarted($lesson));
+            $lesson->teacher->user->notify(new ClassStarted($lesson));
             return redirect()->to($lesson->link);
         } else if ($lesson) {
-            $lesson->user->notify(new ClassStarted($lesson));
+            $lesson->teacher->user->notify(new ClassStarted($lesson));
             $session_id = (string)Str::uuid();
             $lesson->platform = env('APP_NAME', "Languages");
             $lesson->session_id = $session_id;
