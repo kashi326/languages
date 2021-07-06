@@ -137,6 +137,7 @@ $timeDiff = $close->diffInMinutes($start)
                 </div>
             </div>
             @endif
+            @if($lesson->isAttended)
             <span class="font-5 text-muted">FeedBack</span>
             <div class="row">
                 <div class="col-12 col-md-10 m-auto">
@@ -169,6 +170,7 @@ $timeDiff = $close->diffInMinutes($start)
                     </form>
                 </div>
             </div>
+            @endif
         </div>
 
         <div class="card-footer">

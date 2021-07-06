@@ -325,7 +325,7 @@
             @endif
         </div>
         <div class="d-none d-lg-block col-lg-4 ">
-            @if($teacher->trail)
+            @if($teacher->trail && $hasFreeTrail)
             <div class="card mb-4">
                 <div class="card-head p-2">
                     <p class="card-title mb-0">Trail Lesson</p>
