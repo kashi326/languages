@@ -42,7 +42,7 @@ class ClassStarted extends Notification
     {
         return (new MailMessage)
             ->line($this->class->user->name . " your class with " . $this->class->teacher->name . " Has just started")
-            ->action('Notification Action', url($this->class->link))
+            ->action('Notification Action', $this->class->link)
             ->line('Thank you for using our application!');
     }
 
