@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ClassStarted;
 use App\UserRegisterWithTeacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -17,8 +18,10 @@ class MeetingController extends Controller
     {
         $lesson = UserRegisterWithTeacher::where('id', $id)->first();
         if ($lesson && $lesson->platform && $lesson->link) {
+            $lesson->user->notify(new ClassStarted($lesson));
             return redirect()->to($lesson->link);
         } else if ($lesson) {
+            $lesson->user->notify(new ClassStarted($lesson));
             $session_id = (string)Str::uuid();
             $lesson->platform = env('APP_NAME', "Languages");
             $lesson->session_id = $session_id;
