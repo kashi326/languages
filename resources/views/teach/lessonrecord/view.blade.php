@@ -92,7 +92,7 @@ $timeDiff = $close->diffInMinutes($start)
                 @endif
                 @if ($lesson->homework && $lesson->homework->response_path != null)
                 <div class="mb-3 w-75 m-auto">
-                    <span class="font-3">Response Submitted</span>
+                    <span class="font-3">Homeword Submitted by student</span>
                     <form action="{{ route('homework.download',$lesson->homework->id) }}" method="get">
                         @csrf
                         <input type="submit" value="Download" class="btn btn-primary btn-block btn-sm" />
@@ -100,7 +100,7 @@ $timeDiff = $close->diffInMinutes($start)
                 </div>
                 @else
                 <div class="alert alert-info">
-                    Response Not Submitted yet
+                    Homework Response Not Submitted yet
                 </div>
                 @endif
                 <hr>
