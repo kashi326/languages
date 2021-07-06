@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\teach;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\ClassStarted;
 use App\UserRegisterWithTeacher;
 use Illuminate\Support\Str;
 
