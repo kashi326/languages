@@ -218,14 +218,7 @@ class DashboardController extends Controller
             return $q->whereDate('scheduled_date', "<", Carbon::now())->where('isAttended', 0)->where('user_id', FacadesAuth::id());
         }])->withCount(['lessons as upcoming' => function ($q) {
             return $q->whereDate('scheduled_date', ">", Carbon::now())->where('isAttended', 0)->where('user_id', FacadesAuth::id());
-        }])->leftJoin('lessons', 'lessons.teacher_id', 'teachers.id')->where('lessons.user_id', auth()->user()->id)->get();
-        // $my_teachers = DB::table('user_favourite_teacher as uft')
-        //     ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
-        //     ->LeftJoin('languages', 'languages.id', 'teachers.language_id')
-        //     ->LeftJoin('users', 'users.id', 'teachers.user_id')
-        //     ->where('uft.user_id', Auth::id())
-        //     ->select('uft.teacher_id as teacher_id', 'teachers.name as teacher_name', 'teachers.country as teacher_country', 'languages.name as language_name', 'languages.code as language_code', 'users.avatar as teacher_avatar')
-        //     ->union($teachers_registered_with)->get();
+        }])->leftJoin('lessons', 'lessons.teacher_id', 'teachers.id')->where('lessons.user_id', auth()->user()->id)->distinct('lesson.user_id')->get();
         return view('user.dashboard.myteachers')->with(['myteachers' => $teachers_registered_with]);
     }
     public function vocabulary()
