@@ -110,11 +110,21 @@ class DashboardController extends Controller
 
     public function lessons(Request $request)
     {
+        $id = null;
+        $user_id = "";
+        if (auth()->user()->role != 'teacher') {
+            $user_id = "user_id";
+            $id = Auth::id();
+        } else {
+            $user_id = "teacher_id";
+            $teacher = Teacher::where("user_id", Auth::id())->first();
+            $id = $teacher->id;
+        }
         $data = [];
         $lessonsList = DB::table('lessons as registered')
             ->LeftJoin('teacher_timings as timing', 'timing.id', '=', 'registered.timing_id')
             ->LeftJoin('teachers', 'teachers.id', '=', 'registered.teacher_id')
-            ->where(auth()->user()->role != 'teacher' ? 'registered.user_id' : 'registered.teacher_id', Auth::user()->role != 'teacher' ? Auth::id() : auth()->user()->teacher()->id());
+            ->where("registered.$user_id", $id);
         if (isset($_GET['search'])) {
             $lessonsList = $lessonsList->where('teachers.name', 'LIKE', '%' . $_GET['search'] . '%');
         }
@@ -142,7 +152,7 @@ class DashboardController extends Controller
             }
         }
         $lessonsList = $lessonsList->select('registered.*', 'timing.open', 'timing.close', 'teachers.name')->get();
-        $lessonsDate = DB::table('lessons')->where(auth()->user()->role != 'teacher' ? 'user_id' : 'teacher_id', Auth::user()->role != 'teacher' ? Auth::id() : auth()->user()->teacher()->id)->select('created_at')->get();
+        $lessonsDate = DB::table('lessons')->where($user_id, $id)->select('created_at')->get();
         $alllessons = [];
         foreach ($lessonsDate as  $ld) {
             foreach ($lessonsList as $ll) {
@@ -157,9 +167,9 @@ class DashboardController extends Controller
             $array = array_unique($array);
             $lessons[$key] = array_map('json_decode', $array);
         }
-        $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where(auth()->user()->role != 'teahcer' ? 'user_id' : 'teacher_id', auth()->user()->role != 'teahcer' ? Auth::id() : auth()->user()->teacher()->id)->count();
-        $lessonscount['past'] = DB::table('lessons')->where('scheduled_date', '<', date('yy-m-d H:i:s'))->where(auth()->user()->role != 'teahcer' ? 'user_id' : 'teacher_id', auth()->user()->role != 'teahcer' ? Auth::id() : auth()->user()->teacher()->id)->count();
-        $lessonscount['upcoming'] = DB::table('lessons')->where('scheduled_date', '>=', date('yy-m-d H:i:s'))->where(auth()->user()->role != 'teahcer' ? 'user_id' : 'teacher_id', auth()->user()->role != 'teahcer' ? Auth::id() : auth()->user()->teacher()->id)->count();
+        $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where($user_id, $id)->count();
+        $lessonscount['past'] = DB::table('lessons')->where('scheduled_date', '<', date('yy-m-d H:i:s'))->where($user_id, $id)->count();
+        $lessonscount['upcoming'] = DB::table('lessons')->where('scheduled_date', '>=', date('yy-m-d H:i:s'))->where($user_id, $id)->count();
 
 
         $classes = [];
