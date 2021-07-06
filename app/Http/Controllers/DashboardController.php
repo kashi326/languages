@@ -114,7 +114,7 @@ class DashboardController extends Controller
         $lessonsList = DB::table('lessons as registered')
             ->LeftJoin('teacher_timings as timing', 'timing.id', '=', 'registered.timing_id')
             ->LeftJoin('teachers', 'teachers.id', '=', 'registered.teacher_id')
-            ->where(auth()->user()->role != 'teacher' ? 'registered.user_id' : 'registered.teacher_id', Auth::user()->role != 'teacher' ? Auth::id() : auth()->user()->teacher()->id);
+            ->where(auth()->user()->role != 'teacher' ? 'registered.user_id' : 'registered.teacher_id', Auth::user()->role != 'teacher' ? Auth::id() : auth()->user()->teacher()->id());
         if (isset($_GET['search'])) {
             $lessonsList = $lessonsList->where('teachers.name', 'LIKE', '%' . $_GET['search'] . '%');
         }
