@@ -120,7 +120,7 @@ class FindTeacherController extends Controller
         $data['expertise'] = $expertise;
         $data['total_registered_lessons'] = count($total_registered_lessons);
         $data['lesson_per_Student'] = count($lesson_per_Student);
-        $data['hasFreeTrail'] = !(UserRegisterWithTeacher::where("user_id", auth()->user()->id)->where("teacher_id", $teacher->id)->exist() || FreeTrail::where("user_id", auth()->user()->id)->where("teacher_id", $teacher->id)->exist());
+        $data['hasFreeTrail'] = !(UserRegisterWithTeacher::where("user_id", auth()->user()->id)->where("teacher_id", $teacher->id)->exists() || FreeTrail::where("user_id", auth()->user()->id)->where("teacher_id", $teacher->id)->exists());
         return view('user.vteacherprofile', $data);
     }
 
