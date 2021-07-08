@@ -72,29 +72,7 @@ class PaymentController extends Controller
             $user->notify(new BookingConfirmation($lesson));
             $teacher_user->notify(new BookingConfirmation($lesson));
             return response()->json(['status' => 'success', 'pid' => 1]);
-        }
-        // if (request()->post('is_dummy')) { // Dummy for testing notification etc
-        //     $amount = request()->post('amount');
-        //     $p = new Payments();
-        //     $p->teacher_id = $teacher_id;
-        //     $p->user_id = $user_id;
-        //     $p->ref_id = uniqid();
-        //     $p->amount = $amount;
-        //     $p->save();
-
-        //     $payment_id = $p->id;
-        //     $user = User::find($user_id);
-        //     // dd($user);
-        //     $user->notify(new NotificationsPaymentReceived($p));
-
-        //     $teacher = Teacher::find($teacher_id);
-        //     $teacher->notify(new NotificationsPaymentReceived($p));
-
-        //     $payment_notification['ref_id'] = $p->id;
-        //     $payment_notification['amount'] = $amount;
-        //     event(new PaymentReceived($payment_notification)); // Trigger pusher update
-        // } else
-        else {
+        } else {
             $data = request()->post('details');
             $purchase_units = isset($data['purchase_units']) ? $data['purchase_units'] : NULL;
             $capture = NULL;

@@ -16,7 +16,7 @@
             </div>
             @elseif(empty($homework->response_path))
             <div class="alert alert-danger w-75 m-auto">
-                Homework reponse not submitted yet.
+                You have submitted homework. please wait for student to submit.
             </div>
             @elseif(!empty($homework->response_path)&&$homework->isChecked ==0)
             <div class="alert alert-info w-75 m-auto">
@@ -30,7 +30,7 @@
                     <input type="text" name="homeworkID" value="{{$homework->homeworkID}}" hidden>
                     <div class="form-group row">
                         <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
-                            <input id="fileUpload" name="homeworkFile" style="opacity:0" type="file" accept="application/pdf" >
+                            <input id="fileUpload" name="homeworkFile" style="opacity:0" type="file" accept="application/pdf">
                         </label>
                     </div>
                 </form>
@@ -69,7 +69,7 @@
             </div>
             @elseif(empty($homework->response_path))
             <div class="alert alert-danger w-75 m-auto">
-                Homework reponse not submitted yet.
+                You have submitted homework. please wait for student to submit.
             </div>
             @elseif(!empty($homework->response_path)&&$homework->isChecked ==0)
             <div class="alert alert-info w-75 m-auto">

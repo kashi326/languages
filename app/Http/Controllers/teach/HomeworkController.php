@@ -55,6 +55,7 @@ class HomeworkController extends Controller
                 $homework->homework_path = $file_path;
                 $homework->lesson_id = $request->lessonID;
                 $homework->isChecked = 0;
+                $homework->isExpired = null;
                 $homework->marks = 0;
                 $homework->remarks = '';
                 $homework->save();
@@ -128,7 +129,8 @@ class HomeworkController extends Controller
         return response()->download($url, $file_name, $headers);
     }
     public function upload(Request $request)
-    { }
+    {
+    }
     /**
      * Remove the specified resource from storage.
      *

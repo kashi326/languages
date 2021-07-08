@@ -52,25 +52,25 @@ $timeDiff = $close->diffInMinutes($start)
                 <div class="row">
                     <div class="col-12 col-md-8 m-auto">
                         <div class="w-75 m-auto">
-                            @if(!$lesson->isAttended)
-                            <a href="{{route('teacher.meeting',[$lesson->id,$lesson->teacher->user_id])}}" target="_blank" class="btn btn-primary">Start Meeting</a>
-                            <p class="text-center"><b>OR</b></p>
-                            @endif
-                            <form id="platformForm">
-                                <div id="summaryError"></div>
-                                <input type="text" name="id" value="{{$lesson->id}}" hidden>
-                                <div class="form-group">
-                                    <label for="">Platform Name</label>
-                                    <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" required>
-                                    <div id="platformNameError" class="mt-1"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Lesson Link</label>
-                                    <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" required>
-                                    <div id="lessonLinkError" class="mt-1"></div>
-                                </div>
-                                <div class="form-group"><a type="submit" class="btn btn-primary btn-sm float-right text-decoration-none text-light" id="updatePlatform">Update</a></div>
-                            </form>
+                            @if(!$lesson->isAttended && Carbon::now()->diffInMinutes($lesson->scheduled_date,false)<=15) <div class="d-flex justify-content-center">
+                                <a href="{{route('teacher.meeting',[$lesson->id,$lesson->teacher->user_id])}}" target="_blank" class="btn btn-primary">Start Meeting</a>
+                                <p class="text-center"><b>OR</b></p>
+                                @endif
+                                <form id="platformForm">
+                                    <div id="summaryError"></div>
+                                    <input type="text" name="id" value="{{$lesson->id}}" hidden>
+                                    <div class="form-group">
+                                        <label for="">Platform Name</label>
+                                        <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" required>
+                                        <div id="platformNameError" class="mt-1"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Lesson Link</label>
+                                        <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" required>
+                                        <div id="lessonLinkError" class="mt-1"></div>
+                                    </div>
+                                    <div class="form-group"><a type="submit" class="btn btn-primary btn-sm float-right text-decoration-none text-light" id="updatePlatform">Update</a></div>
+                                </form>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ $timeDiff = $close->diffInMinutes($start)
                 </div>
                 @else
                 <div class="alert alert-info">
-                    Homework Response Not Submitted yet
+                    You have submitted homework. please wait for student to submit.
                 </div>
                 @endif
                 <hr>

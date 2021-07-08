@@ -105,7 +105,7 @@ class DashboardController extends Controller
             $classes[] = [
                 'title' => 'Class',
                 'start' => date("Y-m-d H:i:s", strtotime($c->scheduled_date)),
-                'end' => date("Y-m-d H:i:s", (strtotime($c->scheduled_date) + 800)),
+                'end' => Carbon::parse($c->scheduled_date)->addMinutes(60)->format('Y-m-d H:i:s'),
             ];
         }
         $data = [];
@@ -190,7 +190,7 @@ class DashboardController extends Controller
             $classes[] = [
                 'title' => 'Class',
                 'start' => date("Y-m-d H:i:s", strtotime($c->scheduled_date)),
-                'end' => date("Y-m-d H:i:s", (strtotime($c->scheduled_date) + 800)),
+                'end' => Carbon::parse($c->scheduled_date)->addMinutes(60)->format('Y-m-d H:i:s'),
             ];
         }
 

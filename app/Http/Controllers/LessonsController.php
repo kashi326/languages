@@ -77,7 +77,7 @@ class LessonsController extends Controller
                     $homework->update();
                     return response()->view('includes.success_toast', ['color' => '#89b850', 'message' => 'Homework Updated successfully']);
                 } else {
-                    return response()->view('includes.success_toast', ['color' => '#dc3545', 'message' => 'Time Expired'], 500);
+                    return response()->view('includes.success_toast', ['color' => '#dc3545', 'message' => 'Time Expired'], 400);
                 }
             }
         }

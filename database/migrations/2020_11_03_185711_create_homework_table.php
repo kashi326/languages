@@ -18,7 +18,7 @@ class CreateHomeworkTable extends Migration
             $table->unsignedBigInteger('lesson_id');
             $table->string('homework_path');
             $table->string('response_path')->nullable();
-            $table->timestamp('isExpired');
+            $table->timestamp('isExpired')->default(null);
             $table->tinyInteger('isChecked')->default(0);
             $table->float('marks')->default(0);
             $table->text('remarks');
