@@ -14,7 +14,16 @@ $timeDiff = $close->diffInMinutes($start)
 ?>
 <div class="card mb-2 lesson-card">
     <div class="card-body d-flex">
-        <img src="{{asset(Auth::user()->avatar)??asset('images/avatar.png')}}" alt="" width="150" height="150" style="border-radius: 100%;">
+        <?php
+        $id = 0;
+        $user = null;
+        if(Auth::user()->role=='teacher'){
+            $teacher = \App\Teacher::find($row->teacher_id);
+            $user = \App\User::find($teacher->user_id);
+        }else{
+            $user = \App\User::find($row->user_id);
+        } $url = asset($user->avatar)??asset('images/avatar.png'); ?>
+        <div style="background-image: url('{{$url}}');background-size: cover;background-repeat: no-repeat;width: 150px;height: 150px;border-radius: 50%;margin: auto"></div>
         <div class="ml-2 mr-2 mr-md-4">
             @if(date('Y-m-d') <= $row->scheduled_date)
                 <p style="color: #00aaf4;">UpComing</p>

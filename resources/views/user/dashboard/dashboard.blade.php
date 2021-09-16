@@ -10,16 +10,16 @@
 <div class="dashboard-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-12 d-flex">
-                <div>
+            <div class="col-md-8 col-12 d-flex flex-column">
+                <div class="d-flex align-items-center">
                     @if(auth()->user()->avatar)
-                    <img src="{{ asset(auth()->user()->avatar) }}" alt="" width="60" height="60">
+                    <img src="{{ asset(auth()->user()->avatar) }}" alt="" width="100" height="100">
                     @else
                     <div id="profileImage"></div>
                     @endif
+                    <h2 id="name" class="my-auto mx-2">{{auth()->user()->name}}</h2>
                 </div>
-                <div class="ml-2">
-                    <h2 id="name">{{auth()->user()->name}}</h2>
+                <div class="ml-2 mt-4">
                     <h3 id="timezone"></h3>
                 </div>
             </div>
@@ -225,12 +225,12 @@
                         <div class="col-sm-4 form-group">
                             <?php echo Form::select(
                                 'level',
-                                array('totalbeginner' => 'Total Beginner', 'beginner' => 'Beginner', 'upperbeginner' => 'Upper Beginner', 'totalintermediate' => 'Total Intermediate', 'intermediate' => 'Intermediate', 'upperintermediate' => 'UpperIntermediate', 'totaladvanced' => 'Total Advanced', 'advanced' => 'Advanced', 'upperadvanced' => 'Upper Advanced'),
-                                'totalbeginner',
+                                array('beginner' => 'Beginner', 'intermediate' => 'Intermediate', 'advanced' => 'Advanced'),
+                                'beginner',
                                 ['class' => 'form-control browser-default custom-select']
                             ); ?>
                         </div>
-                        <div class="col-sm-4 form-group">
+                        <div class="col-sm-4 form-group d-none">
 
                             <?php echo Form::select(
                                 'motivation',
@@ -248,8 +248,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-danger mx-1" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Add" class="btn btn-primary w-100">
+                        <button type="button" class="btn btn-outline-danger mx-1" style="min-width: 100px" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Add" class="btn btn-primary" style="min-width: 100px">
                     </div>
                 </form>
             </div>

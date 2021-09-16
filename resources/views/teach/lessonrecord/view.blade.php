@@ -61,15 +61,14 @@ $timeDiff = $close->diffInMinutes($start)
                                     <input type="text" name="id" value="{{$lesson->id}}" hidden>
                                     <div class="form-group">
                                         <label for="">Platform Name</label>
-                                        <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" required>
+                                        <input type="text" class="form-control" name="platformName" id="platformName" placeholder="Google Meet, Teams, Zoom ..." value="{{$lesson->platform}}" disabled>
                                         <div id="platformNameError" class="mt-1"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Lesson Link</label>
-                                        <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" required>
+                                        <input type="text" class="form-control " name="lessonLink" id="lessonLink" placeholder="Link to class" value="{{$lesson->link}}" disabled>
                                         <div id="lessonLinkError" class="mt-1"></div>
                                     </div>
-                                    <div class="form-group"><a type="submit" class="btn btn-primary btn-sm float-right text-decoration-none text-light" id="updatePlatform">Update</a></div>
                                 </form>
                         </div>
                     </div>

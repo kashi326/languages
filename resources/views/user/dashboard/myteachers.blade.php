@@ -31,8 +31,7 @@
             @foreach($myteachers as $myteacher)
             <div class="card mb-2 lesson-card">
                 <div class="card-body d-flex">
-                    <!-- <img src="{{asset('images/profile/$myteacher->teacher_avatar')??asset('images/avatar.png')}}" alt="" width="80" height="80" style="border-radius: 100%;"> -->
-                    <img src="{{asset($myteacher->user->avatar)??asset('images/avatar.png')}}" alt="" width="80" height="80" style="border-radius: 100%;">
+                    <div style="background-image: url('{{$myteacher->user->avatar??'images/avatar.png'}}');background-size: cover;background-repeat: no-repeat;width: 100px;height: 100px;border-radius: 50%;margin: auto"></div>
                     <div class="ml-2 mr-2 mr-md-4">
                         <span>{{$myteacher->name}}</span>
                         <div>
