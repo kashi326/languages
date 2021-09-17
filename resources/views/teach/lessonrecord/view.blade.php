@@ -108,7 +108,9 @@ $timeDiff = $close->diffInMinutes($start)
                     <div class="col-12 text-justify">
                         <div class="card p-0 m-auto w-75">
                             <div class="card-body p-2">
-                                {{$lesson->stars}}
+                                @for($i=0;$i<$lesson->stars;$i++)
+                                    <img src="{{asset('/icons/star.svg')}}" width="25" alt="">
+                                @endfor
                                 <hr>
                                 <span>{{$lesson->feedback}}</span>
                             </div>
