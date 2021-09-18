@@ -22,12 +22,12 @@
                 <label for="" class="text-dark">Proficiency</label>
                 <?php echo Form::select(
                     'level',
-                    array('totalbeginner' => 'Total Beginner', 'beginner' => 'Beginner', 'upperbeginner' => 'Upper Beginner', 'totalintermediate' => 'Total Intermediate', 'intermediate' => 'Intermediate', 'upperintermediate' => 'UpperIntermediate', 'totaladvanced' => 'Total Advanced', 'advanced' => 'Advanced', 'upperadvanced' => 'Upper Advanced'),
+                    array( 'beginner' => 'Beginner','intermediate' => 'Intermediate', 'advanced' => 'Advanced'),
                     $lang->level,
                     ['class' => 'form-control browser-default custom-select', 'data-url' => route('language.speaks.level'), 'data-remote' => "true", 'data-method' => 'put', 'data-params' => 'id=' . $lang->speakID]
                 ); ?>
             </div>
-            <div class="col-6 pt-0">
+            <div class="col-6 pt-0 d-none">
                 <label for="" class="text-dark">Motivation</label>
 
                 <?php echo Form::select(
