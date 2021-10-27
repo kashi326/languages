@@ -6,10 +6,10 @@ use App\Teacher;
 use App\UserRegisterWithTeacher;
 use App\UserVoteDiscussion;
 use Illuminate\Http\Request;
-use DB;
-use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -87,9 +87,9 @@ class DashboardController extends Controller
             $lessons[$key] = array_map('json_decode', $array);
         }
 
-        $lessonscount['attended'] = DB::table('lessons')->where('isAttended', 1)->where($user_id, $id)->count();
-        $lessonscount['past'] = DB::table('lessons')->whereDate('scheduled_date', '<', Carbon::now())->where('isAttended', "!=", 1)->where($user_id, $id)->count();
-        $lessonscount['upcoming'] = DB::table('lessons')->whereDate('scheduled_date', '>=', Carbon::now())->where($user_id, $id)->count();
+        $lessons_count['attended'] = DB::table('lessons')->where('isAttended', 1)->where($user_id, $id)->count();
+        $lessons_count['past'] = DB::table('lessons')->whereDate('scheduled_date', '<', Carbon::now())->where('isAttended', "!=", 1)->where($user_id, $id)->count();
+        $lessons_count['upcoming'] = DB::table('lessons')->whereDate('scheduled_date', '>=', Carbon::now())->where($user_id, $id)->count();
         if (auth()->user()->role != 'teacher') {
             $favourite_teacher = DB::table('user_favourite_teacher as uft')
                 ->LeftJoin('teachers', 'teachers.id', 'uft.teacher_id')
@@ -97,12 +97,12 @@ class DashboardController extends Controller
                 ->where('uft.user_id', Auth::id())
                 ->select('teachers.id as teacher_id', 'users.avatar as avatar', 'teachers.name as teacher_name')->paginate(3);
             if(!count($favourite_teacher));{
-                $favourite_teacher = Teacher::leftJoin('lessons', 'lessons.teacher_id', 'teachers.id')->where('lessons.user_id', auth()->user()->id)->distinct('lesson.user_id')->limit(3)->get()->map(function ($item){
+                $favourite_teacher = UserRegisterWithTeacher::select('teacher_id')->where('user_id', auth()->user()->id)->groupBy('teacher_id')->get()->map(function ($item){
 //                    dd($item);
                     return (object)[
-                        'teacher_id'=>$item->id,
-                        'avatar'=>$item->user->avatar,
-                        'teacher_name'=>$item->name,
+                        'teacher_id'=>$item->teacher_id,
+                        'avatar'=>$item->teacher->user->avatar,
+                        'teacher_name'=>$item->teacher->name,
                     ];
                 });
             }
@@ -120,7 +120,7 @@ class DashboardController extends Controller
         $data = [];
         $data['other_langs'] = $other_langs;
         $data['lessons'] = $lessons;
-        $data['count'] = $lessonscount;
+        $data['count'] = $lessons_count;
         $data['fav_teacher'] = $favourite_teacher;
         $data['classesTime'] = $classes;
         if ($request->ajax()) {

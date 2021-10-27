@@ -84,11 +84,11 @@
                     <a href="{{route('view.teacher',[$fteacher->teacher_id,$fteacher->teacher_name])}}"><img src="{{ $fteacher->avatar?asset($fteacher->avatar):asset('images/avatar.png') }}" style="width: 60px;height: 60px" class="rounded-circle" alt="{{$fteacher->teacher_name}}"></a>
                     @endforeach
                 </div>
-                @if(count($fav_teacher)>3)
-                <div class="card-footer">
-                    {{$fav_teacher->render()}}
-                </div>
-                @endif
+{{--                @if(count($fav_teacher)>3)--}}
+{{--                <div class="card-footer">--}}
+{{--                    {{$fav_teacher->render()}}--}}
+{{--                </div>--}}
+{{--                @endif--}}
             </div>
             @endif
         </div>
