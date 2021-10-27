@@ -119,7 +119,7 @@ class DashboardController extends Controller
         }
         $data = [];
         $data['other_langs'] = $other_langs;
-        $data['lessons'] = $lessons;
+        $data['lessons'] = array_reverse($lessons);
         $data['count'] = $lessons_count;
         $data['fav_teacher'] = $favourite_teacher;
         $data['classesTime'] = $classes;
