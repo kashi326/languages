@@ -17029,3 +17029,172 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+.footer-custom .banner-bg {
+  background-image: url(/images/9-SCENE.svg?65311df26d58b9e9b2a53418e2b1bfd5);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+
+.footer-custom .btn {
+  padding: 13.5px 36px;
+  font-weight: 700;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-custom .btn-success {
+  background-color: #15b28b;
+  border-color: #15b28b;
+}
+
+.footer-custom .navbar-light .navbar-nav .nav-link {
+  color: #453e6e;
+  font-weight: 500;
+}
+
+.footer-custom .bb li {
+  margin-bottom: 5px;
+}
+
+.footer-custom .bb li a {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-custom .bb li a:hover {
+  color: #fba94b;
+}
+
+.footer-custom .social-icons a {
+  margin-right: 15px;
+  color: #999;
+}
+
+.footer-custom .social-icons a:hover {
+  color: #333;
+}
+
+.footer-custom .hero-shape {
+  position: absolute;
+  left: auto;
+  top: -88%;
+  right: -26%;
+  bottom: auto;
+  display: block;
+  width: 90%;
+  height: 150%;
+  border-radius: 94px;
+  background-color: #f2faff;
+  transform: rotate(-23deg);
+}
+
+.footer-custom .bg-light {
+  background-color: #f2faff !important;
+}
+
+.footer-custom .bg-tutor {
+  background-color: #f2faff;
+  transition: all 0.3s ease;
+}
+
+.footer-custom .bg-tutor:hover {
+  cursor: pointer;
+  background-color: #15b28b;
+  color: #FFF;
+}
+
+.footer-custom .bg-tutor:hover h6 {
+  color: #FFF;
+}
+
+.footer-custom .bg-tutor i {
+  font-size: 36px;
+  color: #15b28b;
+}
+
+.footer-custom .bg-tutor:hover i {
+  color: #FFF;
+}
+
+.footer-custom .nb i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.footer-custom .right-shape.home {
+  top: -18%;
+}
+
+.footer-custom .right-shape {
+  position: absolute;
+  left: 57%;
+  top: 31%;
+  width: 80%;
+  height: 90%;
+  border-radius: 94px;
+  background-color: #fff5e8;
+  transform: rotate(-21deg);
+}
+
+.footer-custom .btn.dropdown-toggle.dropdown-button {
+  padding: 11px 36px !important;
+}
+
+.footer-custom .shape-four {
+  position: absolute;
+  top: 16%;
+  right: 75%;
+  width: 80%;
+  height: 122%;
+  border-radius: 94px;
+  background-color: #f2faff;
+  transform: rotate(-22deg);
+}
+
+.footer-custom .img-radius img {
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  width: 150px;
+  height: 150px;
+}
+
+.footer-custom .page-wrape {
+  overflow: hidden;
+}
+
+.footer-custom .owl-carousel .owl-item img {
+  display: inline-block !important;
+  width: auto;
+}
+
+@media (max-width: 1368px) {
+  .footer-custom .banner-bg {
+    background-position: center right -300px;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 1168px) {
+  .footer-custom .banner-bg {
+    background-position: center right -380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-custom .banner-bg {
+    background-position: bottom -300px right -290px;
+  }
+}
+
+@media (max-width: 568px) {
+  .footer-custom .banner-bg {
+    background-position: bottom -330px right -310px;
+  }
+}
+

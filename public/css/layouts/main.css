@@ -360,7 +360,7 @@ pre {
 
 .btn-floating {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
-        0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    0 4px 15px 0 rgba(0, 0, 0, 0.15);
     width: 47px;
     height: 47px;
     position: relative;
@@ -415,11 +415,11 @@ pre {
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
+    "Liberation Mono", "Courier New", monospace;
     font-size: 1rem;
     line-height: 1.5;
     color: #212529;
@@ -802,4 +802,8 @@ pre {
 .empty-state__help {
     color: #a2a5b9;
     font-size: 0.875rem;
+}
+
+.btn.dropdown-toggle.dropdown-button {
+    padding: 11px 36px !important;
 }

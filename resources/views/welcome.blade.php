@@ -146,7 +146,9 @@
             -ms-transform: rotate(-21deg);
             transform: rotate(-21deg);
         }
-
+        .btn.dropdown-toggle.dropdown-button {
+            padding: 11px 36px !important;
+        }
         .shape-four {
             position: absolute;
             top: 16%;
