@@ -82,21 +82,18 @@ $timeDiff = $close->diffInMinutes($start)
                 <span class="font-5 text-muted">Platform</span>
                 <div class="row">
                     <div class="col-12 col-md-12">
-                        @if(!$lesson->isAttended )
-                        @if($dateDiff = Carbon::now()->diffInMinutes($lesson->scheduled_date,false)<=15) <div class="d-flex justify-content-center">
+
+                        @if(!$lesson->isAttended && Carbon::now()->tz(auth()->user()->timezone)->diffInMinutes($lesson->scheduled_date,false)<=900) <div class="d-flex justify-content-center">
                             <a href="{{route('meeting.student',[$lesson->id,$lesson->user_id])}}" target="_blank" class="btn btn-primary mx-auto">Start Meeting</a>
                     </div>
                     <p class="text-center"><b>OR</b></p>
-                    @endif
                     @endif
                     @if($lesson->link != "")
                     <pre>{{ $lesson->platform }}</pre>
                     <pre>{{ $lesson->link }}</pre>
                     @else
                     <div class="row justify-content-content">
-                        <img src="{{
-                                    asset('/icons/collaborationfemalemale.svg')
-                                }}" width="50" height="50" alt="img" style="margin-left:45%" />
+                        <img src="{{asset('/icons/collaborationfemalemale.svg')}}" width="50" height="50" alt="img" style="margin-left:45%" />
                         <h4 class="text-center w-100">
                             No Platform has been added yet.
                         </h4>
