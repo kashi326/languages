@@ -3,14 +3,19 @@
 namespace App\Traits;
 
 use App\UserRegisterWithTeacher;
+use DateTime;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 trait GetDates
 {
-    public function getMondaysInRange($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null)
+    /**
+     * @throws Exception
+     */
+    public function getMondaysInRange($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null): array
     {
-        $dateFrom = new \DateTime($dateFromString);
-        $dateTo = new \DateTime($dateToString);
+        $dateFrom = new DateTime($dateFromString);
+        $dateTo = new DateTime($dateToString);
         $dates = [];
         $days = [
             'sunday' => 0,
@@ -21,9 +26,6 @@ trait GetDates
             'friday' => 5,
             'saturday' => 6
         ];
-        if ($dateFrom > $dateTo) {
-            return $dates;
-        }
 
         if ($days[strtolower($day)] != $dateFrom->format('N')) {
             $dateFrom->modify("next $day");
@@ -32,7 +34,7 @@ trait GetDates
         for ($i = 0; $dateFrom <= $dateTo; $i++) {
             if ($id) {
                 $teacher = UserRegisterWithTeacher::where("scheduled_date", $dateFrom->format("Y-m-d $startTime"))->where('teacher_id', $id)->first();
-                if ($teacher != null) {
+                if ($teacher !== null) {
                     $dateFrom->modify('+1 week');
                     continue;
                 }
@@ -45,13 +47,16 @@ trait GetDates
             }
             $dateFrom->modify('+1 week');
         }
-
         return $dates;
     }
-    public function getRescheduleDates($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null, $teacher_id = null)
+
+    /**
+     * @throws Exception
+     */
+    public function getRescheduleDates($dateFromString, $dateToString, $day, $startTime, $endTime, $id = null, $teacher_id = null): array
     {
-        $dateFrom = new \DateTime($dateFromString);
-        $dateTo = new \DateTime($dateToString);
+        $dateFrom = new DateTime($dateFromString);
+        $dateTo = new DateTime($dateToString);
         $dates = [];
         $days = [
             'sunday' => 0,
@@ -62,9 +67,7 @@ trait GetDates
             'friday' => 5,
             'saturday' => 6
         ];
-        if ($dateFrom > $dateTo) {
-            return $dates;
-        }
+
 
         if ($days[strtolower($day)] != $dateFrom->format('N')) {
             $dateFrom->modify("next $day");
@@ -73,7 +76,7 @@ trait GetDates
         for ($i = 0; $dateFrom <= $dateTo; $i++) {
             if ($id) {
                 $teacher = UserRegisterWithTeacher::where("scheduled_date", $dateFrom->format("Y-m-d $startTime"))->where('teacher_id', $teacher_id)->first();
-                if ($teacher != null) {
+                if ($teacher !== null) {
                     $dateFrom->modify('+1 week');
                     continue;
                 }

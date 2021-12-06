@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'CheckForAdmin'=>\App\Http\Middleware\CheckForAdmin::class,
         "PreventAdminFromTutor"=>\App\Http\Middleware\PreventAdminFromTutor::class,
         "PreventTeacherFromJoin"=>\App\Http\Middleware\PreventTeacherFromJoin::class,
+        "timezone"=>\App\Http\Middleware\TimeZoneMiddleware::class,
     ];
 }
