@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-start py-3 mb-2 w-75 mx-auto">
             <button class="uk-button bg-light uk-button-default mx-2" type="button">I Want To Learn</button>
             <div uk-dropdown>
-                <ul class="uk-nav uk-dropdown-nav">
+                <ul class="uk-nav uk-dropdown-nav" style="max-height: 300px;overflow-y:auto;overflow-x:hidden">
                     @foreach($langs as $l)
                         <li><a href="/findteacher?lang={{$l->name}}">{{$l->name}}</a></li>
                     @endforeach

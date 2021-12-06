@@ -5,17 +5,20 @@ namespace App\Http\Controllers\teach;
 use App\Http\Controllers\Controller;
 use App\Notifications\ClassStarted;
 use App\UserRegisterWithTeacher;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 
 class MeetingController extends Controller
 {
-    public function index($id, $teacher_id)
+    public function index($id, $teacher_id): RedirectResponse
     {
         $lesson = UserRegisterWithTeacher::where('id', $id)->first();
         if ($lesson && $lesson->platform && $lesson->link) {
             $lesson->user->notify(new ClassStarted($lesson));
             return redirect()->to($lesson->link);
-        } else if ($lesson) {
+        }
+
+        if ($lesson) {
             $lesson->user->notify(new ClassStarted($lesson));
             $session_id = (string)Str::uuid();
             $lesson->platform = env('APP_NAME', "Languages");
@@ -24,7 +27,8 @@ class MeetingController extends Controller
             $lesson->isAttended = 1;
             $lesson->save();
             return redirect()->to($lesson->link);
-        } else
-            return redirect()->back();
+        }
+
+        return redirect()->back();
     }
 }
