@@ -58,7 +58,7 @@ Route::middleware('timezone')->group(function () {
         Route::post("/lesson/reschedule/{id}", "LessonsController@update")->name('lesson.reschedule.update');
         Route::get('/homework/download/{id}', 'LessonsController@download')->name('homework.download');
         Route::post('/homework/response', 'LessonsController@response')->name('homework.response');
-        //settings routes
+        //setting routes
         Route::get('/setting', 'SettingController@index')->name('setting.profile.get');
         Route::post('/setting', 'SettingController@updateProfile')->name('setting.profile.post');
         Route::get('/setting/profilepicture', 'SettingController@getProfilePicture')->name('setting.profile.picture.get');

@@ -9,6 +9,16 @@
     $timeDiff = $close->diffInMinutes($start)
 
     ?>
+    <style>
+        .countdown-number-container {
+            justify-content: center;
+        }
+
+        .countdown-number-container div {
+            font-size: 20px !important;
+            line-height: 1 !important;
+        }
+    </style>
     <div class="row mt-2">
         <div class=" ml-auto mr-auto col-12 col-md-10 col-lg-8">
             <div class="card">
@@ -46,9 +56,9 @@
                     <div class="row">
                         <div class="col-6 col-md-4 pl-5">
                             <p class="font-2">Lesson Start at: <strong
-                                    class="text-main">{{$lesson->timing->open}}</strong></p>
+                                    class="text-main">{{\Carbon\Carbon::parse($lesson->timing->open)->tz(auth()->user()->timezone)->format('h:i A')}}</strong></p>
                             <p class="font-2">Lesson Ends at: <strong
-                                    class="text-main">{{$lesson->timing->close}}</strong></p>
+                                    class="text-main">{{\Carbon\Carbon::parse($lesson->timing->close)->tz(auth()->user()->timezone)->format('h:i A')}}</strong></p>
                             <p class="font-2">Date: <strong
                                     class="text-main">{{date('l', strtotime($lesson->scheduled_date))}}
                                     , {{date('jS F Y\ ', strtotime($lesson->scheduled_date))}}</strong></p>
@@ -59,6 +69,24 @@
                     <span class="font-5 text-muted">Platform</span>
                     <div class="row">
                         <div class="col-12 col-md-8 m-auto">
+                            <div class="uk-grid-small uk-child-width-auto uk-margin countdown-number-container " uk-grid
+                                 uk-countdown="date:{{\Carbon\Carbon::parse($lesson->scheduled_date)->toDateTimeString()}} ">
+                                <div>
+                                    <div class="uk-countdown-number uk-countdown-days"></div>
+                                </div>
+                                <div class="uk-countdown-separator">:</div>
+                                <div>
+                                    <div class="uk-countdown-number uk-countdown-hours"></div>
+                                </div>
+                                <div class="uk-countdown-separator">:</div>
+                                <div>
+                                    <div class="uk-countdown-number uk-countdown-minutes"></div>
+                                </div>
+                                <div class="uk-countdown-separator">:</div>
+                                <div>
+                                    <div class="uk-countdown-number uk-countdown-seconds"></div>
+                                </div>
+                            </div>
                             <div class="w-75 m-auto">
                                 @if(!$lesson->isAttended && Carbon::now()->tz(auth()->user()->timezone)->diffInMinutes($lesson->scheduled_date,false)<=(900))
                                     <div class="d-flex flex-column justify-content-center">

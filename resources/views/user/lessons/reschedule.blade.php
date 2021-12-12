@@ -35,8 +35,7 @@
             hour12: true
         },
         eventClick: function(info) {
-            var eventObj = info.event;
-            console.log(eventObj)
+            let eventObj = info.event;
             if (eventObj.extendedProps.link) {
                 alert('this will rescedule your class at ' + eventObj.start);
                 $.ajax({
