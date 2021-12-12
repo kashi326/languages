@@ -105,7 +105,7 @@
                                     <div class="uk-countdown-number uk-countdown-seconds"></div>
                                 </div>
                             </div>
-                            @if(!$lesson->isAttended && Carbon::now()->tz(auth()->user()->timezone)->diffInMinutes($lesson->scheduled_date,false)<=900)
+                            @if(!$lesson->isAttended && $lesson->link != "")
                                 <div class="d-flex justify-content-center">
                                     <a href="{{route('meeting.student',[$lesson->id,$lesson->user_id])}}"
                                        target="_blank" class="btn btn-primary mx-auto">Start Meeting</a>
