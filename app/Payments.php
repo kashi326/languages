@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payments extends Model
-{    use SoftDeletes;
+{
+    use SoftDeletes;
 
-    public function teacher():BelongsTo{
+    protected $casts = ['created_at' => 'date:Y-m-d'];
+
+    public function teacher(): BelongsTo
+    {
         return $this->belongsTo('App\Teacher');
     }
-    public function user():BelongsTo{
+
+    public function user(): BelongsTo
+    {
         return $this->belongsTo('App\User');
     }
 }

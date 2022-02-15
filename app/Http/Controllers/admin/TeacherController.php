@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Homework;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Teacher;
 use App\Language;
-use App\TeacherTiming;
 use App\OtherLangs;
+use App\Payments;
+use App\Teacher;
+use App\TeacherTiming;
 use App\UserRegisterWithTeacher;
-use Facade\FlareClient\View;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -93,6 +94,42 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
+    public function payment($teacher_id)
+    {
+        $teacher = Teacher::find($teacher_id);
+        $payments = Payments::where('teacher_id', $teacher_id)->get();
+        $total_earnings = $payments->where('amount', '>=', 0)->sum('amount');
+        $total_paid = $payments->where('amount', '<=', 0)->sum('amount');
+        $formatted_payments = [];
+        $monthly_payments = [];
+        foreach ($payments as $index => $payment) {
+            $created_at = Carbon::parse($payment->created_at)->format('m-Y');
+            $formatted_payments[$created_at][$index] = $payment;
+            $formatted_payments[$created_at][$index]['payment_date'] = Carbon::parse($payment->created_at)->format('d M Y');
+            if (isset($monthly_payments[$created_at])) {
+                $monthly_payments[$created_at] += $payment->amount;
+            } else {
+                $monthly_payments[$created_at] = $payment->amount;
+            }
+        }
+        return view('admin.teacher.payment', compact('teacher', 'formatted_payments', 'monthly_payments', 'total_earnings', 'total_paid'));
+    }
+
+    public function createPayment(Request $request, $teacher_id)
+    {
+        $request->validate([
+            'amount' => "required",
+            'ref_id' => "required",
+        ]);
+        $payment = new Payments();
+        $payment->teacher_id = $teacher_id;
+        $payment->amount = -1*$request->post('amount');
+        $payment->ref_id = $request->post('ref_id');
+        $payment->user_id = auth()->user()->id;
+        $payment->save();
+        session()->flash('success', 'Payment added successfully');
+        return redirect()->back();
+    }
 
     public function destroy(Teacher $teacher)
     {
@@ -106,19 +143,22 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
-    public function lesson()
+    public
+    function lesson()
     {
         $lessons = UserRegisterWithTeacher::with('teacher', 'user', 'timing')->paginate(10);
         return view('admin.lessons.index')->with(['lessons' => $lessons]);
     }
 
-    public function lessonView(UserRegisterWithTeacher $lesson)
+    public
+    function lessonView(UserRegisterWithTeacher $lesson)
     {
         $lessonData = UserRegisterWithTeacher::where('id', $lesson->id)->with('teacher', 'user', 'timing')->first();
         return view('admin.lessons.view')->with('lesson', $lessonData);
     }
 
-    public function homework()
+    public
+    function homework()
     {
         $homework = Homework::with(['lesson' => function ($q) {
             return $q->with('teacher', 'user');
@@ -126,7 +166,8 @@ class TeacherController extends Controller
         return view('admin.homework.index')->with('homeworks', $homework);
     }
 
-    public function download($type, $id, Request $request)
+    public
+    function download($type, $id, Request $request)
     {
         $homework = Homework::where("id", $id)->first();
         $url = '';

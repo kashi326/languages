@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Teacher extends Model
 {
+    protected $appends = ['full_name'];
+    public function getFullNameAttribute(): string
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
     public function language(): BelongsTo
     {
         return $this->belongsTo("App\Language");
