@@ -52,41 +52,7 @@
                 </tbody>
             </table>
         </div>
-        @foreach($formatted_payments as $key => $mon_payment)
-            <div class="card my-5">
-                <div class="card-body">
-
-                    <p>Month: {{$key}}</p>
-                    <table class="uk-table uk-table-divider">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Reference ID</th>
-                            <th>Payment Type</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($mon_payment as $payment)
-                            <tr>
-                                <td>{{$payment->payment_date}}</td>
-                                <td>{{$payment->amount}}</td>
-                                <td>{{$payment->ref_id}}</td>
-                                <td>{{$payment->amount<0?"Paid to teacher":"Class payment"}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="1" class="uk-text-bold">Total</td>
-                            <td class="uk-text-bold">{{$monthly_payments[$key]??0}}</td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-
-        @endforeach
+    
     </div>
     <!-- This is the modal -->
     <div id="modal-example" uk-modal>

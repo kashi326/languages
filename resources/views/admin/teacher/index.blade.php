@@ -44,6 +44,10 @@
                                 <a href="{{route('admin.teacher.payment',$item)}}" class="btn btn-primary">
                                     <i class="fas fa-eye"></i> Payment
                                 </a>
+
+                                <a href="{{route('admin.teacher.payment.history',$item)}}" class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> Payment History
+                                </a>
                                 <form action="{{route('admin.teacher.destroy',$item)}}" class="d-inline-block" method="POST" onsubmit="return confirm('Are you sure want to delete this teacher?')">
                                     @csrf
                                     @method("DELETE")

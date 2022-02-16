@@ -100,19 +100,31 @@ class TeacherController extends Controller
         $payments = Payments::where('teacher_id', $teacher_id)->get();
         $total_earnings = $payments->where('amount', '>=', 0)->sum('amount');
         $total_paid = $payments->where('amount', '<=', 0)->sum('amount');
+
+        return view('admin.teacher.payment', compact('teacher', 'total_earnings', 'total_paid'));
+    }
+
+    public function paymentHistory(Request $request, $teacher_id)
+    {
+
+        $teacher = Teacher::find($teacher_id);
         $formatted_payments = [];
         $monthly_payments = [];
-        foreach ($payments as $index => $payment) {
-            $created_at = Carbon::parse($payment->created_at)->format('m-Y');
-            $formatted_payments[$created_at][$index] = $payment;
-            $formatted_payments[$created_at][$index]['payment_date'] = Carbon::parse($payment->created_at)->format('d M Y');
-            if (isset($monthly_payments[$created_at])) {
-                $monthly_payments[$created_at] += $payment->amount;
-            } else {
-                $monthly_payments[$created_at] = $payment->amount;
+        if ($request->has('from') && $request->has('to')) {
+            $payments = Payments::where('teacher_id', $teacher_id)->whereRaw('date(created_at) between ? and ?',[$request->from,$request->to])->get();
+            foreach ($payments as $index => $payment) {
+                $created_at = Carbon::parse($payment->created_at)->format('m-Y');
+                $formatted_payments[$created_at][$index] = $payment;
+                $formatted_payments[$created_at][$index]['payment_date'] = Carbon::parse($payment->created_at)->format('d M Y');
+                if (isset($monthly_payments[$created_at])) {
+                    $monthly_payments[$created_at] += $payment->amount;
+                } else {
+                    $monthly_payments[$created_at] = $payment->amount;
+                }
             }
         }
-        return view('admin.teacher.payment', compact('teacher', 'formatted_payments', 'monthly_payments', 'total_earnings', 'total_paid'));
+
+        return view('admin.teacher.payment_history', compact('teacher', 'monthly_payments', 'formatted_payments'));
     }
 
     public function createPayment(Request $request, $teacher_id)
@@ -123,7 +135,7 @@ class TeacherController extends Controller
         ]);
         $payment = new Payments();
         $payment->teacher_id = $teacher_id;
-        $payment->amount = -1*$request->post('amount');
+        $payment->amount = -1 * $request->post('amount');
         $payment->ref_id = $request->post('ref_id');
         $payment->user_id = auth()->user()->id;
         $payment->save();
