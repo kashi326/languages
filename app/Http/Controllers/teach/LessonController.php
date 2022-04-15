@@ -68,7 +68,7 @@ class LessonController extends Controller
         foreach ($alllessons as $key => $l) {
             $array = array_map('json_encode', $l);
             $array = array_unique($array);
-            $lessons[$key] = array_map('json_decode', $array);
+            $lessons[$key][] = array_map('json_decode', $array);
         }
 
         $data = [];
