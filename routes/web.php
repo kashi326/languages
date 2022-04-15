@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-include_once("custom_routes/admin.php");
-
-Route::get('/', "WelcomeController@index")->name('main');
-Route::get('lang/{locale}', 'WelcomeController@lang');
-Route::get('/privacy-policy', 'HomeController@privacypolicy')->name('privacy');
-Auth::routes(['verify' => true]);
-Route::resource('findteacher', 'FindTeacherController');
-Route::get('/view/{id}/{name}', 'FindTeacherController@profile')->name('view.teacher');
-
 Route::middleware('timezone')->group(function () {
+    include_once("custom_routes/admin.php");
+
+    Route::get('/', "WelcomeController@index")->name('main');
+    Route::get('lang/{locale}', 'WelcomeController@lang');
+    Route::get('/privacy-policy', 'HomeController@privacypolicy')->name('privacy');
+    Auth::routes(['verify' => true]);
+    Route::resource('findteacher', 'FindTeacherController');
+    Route::get('/view/{id}/{name}', 'FindTeacherController@profile')->name('view.teacher');
+
 
     Route::middleware(['auth'])->group(function () {
         //dashboard routes
@@ -101,5 +101,5 @@ Route::middleware('timezone')->group(function () {
     Route::group(['middleware' => "auth"], function () {
         include_once("custom_routes/teach.php");
     });
+    Route::get('/home', 'HomeController@index')->name('home');
 });
-Route::get('/home', 'HomeController@index')->name('home');
