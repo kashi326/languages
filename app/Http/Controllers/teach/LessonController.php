@@ -72,7 +72,7 @@ class LessonController extends Controller
         }
 
         $data = [];
-        $data['lessons'] = $lessons;
+        $data['lessons'] = array_reverse($lessons);
         if ($request->ajax()) {
             return response()->view('teach.lessonrecord.classesList', $data);
         }
